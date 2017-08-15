@@ -1,0 +1,18 @@
+# OS-specific
+.DS_Store
+
+# Editor swapfiles
+.*.sw?
+*~
+
+# Vagrant stuff
+acceptance_config.yml
+boxes/*
+/.vagrant
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear

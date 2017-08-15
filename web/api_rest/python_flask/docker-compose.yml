@@ -1,0 +1,19 @@
+version: '2'
+services:
+  www:
+    build: www/.
+    ports:
+      - "5000:5000"
+    links:
+      - db
+    depends_on:
+      - db
+    hostname: myappserver
+  db:
+    build: db/.
+    volumes:
+      - /var/lib/mysql
+    environment:
+       MYSQL_ROOT_PASSWORD: supersecure
+       MYSQL_DATABASE: flaskwebapi
+    hostname: mydbserver

@@ -1,0 +1,1 @@
+This enviroment is to tests the same steps in centos

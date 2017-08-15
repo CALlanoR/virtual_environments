@@ -1,0 +1,51 @@
+Basic nginx installation using chef-solo
+========================================
+
+1. Verify chef installation
+  chef-solo -v
+2. Download master template to chef
+  wget http://github.com/opscode/chef-repo/tarball/master
+  tar -zxf master
+  mv chef-*/ chef-repo
+  rm master
+  cd chef-repo/
+3. Setup cookbook_path in knife
+  mkdir .chef
+  echo "cookbook_path [ '/home/vagrant/chef-repo/cookbooks' ]" > .chef/knife.rb
+4. Create template using knife
+  knife cookbook create nginx
+  ls cookbooks/
+5. Edit default recipe, adding the packages to install
+  vi cookbooks/nginx/recipes/default.rb
+
+  Put this into of the file:
+
+package 'nginx' do
+  action [ :install, :upgrade ]
+end
+
+service 'nginx' do
+  action [ :enable, :start ]
+end
+6. Create configuration to chef-solo
+  touch solo.rb
+  vi solo.rb
+
+  Put this into the file:
+
+file_cache_path "/home/vagrant/chef-repo/cache"
+cookbook_path "/home/vagrant/chef-repo/cookbooks"
+
+7. We tell chef to run the apt cookbook followed by our nginx cookbook.
+    vi nginx.json
+{
+    "some_attr": true,
+    "run_list": [
+          "recipe[nginx]"
+        ]
+}
+8. Chef run
+  cd ..
+  chef-solo -c solo.rb -j nginx.json
+9. Verify
+  curl localhost

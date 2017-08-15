@@ -1,0 +1,63 @@
+Complete nginx installation using chef-solo
+===========================================
+
+1. Verify chef installation
+  chef-solo -v
+2. Download master template to chef
+  wget http://github.com/opscode/chef-repo/tarball/master
+  tar -zxf master
+  mv chef-*/ chef-repo
+  rm master
+  cd chef-repo/
+3. Setup cookbook_path in knife
+  mkdir .chef
+  echo "cookbook_path [ '/home/vagrant/chef-repo/cookbooks' ]" > .chef/knife.rb
+4. Download into /home/vagrant/chef-repo/cookbooks the templates using knife:
+	cd cookbooks
+	knife cookbook site download nginx 2.7.6
+	knife cookbook site download yum 3.0.0
+	knife cookbook site download yum-epel 0.3.0
+	knife cookbook site download apt 2.2.0
+	knife cookbook site download ohai 2.0.0
+	knife cookbook site download build-essential 2.0.0
+	knife cookbook site download runit 1.2.0
+	knife cookbook site download bluepill 2.3.0
+	knife cookbook site download rsyslog
+	knife cookbook site download compat_resource 12.14.6
+
+	for file in *.gz; do tar zxf $file; done;
+
+	rm -f *.gz
+5. cd ..
+6. We tell chef to run the apt cookbook followed by our web cookbook.
+    vi web.json
+{
+  "some_attr": true,
+  "run_list": [
+        "recipe[nginx]"
+      ]
+}
+7. Create configuration to chef-solo
+  touch solo.rb
+  vi solo.rb
+
+  Put this into the file:
+
+    file_cache_path "/home/vagrant/chef-repo/cache"
+    cookbook_path "/home/vagrant/chef-repo/cookbooks"
+8. chef-solo -c solo.rb -j web.json
+9. mkdir -p /var/www/nginx-default
+10. vim /var/www/nginx-default/index.html
+	<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+   <HEAD>
+      <TITLE>
+         A Small Hello
+      </TITLE>
+   </HEAD>
+<BODY>
+   <H1>Hi</H1>
+   <P>This is very minimal "hello world" HTML document.</P>
+</BODY>
+</HTML>
+11. curl localhost

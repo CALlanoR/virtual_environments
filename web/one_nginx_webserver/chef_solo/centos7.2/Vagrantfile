@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vim: ft=ruby
+
+
+# ---- Configuration variables ----
+
+GUI               = false # Enable/Disable GUI
+RAM               = 500   # Default memory size in MB
+
+# Network configuration
+DOMAIN            = ".example.com"
+NETWORK           = "192.168.56."
+NETMASK           = "255.255.255.0"
+
+# Default Virtualbox .box
+# See: https://atlas.hashicorp.com/boxes/search
+BOX               = 'centos/7'
+
+# Ubuntu 14.04 'ubuntu/trusty64'
+# Ubuntu 12.04 hashicorp/precise64'
+# Centos 7 'bento/centos-7.2'
+
+HOSTS = {
+  "nginx.server1"  => [NETWORK+"115", RAM, GUI, BOX, "chef_install.sh"], 
+}
+
+# ---- Vagrant configuration ----
+
+Vagrant.configure(2) do |config|
+  HOSTS.each do | (name, cfg) |
+    ipaddr, ram, gui, box, provisioning_script = cfg
+
+    config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+    config.vm.define name do |machine|
+      machine.vm.box   = box
+      machine.vm.provision :shell, path: provisioning_script
+
+      machine.vm.provider "virtualbox" do |vbox|
+        vbox.gui    = gui
+        vbox.memory = ram
+        vbox.name = name
+      end
+
+      machine.vm.hostname = name
+      machine.vm.network 'private_network', ip: ipaddr, netmask: NETMASK, name: 'vboxnet0', adapter:2
+    end
+
+
+  end # HOSTS-each
+
+end

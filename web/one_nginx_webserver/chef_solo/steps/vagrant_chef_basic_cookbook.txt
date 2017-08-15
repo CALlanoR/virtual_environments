@@ -1,0 +1,82 @@
+1. $gem install chef
+
+2. $mkdir cengine
+   $cd cengine
+   $mkdir cookbooks
+
+3. $knife cookbook create nginx -o cookbooks
+
+4 Edit recipes/default.rb:
+	package 'nginx' do
+	  action :install
+	end
+
+5. Your directory:
+app
+|
+|–––Vagrantfile
+|–––cookbooks
+
+6. touch Vagrantfile
+   Put this code into:
+
+# -*- mode: ruby -*-
+# vim: ft=ruby
+
+
+# ---- Configuration variables ----
+
+GUI               = false # Enable/Disable GUI
+RAM               = 500   # Default memory size in MB
+
+# Network configuration
+DOMAIN            = ".example.com"
+NETWORK           = "192.168.56."
+NETMASK           = "255.255.255.0"
+
+# Default Virtualbox .box
+# See: https://atlas.hashicorp.com/boxes/search
+BOX               = 'ubuntu/trusty64'
+
+# Ubuntu 14.04 'ubuntu/trusty64'
+# Ubuntu 12.04 hashicorp/precise64'
+# Centos 7 'bento/centos-7.2'
+
+HOSTS = {
+  "nginx.server1"  => [NETWORK+"115", RAM, GUI, BOX], 
+}
+
+# ---- Vagrant configuration ----
+
+Vagrant.configure(2) do |config|
+  HOSTS.each do | (name, cfg) |
+    ipaddr, ram, gui, box = cfg
+
+    config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+    config.vm.define name do |machine|
+      machine.vm.box   = box
+      machine.vm.guest = :ubuntu
+
+      machine.vm.provider "virtualbox" do |vbox|
+        vbox.gui    = gui
+        vbox.memory = ram
+        vbox.name = name
+      end
+
+      machine.vm.hostname = name + DOMAIN
+      machine.vm.network 'private_network', ip: ipaddr, netmask: NETMASK, name: 'vboxnet0', adapter:2
+    end
+
+    config.vm.provision :chef_solo do |chef|
+      chef.channel = "stable"
+      chef.version = '12.10.24'
+      chef.run_list = [
+        "recipe[nginx]"
+      ]
+    end
+
+  end # HOSTS-each
+
+end
+
+6. vagrant up
