@@ -15,8 +15,7 @@ sudo docker run -di -p 127.0.0.1:3000:3000 --name=nodejs01 nodejs_mongodb_image
 
 4. Verify ip address of each container
 sudo docker ps -a
-sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' <<ID>>
-sudo docker exec -it <<ID>> bash
+sudo docker exec -it nodejs01 bash
 
 5. Please follow the link below:
 https://www.codementor.io/olatundegaruba/nodejs-restful-apis-in-10-minutes-q0sgsfhbd
