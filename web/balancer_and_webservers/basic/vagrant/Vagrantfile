@@ -17,7 +17,7 @@ NETMASK           = "255.255.255.0"
 BOX               = 'hashicorp/precise64'
 
 HOSTS = {
-  #"db"           => [NETWORK+"104", RAM, GUI, BOX, "db.sh"],
+  #"db"          => [NETWORK+"104", RAM, GUI, BOX, "db.sh"],
   "web1"         => [NETWORK+"106", RAM, GUI, BOX, "web_nginx.sh"],
   "web2"         => [NETWORK+"107", RAM, GUI, BOX, "web_apache.sh"],
   "loadbalancer" => [NETWORK+"105", RAM, GUI, BOX, "loadbalancer.sh"],
