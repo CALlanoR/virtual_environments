@@ -1,4 +1,4 @@
-# -*- mode: ruby -*-
+  # -*- mode: ruby -*-
 # vim: ft=ruby
 
 
@@ -14,14 +14,10 @@ NETMASK           = "255.255.255.0"
 
 # Default Virtualbox .box
 # See: https://wiki.debian.org/Teams/Cloud/VagrantBaseBoxes
-BOX               = 'hashicorp/precise64' #ubuntu/xenial64 (ubuntu16.04)
+BOX               =  'ubuntu/xenial64' #'hashicorp/precise64' (ubuntu12.04) ubuntu/xenial64 (ubuntu16.04)
 
 HOSTS = {
-  #"db"           => [NETWORK+"104", RAM, GUI, BOX, "db.sh"],
-  "web1"          => [NETWORK+"120", RAM, GUI, BOX, "web_nginx.sh"],
-  "web2"          => [NETWORK+"121", RAM, GUI, BOX, "web_apache.sh"],
-  "loadbalancer1" => [NETWORK+"100", RAM, GUI, BOX, "loadbalancer_master.sh"],
-  "loadbalancer2" => [NETWORK+"101", RAM, GUI, BOX, "loadbalancer_slave.sh"],
+  "web1"         => [NETWORK+"120", RAM, GUI, BOX, "web_apache.sh"],
 }
 
 # ---- Vagrant configuration ----

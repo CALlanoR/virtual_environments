@@ -45,3 +45,35 @@ listen website 0.0.0.0:80
 
 sudo apt-get clean
 service haproxy restart
+
+
+
+# #Steps for ubuntu 16.04
+
+# #!/usr/bin/env bash
+
+# apt-get update
+# apt-get install -y haproxy openssh-server
+
+# echo "ENABLED=1" >> /etc/default/haproxy
+
+# mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
+
+# echo "
+# frontend firstbalance
+#         bind *:80
+#         option forwardfor
+#         default_backend webservers
+
+# backend webservers
+#         balance roundrobin
+#         server webserver1 192.168.56.120:80 check
+#         server webserver2 192.168.56.121:80 check
+#         option httpchk
+# " >> /etc/haproxy/haproxy.cfg
+
+# haproxy -f /etc/haproxy/haproxy.cfg -c
+
+# sudo apt-get clean
+# service haproxy restart
+# service haproxy status

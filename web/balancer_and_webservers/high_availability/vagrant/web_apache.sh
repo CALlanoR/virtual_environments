@@ -2,5 +2,5 @@
 
 apt-get update
 apt-get install -y apache2
-service nginx restart
+service apache2 restart
 sudo apt-get clean
