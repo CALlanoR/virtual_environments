@@ -45,17 +45,17 @@ apt-get install -y php-memcached memcached
 
 echo "<?php
 $mem = new Memcached();
-$mem->addServer("127.0.0.1", 11211);
+$mem->addServer(\"127.0.0.1\", 11211);
 
 
-$result = $mem->get("blah");
+$result = $mem->get(\"blah\");
 
 
 if ($result) {
     echo $result;
 } else {
-    echo "No matching key found yet. Let's start adding that now!";
-    $mem->set("blah", "I am data!  I am held in memcached!") or die("Couldn't save anything to memcached...");
+    echo \"No matching key found yet. Let's start adding that now!\";
+    $mem->set(\"blah\", \"I am data!  I am held in memcached!\") or die(\"Couldn't save anything to memcached...\");
 }
 ?>" > /var/www/html/cache_test.php
 
