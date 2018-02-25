@@ -25,3 +25,13 @@ https://app.vagrantup.com/ubuntu/boxes/xenial64
 http://kirang89.github.io/blog/2013/01/24/installing-pylibmc-in-ubuntu/
 https://wincent.com/wiki/Testing_memcached_with_telnet
 
+In php
+======
+If you are planning to connect to a cluster of memcached servers you will need to add all the servers using the addServer method:
+
+<?php
+/* OO API */
+$memcache = new Memcache;
+$memcache->addServer('memcached_host1', 11211);
+$memcache->addServer('memcached_host2', 11211);
+?>
