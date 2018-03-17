@@ -35,3 +35,13 @@ $memcache = new Memcache;
 $memcache->addServer('memcached_host1', 11211);
 $memcache->addServer('memcached_host2', 11211);
 ?>
+
+
+In python
+=========
+http://sendapatch.se/projects/pylibmc/behaviors.html
+ketama : True, means that pylibmc is using md5 hashing and that it's using consistent hashing for key distribution.
+tcp_nodelay : True, which disables Nagle’s algorithm. https://es.wikipedia.org/wiki/Algoritmo_de_Nagle
+remove_failed : 1, if set, a server will be removed from the server list after this many operations on it in a row have failed.
+retry_timeout: 1, retry them once every minute.
+dead_timeout: 60, Once a server has been marked dead, wait this amount of time (in seconds) before checking to see if the server is alive again.

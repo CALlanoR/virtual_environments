@@ -79,3 +79,33 @@ rm -v ~/secure_our_mysql.sh # Remove the generated Expect script
 #sudo apt-get -qq purge expect > /dev/null # Uninstall Expect, commented out in case you need Expect
 
 echo "MySQL setup completed. Insecure defaults are gone. Please remove this script manually when you are done with it (or at least remove the MySQL root password that you put inside it."
+
+echo "Configuring master #1 in /etc/mysql/my.cnf"
+
+echo "
+[mysqld]
+server_id                = 1
+log_bin                  = /var/log/mysql/mysql-bin.log
+log_bin_index            = /var/log/mysql/mysql-bin.log.index
+relay_log                = /var/log/mysql/mysql-relay-bin
+relay_log_index          = /var/log/mysql/mysql-relay-bin.index
+expire_logs_days         = 10
+max_binlog_size          = 100M
+log_slave_updates        = 1
+auto-increment-increment = 2
+auto-increment-offset    = 1
+bind-address             = 192.168.56.120" >> /etc/mysql/my.cnf
+
+service mysql restart
+
+# pseudo-user that will be used for replicating data between our two VPS. IP address of the opposing Linode.
+mysql -hlocalhost -uroot -pcallanor -e "GRANT RELOAD, PROCESS, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'replication'@'192.168.56.121' IDENTIFIED BY 'Password123+';"
+
+# Run the following command to test the configuration. Use the private IP address of the opposing Linode:
+# mysql -u replication -p -h 192.168.56.121 -P 3306
+
+# Execute this steps manually for now
+# mysql -hlocalhost -uroot -pcallanor
+# STOP SLAVE;
+# CHANGE MASTER TO master_host='192.168.56.121', master_port=3306, master_user='replication', master_password='Password123+', master_log_file='mysql-bin.000002', master_log_pos=770;
+# START SLAVE;
