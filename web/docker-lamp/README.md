@@ -7,3 +7,5 @@ Run this:
 ```
 docker-compose up -d
 ```
+
+localhost:8001
