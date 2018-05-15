@@ -1,0 +1,11 @@
+FROM node:9.11.1
+MAINTAINER Carlos Llano
+
+RUN apt-get update 
+RUN apt-get install -y nano vim curl npm software-properties-common
+RUN npm install -g express
+RUN npm install nodeunit -g 
+RUN npm install -g http --save
+
+# replace this with your application's default port
+EXPOSE 8180

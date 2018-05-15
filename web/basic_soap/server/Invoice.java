@@ -13,7 +13,7 @@ public class Invoice {
 	public String get_invoice_date_by_id(String id) {
 		// Simulate the service
 		SimpleDateFormat format_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-    Date now = new Date();
-    return format_date.format(now);
+    	Date now = new Date();
+    	return format_date.format(now);
 	}
 }

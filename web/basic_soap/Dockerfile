@@ -10,12 +10,9 @@ RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true 
 RUN apt-get install -y oracle-java8-installer
 RUN apt-get clean
 
-RUN mkdir /home/workdir
-RUN mkdir /home/workdir/client
+RUN mkdir /home/server /home/client
+COPY Invoice.java /home/server
+COPY ServiceInvoiceStarter.java /home/server
+COPY client/InvoiceClient.java /home/client
 
-COPY Invoice.java /home/workdir
-COPY ServiceInvoiceStarter.java /home/workdir
-COPY client/InvoiceClient.java /home/workdir/client
-
-WORKDIR /home/workdir
 EXPOSE 1212

@@ -1,0 +1,5 @@
+Commands
+========
+1. npm init
+2. npm list 
+	2.1 npm list -g | grep express
