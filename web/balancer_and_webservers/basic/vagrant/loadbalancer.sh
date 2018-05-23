@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 apt-get update
-apt-get install -y haproxy
+apt-get install -y haproxy=1.6.3-1ubuntu0.1
 echo "ENABLED=1" > /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
 
@@ -26,11 +26,12 @@ defaults
         retries 3
         option redispatch
         maxconn 2000
-        contimeout      5000
-        clitimeout      50000
-        srvtimeout      50000
+        timeout connect      5000
+        timeout client      50000
+        timeout server      50000
 
-listen website 0.0.0.0:80
+listen website 
+    bind 0.0.0.0:80
     mode http
     stats enable
     stats uri /haproxy?stats

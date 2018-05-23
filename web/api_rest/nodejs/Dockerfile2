@@ -6,6 +6,7 @@ RUN apt-get install -y nano vim curl npm software-properties-common
 RUN npm install -g express
 RUN npm install nodeunit -g 
 RUN npm install -g http --save
+RUN npm install -g http-errors --save
 
 # replace this with your application's default port
 EXPOSE 8180

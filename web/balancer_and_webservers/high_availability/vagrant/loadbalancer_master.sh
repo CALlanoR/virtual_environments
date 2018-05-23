@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 apt-get update
-apt-get install -y haproxy
-apt-get install -y keepalived
+apt-get install -y haproxy=1.6.3-1ubuntu0.1
+apt-get install -y keepalived=1:1.2.19-1ubuntu0.2
+
 echo "ENABLED=1" > /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
 
@@ -27,11 +28,12 @@ defaults
         retries 3
         option redispatch
         maxconn 2000
-        contimeout      5000
-        clitimeout      50000
-        srvtimeout      50000
+        timeout connect      5000
+        timeout client      50000
+        timeout server      50000
 
-listen website 0.0.0.0:80
+listen website 
+    bind 0.0.0.0:80
     mode http
     stats enable
     stats uri /haproxy?stats
@@ -44,31 +46,39 @@ listen website 0.0.0.0:80
     server webserver1 192.168.56.120:80 check
     server webserver2 192.168.56.121:80 check" > /etc/haproxy/haproxy.cfg
 
-
 echo "net.ipv4.ip_nonlocal_bind=1" >> /etc/sysctl.conf
 sysctl -p
 
 echo "
-vrrp_script chk_haproxy {           # Requires keepalived-1.1.13
-        script "killall -0 haproxy"     # cheaper than pidof
-        interval 2                      # check every 2 seconds
-        weight 2                        # add 2 points of prio if OK
+! Configuration File for keepalived
+
+global_defs {
+   notification_email {
+     sysadmin@mydomain.com
+     support@mydomain.com
+   }
+   notification_email_from lb1@mydomain.com
+   smtp_server localhost
+   smtp_connect_timeout 30
 }
 
 vrrp_instance VI_1 {
-        interface eth1
-        state MASTER
-        virtual_router_id 51
-        priority 101                    # 101 on master, 100 on backup
-        virtual_ipaddress {
-            192.168.56.99
-        }
-        track_script {
-            chk_haproxy
-        }
+    state MASTER
+    interface enp0s8
+    virtual_router_id 101
+    priority 101
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        192.168.56.99
+    }
 }" > /etc/keepalived/keepalived.conf
 
-/etc/init.d/keepalived start
+/etc/init.d/keepalived restart
+ip addr show enp0s8
 
 sudo apt-get clean
 service haproxy restart

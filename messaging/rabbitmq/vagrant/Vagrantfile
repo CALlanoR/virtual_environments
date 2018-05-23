@@ -14,8 +14,7 @@ NETMASK           = "255.255.255.0"
 
 # Default Virtualbox .box
 # See: https://wiki.debian.org/Teams/Cloud/VagrantBaseBoxes
-BOX               = 'ubuntu/trusty64'
-
+BOX               = 'ubuntu/xenial64'
 
 HOSTS = {
   "rabbitmq.server1"  => [NETWORK+"115", RAM, GUI, BOX, "rabbitmq.sh"],
@@ -32,7 +31,7 @@ Vagrant.configure(2) do |config|
     config.vm.define name do |machine|
       machine.vm.box   = box
       machine.vm.guest = :ubuntu
-      machine.vm.provision :shell, path: provisioning_script
+      machine.vm.provision :shell, path: provisioning_script      
 
       machine.vm.provider "virtualbox" do |vbox|
         vbox.gui    = gui
@@ -43,7 +42,6 @@ Vagrant.configure(2) do |config|
       machine.vm.hostname = name + DOMAIN
       machine.vm.network 'private_network', ip: ipaddr, netmask: NETMASK, name: 'vboxnet0', adapter:2
     end
-
 
   end # HOSTS-each
 

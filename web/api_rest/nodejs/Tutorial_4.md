@@ -68,8 +68,6 @@ JSON objects are natively supported by JavaScript. They are easy to extend durin
 
 11. Create our catalag route
 
-vi routes/catalog.js
-
 -----------------------------------------------------------------------------
 | HTTP method |  Route                       | Catalog's module function    |
 -----------------------------------------------------------------------------
@@ -77,6 +75,8 @@ vi routes/catalog.js
 | GET         | /catalog/:categoryId         | findItems(categoryId)        |
 | GET         | /catalog/:categoryId/:itemId | findItem(categoryId, itemId) |
 -----------------------------------------------------------------------------
+
+vi routes/catalog.js
 
 put this:
 
