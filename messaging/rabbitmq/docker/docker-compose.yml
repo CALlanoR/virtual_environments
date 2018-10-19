@@ -1,0 +1,14 @@
+
+version: "2"
+services:
+    rabbitmq_server:
+        build: './rabbitmq_server'
+        networks:
+            - default
+    rabbitmq_client:
+        build: './rabbitmq_client'
+        links: 
+            - rabbitmq_server
+        networks:
+            - default
+        tty: true

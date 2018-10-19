@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Build Centos7 (with JDK - Tomcat and Postgresql) image
+    docker_image:
+      path: ./centos7_tomcat8
+      name: centos7-tomcat8
+      tag: latest
+  - name: Create container
+    docker_container:
+      name: centos7_tomcat8
+      image: centos7-tomcat8
+      ports:
+      - "5432:5432"
+      - "8080:8080"
+      - "8009:8009"

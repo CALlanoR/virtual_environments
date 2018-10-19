@@ -1,0 +1,32 @@
+dbdata:
+  image: mysql:5.6
+  volumes:
+    - /var/lib/mysql
+
+dbserver:
+  image: mysql:5.6
+  volumes_from:
+    - dbdata
+  environment:
+    - MYSQL_ROOT_PASSWORD=Memzoh78
+    - MYSQL_DATABASE=wordpressdemo
+    - MYSQL_USER=conetixdemo
+    - MYSQL_PASSWORD=Xumkos26
+
+wpdata:
+  image: wordpress:latest
+  volumes:
+    - /var/www/html
+
+wpdemo:
+  image: wordpress:latest
+  links:
+    - dbserver:mysql
+  volumes_from:
+    - wpdata
+  ports:
+    - "8080:80"
+  environment:
+    - WORDPRESS_DB_NAME=wordpressdemo
+    - WORDPRESS_DB_USER=conetixdemo
+    - WORDPRESS_DB_PASSWORD=Xumkos26

@@ -2,7 +2,8 @@ https://hub.docker.com/_/neo4j/
 https://marcobonzanini.com/2015/04/06/getting-started-with-neo4j-and-python/
 
 1. Create a server
-sudo docker run --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data neo4j
+sudo docker run --name neo4j -p 7474:7474 -p 7687:7687 --volume=$HOME/neo4j/data:/data -d neo4j
+sudo docker run --name neo4j -p 7474:7474 -p 7687:7687 -d neo4j
 
 2. Verify the database in your localhost: http://localhost:7474/
   Note: neo4j is the current password, change it! and remember it!
