@@ -1,0 +1,49 @@
+  # -*- mode: ruby -*-
+# vim: ft=ruby
+
+
+# ---- Configuration variables ----
+
+GUI               = false # Enable/Disable GUI
+RAM               = 1000   # Default memory size in MB
+
+# Network configuration
+DOMAIN            = ".example.com"
+NETWORK           = "192.168.56."
+NETMASK           = "255.255.255.0"
+
+# Default Virtualbox .box
+# See: https://wiki.debian.org/Teams/Cloud/VagrantBaseBoxes
+#      https://app.vagrantup.com/ubuntu
+BOX               =  'ubuntu/bionic64' #(ubuntu18.04)
+
+HOSTS = {
+  "kubernetes.master.node" => [NETWORK+"103", RAM, GUI, BOX, "kubernetes_master.sh"],
+  "kubernetes.slave.node"  => [NETWORK+"104", RAM, GUI, BOX, "kubernetes_slave.sh"],
+}
+
+# ---- Vagrant configuration ----
+
+Vagrant.configure(2) do |config|
+  HOSTS.each do | (name, cfg) |
+    ipaddr, ram, gui, box, provisioning_script = cfg
+
+    config.vm.define name do |machine|
+      machine.vm.box   = box
+      machine.vm.guest = :ubuntu
+      machine.vm.provision :shell, path: provisioning_script
+
+      machine.vm.provider "virtualbox" do |vbox|
+        vbox.gui    = gui
+        vbox.memory = ram
+        vbox.name = name
+      end
+
+      machine.vm.hostname = name + DOMAIN
+      machine.vm.network 'private_network', ip: ipaddr, netmask: NETMASK, name: 'vboxnet0', adapter:2
+    end
+
+
+  end # HOSTS-each
+
+end
