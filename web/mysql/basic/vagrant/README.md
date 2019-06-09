@@ -5,6 +5,13 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-
 https://www.digitalocean.com/community/tutorials/how-to-install-the-latest-mysql-on-ubuntu-16-04
 
 
+Test mysql with mysql workbench
+===============================
+Hostname: 192.168.56.120
+username: root
+password: root
+Default Schema: myDB 
+
 Test mysql service
 ==================
 systemctl status mysql.service
