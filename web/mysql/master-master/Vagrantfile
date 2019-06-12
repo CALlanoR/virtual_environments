@@ -17,8 +17,8 @@ NETMASK           = "255.255.255.0"
 BOX               =  'ubuntu/xenial64' #'hashicorp/precise64' (ubuntu12.04) ubuntu/xenial64 (ubuntu16.04)
 
 HOSTS = {
-  "mysql-C"         => [NETWORK+"120", RAM, GUI, BOX, "mysql.sh"],
-  "mysql-D"         => [NETWORK+"121", RAM, GUI, BOX, "mysql.sh"],
+  "mysql-master1"         => [NETWORK+"121", RAM, GUI, BOX, "mysql.sh"],
+  "mysql-master2"         => [NETWORK+"122", RAM, GUI, BOX, "mysql.sh"],
 }
 
 # ---- Vagrant configuration ----
@@ -38,8 +38,9 @@ Vagrant.configure(2) do |config|
         vbox.name = name
       end
 
-      machine.vm.hostname = name + DOMAIN
+      machine.vm.hostname = name
       machine.vm.network 'private_network', ip: ipaddr, netmask: NETMASK, name: 'vboxnet0', adapter:2
+      # machine.vm.network "forwarded_port", guest: port, host: port
     end
 
 
