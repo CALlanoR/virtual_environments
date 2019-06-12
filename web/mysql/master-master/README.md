@@ -76,7 +76,7 @@ start slave;
 show master status;
 
 # in master1
-stop slave;
+stop slave;<br />
 CHANGE MASTER TO MASTER_HOST='192.168.56.122', MASTER_PORT=3306, MASTER_USER='replicator', MASTER_PASSWORD='password123+', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS = 1067;
 
 `You should copy the values of MASTER_LOG_FILE and MASTER_LOG_POS that "SHOW MASTER STATUS" returns on Server master2.`
