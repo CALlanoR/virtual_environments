@@ -13,7 +13,7 @@ Open two terminals and ssh in either Server mysql-master1 and Server mysql-maste
 # Updated the configuration
 Under the mysqld section add or modify the following values in the server mysql-master1 (192.168.56.121):
 
-[mysqld]
+[mysqld]<br />
 server-id=1<br />
 log-bin="mysql-bin"<br />
 binlog-ignore-db=test<br />
@@ -26,7 +26,7 @@ auto-increment-offset = 1<br />
 
 Under the mysqld section add or modify the following values in the server mysql-master2 (192.168.56.122):
 
-[mysqld]
+[mysqld]<br />
 server-id=2<br />
 log-bin="mysql-bin"<br />
 binlog-ignore-db=test<br />
