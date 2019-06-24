@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 apt-get update
-apt-get install -y haproxy=1.6.3-1ubuntu0.1
-apt-get install -y keepalived=1:1.2.19-1ubuntu0.2
+apt-get install -y haproxy=1.6.3-1ubuntu0.2
+apt-get install -y keepalived=1:1.2.24-1ubuntu0.16.04.2
 
 echo "ENABLED=1" > /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original

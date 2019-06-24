@@ -37,6 +37,8 @@ done
 7. sudo docker ps -a
 8. sudo docker logs node1 
 
+# Sleep for two seconds for servers to come online...
+
 # Setting up and starting GR in the containers
 # Execute these commands on node1 which will bootstrap the group:
 9. sudo docker exec -it node1 mysql -uroot -pmypass \

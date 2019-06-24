@@ -1,0 +1,27 @@
+version: '3'
+ 
+services:
+    haproxy_img:
+        container_name: ${COMPOSE_PROJECT_NAME}
+        build: ./haproxy
+        ports:
+            - 33060:3306
+            - 38080:8080
+        expose:
+            - 33060
+            - 38080
+        networks:
+            public_net:
+                ipv4_address: ${HA_PROXY_IP}
+        environment:
+            - MYSQL_1_IP=${APACHE_1_IP}
+            - MYSQL_2_IP=${APACHE_2_IP}
+            - MYSQL_3_IP=${APACHE_2_IP}
+            - APACHE_EXPOSED_PORT=${MYSQL_EXPOSED_PORT}
+networks:
+    public_net:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: ${NETWORK_SUBNET}
