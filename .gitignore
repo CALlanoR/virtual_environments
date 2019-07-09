@@ -10,3 +10,10 @@ rel/example_project
 .rebar
 .vagrant
 *.log
+
+*.jar
+.gradle
+/gradle
+/build/
+*.bin
+*.lock

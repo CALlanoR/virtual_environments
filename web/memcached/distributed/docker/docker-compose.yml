@@ -1,0 +1,10 @@
+version: "3"
+services:
+    memcached_server_1:
+      image: memcached
+      ports:
+        - "11211:11211"
+    memcached_server_2:
+      image: memcached
+      ports:
+        - "11212:11211"
