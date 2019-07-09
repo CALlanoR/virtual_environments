@@ -1,7 +1,6 @@
 import couchdb
-couch = couchdb.Server()
 
-couch = couchdb.Server('http://couchdb_server:5984/')
+couch = couchdb.Server('http://localhost:5984/')
 
 try:
     #create a new database, or use an existing database:
@@ -10,7 +9,7 @@ except:
     db = couch['test'] # existing
 
 # After selecting a database, create a document and insert it into the db:
-doc = {'type': 'Person', 'name': 'John Doe', 'passport': '1234A'}
+doc = {'type': 'Person', 'name': 'John Doe', 'passport': '1234A', 'year': 2001}
 
 # The save() method returns the ID and "rev" for the newly created document.
 id, rev  = db.save(doc)
@@ -30,21 +29,37 @@ print("Updated: ", str(db[id]))
 print("\n")
 print ("Print all documents:")
 for id in db:
-    print (id)
     print ( db[id] )
 
 
 print("Execute queries: ")
-db['audrey'] = dict(type='Person', name='Audrey Doe')
-db['lisa'] = dict(type='Person', name='Lisa Jane')
-db['gotham'] = dict(type='City', name='Gotham City')
-map_fun = '''function(doc) {
-    if (doc.type == 'Person')
-        emit(doc.name, null);
-    }'''
-for row in db.query(map_fun):
-    print(row.key)
+db['audrey'] = dict(type='Person', name='Audrey Doe', year=2000)
+db['lisa'] = dict(type='Person', name='Lisa Jane', year=1994)
+db['gotham'] = dict(type='City', name='Gotham City', year=2010)
+mango = {
+    'selector': {'type': 'Person'},
+    'fields': ['name', 'year']
+}
+for row in db.find(mango):
+    print(row['year'])
 
+print("------------------------------")
+
+mango = {
+  "selector": {
+    "year": {
+      "$eq": 2001
+    }
+  },
+  "fields": [
+    "name", "year"
+  ]
+}
+for row in db.find(mango):
+    print(row['name'] + "-" + str(row['year']))
+
+# To learn more about selectors
+# http://docs.couchdb.org/en/master/api/database/find.html#find-selectors
 
 # Now we can clean up the test document and database we created:
 db.delete(document)
