@@ -6,6 +6,10 @@ sudo docker-compose up -d
 python3 manual_tests.py | jq .
 
 
+## Swagger documentation
+https://dzone.com/articles/spring-boot-2-restful-api-documentation-with-swagg
+
+http://localhost:7070/swagger-ui.html
 
 ## Manual
 sudo docker run -d \

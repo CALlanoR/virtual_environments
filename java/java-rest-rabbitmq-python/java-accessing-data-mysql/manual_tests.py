@@ -16,8 +16,8 @@ conn = http.client.HTTPConnection("localhost:7070")
 ######################################################## USERS #########################################################
 ########################################################################################################################
 
-#conn.request("GET", "/users", headers={'Content-type': 'application/json'})
-conn.request("POST", "/users?name=MrRed2&email=mrred2@gmail.com", headers={'Content-type': 'application/json'})
+conn.request("GET", "/users", headers={'Content-type': 'application/json'})
+#conn.request("POST", "/users?name=MrRed2&email=mrred2@gmail.com", headers={'Content-type': 'application/json'})
 
 start = datetime.datetime.now()
 res = conn.getresponse()
