@@ -1,6 +1,9 @@
 ## Execute:
 sudo docker-compose up -d
 
+## To see the balancer
+192.168.0.33
+
 ## To see stats:
 
 192.168.0.33/haproxy?stats

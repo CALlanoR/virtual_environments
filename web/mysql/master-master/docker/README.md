@@ -1,4 +1,4 @@
-## Taken from:
+## Setting up MySQL Group Replication with MySQL Docker images
 https://mysqlhighavailability.com/setting-up-mysql-group-replication-with-mysql-docker-images/
 
 ## Steps
@@ -39,7 +39,7 @@ done
 
 # Sleep for two seconds for servers to come online...
 
-# Setting up and starting GR in the containers
+# Setting up and starting GR (Group Replication) in the containers 
 # Execute these commands on node1 which will bootstrap the group:
 9. sudo docker exec -it node1 mysql -uroot -pmypass \
   -e "SET @@GLOBAL.group_replication_bootstrap_group=1;" \
