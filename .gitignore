@@ -17,3 +17,5 @@ rel/example_project
 /build/
 *.bin
 *.lock
+
+__pycache__/

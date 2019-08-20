@@ -9,11 +9,8 @@ sudo docker ps -a
 sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' <<ID>>
 sudo docker exec -it <<ID>> bash
 
-4. Starting Readis
-redis-server
-
-5. Check if Redis is working
+4. Check if Redis is working
 redis-cli ping
 PONG
 
-6. in /home/workdir exec python3.4 redis_test.py
+6. in /home/workdir exec python3 redis_test.py

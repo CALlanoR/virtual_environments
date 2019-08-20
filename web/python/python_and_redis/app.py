@@ -9,5 +9,10 @@ def hello():
     redis.incr('counter')
     return'Hi! You saw me %s times.'% redis.get('counter')
 
+@app.route('/')
+def hello():
+    redis.incr('counter')
+    return'Hi! You saw me %s times.'% redis.get('counter')
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
