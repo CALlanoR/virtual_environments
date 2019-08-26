@@ -8,28 +8,27 @@ from time import time
 ########################################################################################################################
 
 #local
-conn = http.client.HTTPConnection("localhost:5008")
+conn = http.client.HTTPConnection("localhost:5000")
 
 ########################################################################################################################
 ######################################################## USERS #########################################################
 ########################################################################################################################
 
-conn.request("GET", "/rol", headers={'Content-type': 'application/json'})
+conn.request("GET", "/rol?page=1&name=%director%", headers={'Content-type': 'application/json'})
 
 #conn.request("GET", "/rol/1", headers={'Content-type': 'application/json'})
 
 # create_rol_post = {
-#     'name': 'co-Director'
+#     'name': 'coWriter1'
 # }
 # json_data_post = json.dumps(create_rol_post)
 # conn.request("POST", "/rol", json_data_post, headers={'Content-type': 'application/json'})
 
 # create_rol_post = {
-#     'id': 6,
-#     'name': 'coDirector'
+#     'name': 'coWriter7'
 # }
 # json_data_post = json.dumps(create_rol_post)
-# conn.request("PUT", "/rol", json_data_post, headers={'Content-type': 'application/json'})
+# conn.request("PUT", "/rol/8", json_data_post, headers={'Content-type': 'application/json'})
 
 #conn.request("DELETE", "/rol/5", headers={'Content-type': 'application/json'})
 

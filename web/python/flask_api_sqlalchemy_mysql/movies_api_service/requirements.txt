@@ -1,0 +1,5 @@
+flask>=0.12.3
+Flask-Cors==3.0.3
+Flask-SQLAlchemy==2.3.2
+PyMySQL
+flask-mysql

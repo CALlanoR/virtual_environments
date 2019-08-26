@@ -4,7 +4,7 @@ from db_config import mysql
 from flask import jsonify
 from flask import flash, request
 from werkzeug import generate_password_hash, check_password_hash
-        
+
 @app.route('/rol', methods=['POST'])
 def add_rol():
     try:
@@ -18,7 +18,7 @@ def add_rol():
             cursor = conn.cursor()
             cursor.execute(sql, data)
             conn.commit()
-            resp = jsonify('Role added successfully!')
+            resp = jsonify({'id': cursor.lastrowid})
             resp.status_code = 200
             return resp
         else:
@@ -32,9 +32,20 @@ def add_rol():
 @app.route('/rol', methods=['GET'])
 def get_all_roles():
     try:
+        page = request.args.get('page', default = 1, type = int)
+        name = request.args.get('name', default = None, type = str)
+        app.logger.info("page: " + str(page))
+        
+        pagesize = 2
+        startat = page*pagesize
+
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT id, name FROM roles")
+        if name:
+            cursor.execute("SELECT id, name FROM roles WHERE name LIKE %s LIMIT %s, %s", (name,startat, pagesize))
+        else:
+            cursor.execute("SELECT id, name FROM roles LIMIT %s, %s", (startat, pagesize))
+
         rows = cursor.fetchall()
         resp = jsonify(rows)
         resp.status_code = 200
@@ -44,7 +55,7 @@ def get_all_roles():
     finally:
         cursor.close() 
         conn.close()
-        
+
 @app.route('/rol/<int:id>', methods=['GET'])
 def get_rol_by_id(id):
     try:
@@ -61,23 +72,27 @@ def get_rol_by_id(id):
         cursor.close() 
         conn.close()
 
-@app.route('/rol', methods=['PUT'])
-def update_rol():
+@app.route('/rol/<int:id>', methods=['PUT'])
+def update_rol(id):
     try:
         _json = request.json
-        _id = _json['id']
         _name = _json['name']		
         # validate the received values
-        if _name and _id and request.method == 'PUT':
+        if _name and id and request.method == 'PUT':
             # save edits
             sql = "UPDATE roles SET name=%s WHERE id=%s"
-            data = (_name, _id,)
+            data = (_name, id,)
             conn = mysql.connect()
             cursor = conn.cursor()
-            cursor.execute(sql, data)
+            rows_affected = cursor.execute(sql, data)
+            app.logger.info("PUT update_rol, rows_affected: " + str(rows_affected))
+            if rows_affected == 0:
+                resp = jsonify({'message': 'Rol was not updated!'})
+                resp.status_code = 200
+            else:
+                resp = jsonify({'message': 'Rol updated successfully!'})
+                resp.status_code = 200
             conn.commit()
-            resp = jsonify('Rol updated successfully!')
-            resp.status_code = 200
             return resp
         else:
             return not_found()
@@ -92,10 +107,14 @@ def delete_rol(id):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM roles WHERE id=%s", (id,))
+        rows_affected = cursor.execute("DELETE FROM roles WHERE id=%s", (id,))
         conn.commit()
-        resp = jsonify('Rol deleted successfully!')
-        resp.status_code = 200
+        if rows_affected == 0:
+            resp = jsonify({'message': 'Rol was not deleted!'})
+            resp.status_code = 200
+        else:
+            resp = jsonify({'message': 'Rol deleted successfully!'})
+            resp.status_code = 200
         return resp
     except Exception as e:
         print(e)
