@@ -14,7 +14,7 @@ conn = http.client.HTTPConnection("localhost:5000")
 ######################################################## USERS #########################################################
 ########################################################################################################################
 
-conn.request("GET", "/rol?page=1&name=%director%", headers={'Content-type': 'application/json'})
+#conn.request("GET", "/rol?page=0&name=%director%", headers={'Content-type': 'application/json'})
 
 #conn.request("GET", "/rol/1", headers={'Content-type': 'application/json'})
 
@@ -25,12 +25,12 @@ conn.request("GET", "/rol?page=1&name=%director%", headers={'Content-type': 'app
 # conn.request("POST", "/rol", json_data_post, headers={'Content-type': 'application/json'})
 
 # create_rol_post = {
-#     'name': 'coWriter7'
+#     'name': 'coWriter8'
 # }
 # json_data_post = json.dumps(create_rol_post)
-# conn.request("PUT", "/rol/8", json_data_post, headers={'Content-type': 'application/json'})
+# conn.request("PUT", "/rol/14", json_data_post, headers={'Content-type': 'application/json'})
 
-#conn.request("DELETE", "/rol/5", headers={'Content-type': 'application/json'})
+conn.request("DELETE", "/rol/14", headers={'Content-type': 'application/json'})
 
 
 start = datetime.datetime.now()
