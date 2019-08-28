@@ -16,7 +16,6 @@ class RolesRepository(object):
         return lastrowid
 
     def get_all_roles(self, page, pagesize, name):
-        print("...repo....name: " +name)
         startat = page*pagesize
         cursor = self.conn.cursor(pymysql.cursors.DictCursor)
         if name:

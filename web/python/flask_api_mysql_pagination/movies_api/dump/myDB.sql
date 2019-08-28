@@ -24,17 +24,18 @@ CREATE TABLE `movies` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---@al
---@al`
---@al
-DR@al
-CR@al
-  @alT,
-  @al
-  @al
-  @al
-  @al
+--
+-- Table structure for table `persons`
+--
+DROP TABLE IF EXISTS `persons`;
+CREATE TABLE `persons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `full_cast_by_movie`

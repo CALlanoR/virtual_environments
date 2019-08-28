@@ -8,13 +8,16 @@ from time import time
 ########################################################################################################################
 
 #local
-conn = http.client.HTTPConnection("localhost:5000")
+conn = http.client.HTTPConnection("localhost:5008")
 
 ########################################################################################################################
 ######################################################## USERS #########################################################
 ########################################################################################################################
 
-#conn.request("GET", "/rol?page=0&name=%director%", headers={'Content-type': 'application/json'})
+#conn.request("GET", "/rol?page=0", headers={'Content-type': 'application/json'})
+
+conn.request("GET", "/rol?page=1&name=%director%", headers={'Content-type': 'application/json'})
+
 
 #conn.request("GET", "/rol/1", headers={'Content-type': 'application/json'})
 
@@ -30,7 +33,7 @@ conn = http.client.HTTPConnection("localhost:5000")
 # json_data_post = json.dumps(create_rol_post)
 # conn.request("PUT", "/rol/14", json_data_post, headers={'Content-type': 'application/json'})
 
-conn.request("DELETE", "/rol/14", headers={'Content-type': 'application/json'})
+#conn.request("DELETE", "/rol/14", headers={'Content-type': 'application/json'})
 
 
 start = datetime.datetime.now()
