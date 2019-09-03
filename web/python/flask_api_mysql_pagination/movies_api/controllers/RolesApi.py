@@ -12,7 +12,7 @@ roles_service = RolesService()
 def add_rol():
     try:
         _json = request.json
-        _name = _json['name']from app import app
+        _name = _json['name']
         # validate the received values
         if _name and request.method == 'POST':
             lastrowid = roles_service.add_rol(_name)

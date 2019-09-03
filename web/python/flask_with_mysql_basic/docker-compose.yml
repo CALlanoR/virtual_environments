@@ -1,0 +1,29 @@
+
+version: "3"
+services:
+
+  mysql-server:
+    image: mysql:5.7
+    container_name: 'mysql-server'
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=ThePassword
+      - MYSQL_DATABASE=db_example
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - "./conf.d:/etc/mysql/conf.d:ro"
+
+  python_service:
+    image: 'java_service_image'
+    build:
+      context: ./java-accessing-data-mysql
+      dockerfile: Dockerfile
+    container_name: 'java_service'
+    depends_on:
+      - mysql-server
+    links:
+      - mysql-server
+    ports:
+      - 7070:8080

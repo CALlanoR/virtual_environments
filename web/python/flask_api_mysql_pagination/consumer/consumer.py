@@ -8,15 +8,18 @@ from time import time
 ########################################################################################################################
 
 #local
+#conn = http.client.HTTPConnection("localhost:5008")
+
+#container
 conn = http.client.HTTPConnection("localhost:5008")
 
 ########################################################################################################################
 ######################################################## USERS #########################################################
 ########################################################################################################################
 
-#conn.request("GET", "/rol?page=0", headers={'Content-type': 'application/json'})
+conn.request("GET", "/rol?page=0", headers={'Content-type': 'application/json'})
 
-conn.request("GET", "/rol?page=1&name=%director%", headers={'Content-type': 'application/json'})
+#conn.request("GET", "/rol?page=1&name=%director%", headers={'Content-type': 'application/json'})
 
 
 #conn.request("GET", "/rol/1", headers={'Content-type': 'application/json'})

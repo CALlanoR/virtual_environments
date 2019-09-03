@@ -8,7 +8,6 @@ class RolesService(object):
         return self.roles_repository.add_rol(name)
 
     def get_all_roles(self, page, pagesize, name):
-        print("...service....name: " +name)
         return self.roles_repository.get_all_roles(page, pagesize, name)
 
     def get_rol_by_id(self, id):
