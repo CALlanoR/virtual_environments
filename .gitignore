@@ -19,3 +19,7 @@ rel/example_project
 *.lock
 
 __pycache__/
+
+build/
+bin/
+*.class

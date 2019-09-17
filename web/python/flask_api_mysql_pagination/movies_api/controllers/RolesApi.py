@@ -3,6 +3,10 @@ from app import app
 from services.RolesService import RolesService
 from flask import jsonify
 from flask import flash, request
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
 
 roles_api = Blueprint('roles_api', __name__)
 
@@ -25,6 +29,7 @@ def add_rol():
         print(e)
 
 @roles_api.route('/rol', methods=['GET'])
+@jwt_required
 def get_all_roles():
     try:
         page = request.args.get('page', default = 1, type = int)
@@ -40,6 +45,7 @@ def get_all_roles():
         print(e)
 
 @roles_api.route('/rol/<int:id>', methods=['GET'])
+@jwt_required
 def get_rol_by_id(id):
     try:
         row = roles_service.get_rol_by_id(id)

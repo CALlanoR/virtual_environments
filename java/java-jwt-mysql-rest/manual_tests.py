@@ -26,7 +26,7 @@ def login():
     data = res.read()
 
     data_json = json.loads(data.decode("utf-8"))
-    #print(data_json)
+    print(data_json)
     if 'token' in data_json:
         jwt_token = data_json['token']
     else:

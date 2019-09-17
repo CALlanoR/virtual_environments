@@ -11,18 +11,24 @@ from time import time
 #conn = http.client.HTTPConnection("localhost:5008")
 
 #container
-conn = http.client.HTTPConnection("localhost:5008")
+conn = http.client.HTTPConnection("localhost:5000")
 
 ########################################################################################################################
 ######################################################## USERS #########################################################
 ########################################################################################################################
 
-conn.request("GET", "/rol?page=0", headers={'Content-type': 'application/json'})
+
+headers = {
+    'Content-type': 'application/json',
+    'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjYWxsYW5vciIsImlkZW50aXR5IjoiY2FsbGFub3IiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTY4NzM1NjAyLCJleHAiOjE1Njg3MzYyMDJ9.AjinCAo5TYIXFLDfqweFw8SZzFJsekqNNWJuwdBxItT2NP-yega8LAyPKswHpCAZOf1teOGoHDYGtAlkjaCZAA'
+}
+
+#conn.request("GET", "/rol?page=0", headers=headers)
 
 #conn.request("GET", "/rol?page=1&name=%director%", headers={'Content-type': 'application/json'})
 
 
-#conn.request("GET", "/rol/1", headers={'Content-type': 'application/json'})
+conn.request("GET", "/rol/1", headers={'Content-type': 'application/json'})
 
 # create_rol_post = {
 #     'name': 'coWriter1'
