@@ -6,10 +6,4 @@ from flask_jwt_extended import (
 )
 
 app = Flask(__name__)
-
-# Setup the Flask-JWT-Extended extension
-app.config['JWT_SECRET_KEY'] = 'mySecretKey'  # Change this!
-app.config['JWT_ALGORITHM'] = 'HS512'
-jwt = JWTManager(app)
-
 CORS(app)
