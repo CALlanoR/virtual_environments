@@ -1,0 +1,59 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    container_name: MySQLServiceDB
+    ports: 
+        - "3306:3306"
+    environment:
+        MYSQL_USER: dev
+        MYSQL_PASSWORD: 123456
+        MYSQL_ROOT_PASSWORD: test 
+    volumes:
+        - ./databases/dump:/docker-entrypoint-initdb.d
+        - persistent:/var/lib/mysql
+    networks:
+        - default
+  moviesapi:
+    build: ./python_movies_service_api
+    image: python_service_movies_api
+    container_name: pythonServiceMoviesAPI
+    command: python3 main.py
+    ports:
+      - "5000:5000"
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      - default
+  usersapi:
+    build: ./java-users-service-api
+    image: java_users_service_api
+    container_name: javaServiceUsersAPI
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - 7070:7070
+    networks:
+        - default
+  gateway:
+    build: ./java-gateway
+    image: java_gateway
+    container_name: javaGateway
+    depends_on:
+      - db
+      - usersapi
+      - moviesapi
+    links:
+      - usersapi:usersapi
+      - moviesapi:moviesapi
+    ports:
+      - 9999:9999
+    networks:
+        - default
+volumes:
+    persistent:
+

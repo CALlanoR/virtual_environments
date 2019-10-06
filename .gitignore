@@ -10,6 +10,9 @@ rel/example_project
 .rebar
 .vagrant
 *.log
+.classpath
+*.classpath
+.settings/*
 
 *.jar
 .gradle
