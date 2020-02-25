@@ -9,7 +9,15 @@ sudo docker run --name neo4j -p 7474:7474 -p 7687:7687 -d neo4j
   Note: neo4j is the current password, change it! and remember it!
 
 3. In your localmachine install:
-sudo pip install neo4jrestclient
+Python3.7
+https://linuxize.com/post/how-to-install-python-3-7-on-ubuntu-18-04/
+
+Neo4j python driver
+python3.7 -m pip install neo4j 
+
+https://neo4j.com/docs/api/python-driver/current/
+https://medium.com/elements/diving-into-graphql-and-neo4j-with-python-244ec39ddd94
+https://github.com/neo4j/neo4j-python-driver
 
 4. Open another terminal and execute the code neo4j_createdb_test.py NOTE: change the password!
 

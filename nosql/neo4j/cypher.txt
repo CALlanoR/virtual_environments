@@ -1,0 +1,18 @@
+https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-introduction
+
+MATCH (n)
+DETACH DELETE n
+
+CREATE (john:Person {name: 'John'})
+CREATE (joe:Person {name: 'Joe'})
+CREATE (steve:Person {name: 'Steve'})
+CREATE (sara:Person {name: 'Sara'})
+CREATE (maria:Person {name: 'Maria'})
+CREATE (john)-[:FRIEND]->(joe)-[:FRIEND]->(steve)
+CREATE (john)-[:FRIEND]->(sara)-[:FRIEND]->(maria)
+
+Los amigos de John
+MATCH (john:Person {name: "John"})-[:FRIEND]->(johnFriends) RETURN john, johnFriends
+
+Los amigos de sus amigos (quizas conozca)
+MATCH (john {name: 'John'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN john.name, fof.name
