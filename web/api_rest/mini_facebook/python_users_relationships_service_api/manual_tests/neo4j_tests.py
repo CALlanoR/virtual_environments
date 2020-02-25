@@ -60,11 +60,5 @@ with driver.session() as session:
         age = person['age']
         print(f"name: {name} - age: {age}")
 
-    result = session.run("MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
-    print("Quizas conozcas:")
-    for person in result:
-        name = person['name']
-        age = person['age']
-        print(f"name: {name} - age: {age}")
 
 driver.close()
