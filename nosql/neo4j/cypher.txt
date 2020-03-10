@@ -1,18 +1,25 @@
 https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-introduction
 
-MATCH (n)
-DETACH DELETE n
+# Borra todos los nodos creados
+MATCH (n) DETACH DELETE n
 
-CREATE (john:Person {name: 'John'})
-CREATE (joe:Person {name: 'Joe'})
-CREATE (steve:Person {name: 'Steve'})
-CREATE (sara:Person {name: 'Sara'})
-CREATE (maria:Person {name: 'Maria'})
-CREATE (john)-[:FRIEND]->(joe)-[:FRIEND]->(steve)
-CREATE (john)-[:FRIEND]->(sara)-[:FRIEND]->(maria)
+# Borra todas las relaciones creadas
+MATCH ()-[r]-() DELETE r
+
+CREATE (juan:Person {name: 'Juan', sex:'M', age:35, city:'Cali'})
+CREATE (erica:Person {name: 'Erica'})
+CREATE (tomas:Person {name: 'Tomas'})
+CREATE (laura:Person {name: 'Laura'})
+CREATE (valentina:Person {name: 'Valentina'})
+CREATE (jose:Person {name: 'Jose'})
+
+CREATE (juan)-[:FRIEND]->(erica)-[:FRIEND]->(laura), (juan)-[:FRIEND]->(tomas)-[:FRIEND]->(jose)
+CREATE (tomas)-[:FRIEND]->(valentina)
 
 Los amigos de John
-MATCH (john:Person {name: "John"})-[:FRIEND]->(johnFriends) RETURN john, johnFriends
+MATCH (juan:Person {name: "Juan"})-[:FRIEND]->(juanFriends) RETURN juan, juanFriends
+
+
 
 Los amigos de sus amigos (quizas conozca)
-MATCH (john {name: 'John'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN john.name, fof.name
+MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN juan.name, fof.name

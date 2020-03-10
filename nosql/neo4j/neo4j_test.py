@@ -23,37 +23,49 @@ with driver.session() as session:
     
     juan = session.run("CREATE (juan:Person {name:$name, age:43}) "
                        "RETURN id(juan)", name="Juan").single().value()
+    erica = session.run("CREATE (erica:Person {name:$name, age:25}) "
+                       "RETURN id(erica)", name="Erica").single().value()
+    tomas = session.run("CREATE (tomas:Person {name:$name, age:32}) "
+                    "RETURN id(tomas)", name="Tomas").single().value()
     valentina = session.run("CREATE (valentina:Person {name:$name, age:39}) "
                             "RETURN id(valentina)", name="Valentina").single().value()
-    jacobo = session.run("CREATE (jacobo:Person {name:$name, age:25}) "
-                       "RETURN id(jacobo)", name="Jacobo").single().value()
-    yuritza = session.run("CREATE (yuritza:Person {name:$name, age:32}) "
-                    "RETURN id(yuritza)", name="Yuritza").single().value()
+    laura = session.run("CREATE (laura:Person {name:$name, age:25}) "
+                       "RETURN id(laura)", name="Laura").single().value()
+    jose = session.run("CREATE (jose:Person {name:$name, age:32}) "
+                    "RETURN id(jose)", name="Jose").single().value()
 
     session.run("""Match (juan:Person{name:'Juan'}) 
-                   Match (valentina:Person{name:'Valentina'})
-                   Match (jacobo:Person{name:'Jacobo'})
-                   Create (juan)-[:FRIEND]->(valentina)-[:FRIEND]->(jacobo)""")
+                   Match (tomas:Person{name:'Tomas'})
+                   Match (jose:Person{name:'Jose'})
+                   Create (juan)-[:FRIEND]->(tomas)-[:FRIEND]->(jose) """)
 
-    session.run("""Match (valentina:Person{name:'Valentina'})
-                   Match (yuritza:Person{name:'Yuritza'})
-                   Create (valentina)-[:FRIEND]->(yuritza)""")
+    session.run("""Match (tomas:Person{name:'Tomas'})
+                   Match (valentina:Person{name:'Valentina'})
+                   Create (tomas)-[:FRIEND]->(valentina)""")
+
+    session.run("""Match (juan:Person{name:'Juan'}) 
+                   Match (erica:Person{name:'Erica'})
+                   Match (laura:Person{name:'Laura'})
+                   Create (juan)-[:FRIEND]->(erica)-[:FRIEND]->(laura) """)
 
     result = session.run("MATCH (n:Person) RETURN n.name as name, n.age as age LIMIT 25").data()
+    print("----------------------------")
     print("Todos las personas")
     for person in result:
         name = person['name']
         age = person['age']
         print(f"name: {name} - age: {age}")
 
-    result = session.run("MATCH (valentina {name: 'Valentina'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
-    print("Amigos de Valentina:")
+    result = session.run("MATCH (tomas {name: 'Tomas'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
+    print("----------------------------")
+    print("Amigos de Tomas:")
     for person in result:
         name = person['name']
         age = person['age']
         print(f"name: {name} - age: {age}")
 
     result = session.run("MATCH (juan {name: 'Juan'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
+    print("----------------------------")
     print("Amigos de Juan:")
     for person in result:
         name = person['name']
@@ -61,6 +73,7 @@ with driver.session() as session:
         print(f"name: {name} - age: {age}")
 
     result = session.run("MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
+    print("----------------------------")
     print("Quizas conozcas:")
     for person in result:
         name = person['name']

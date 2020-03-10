@@ -12,4 +12,4 @@ def setup_neo4j_driver(host, port, login, password):
     except:
         pass
 
-driver = setup_neo4j_driver("localhost", "7687", "neo4j", "neo4j")
+driver = setup_neo4j_driver("MyNeo4JServiceDB", "7687", "neo4j", "password")

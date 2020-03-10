@@ -2,35 +2,48 @@ import json
 import datetime
 import http.client
 from time import time
+from urllib.parse import quote
+from urllib.parse import unquote # Only to remember
 
 ########################################################################################################################
 ##################################################### ENVIRONMENTS #####################################################
 ########################################################################################################################
 
 #local
-# conn = http.client.HTTPConnection("localhost:8080")
-
-#container
-conn = http.client.HTTPConnection("0.0.0.0:5000")
+conn = http.client.HTTPConnection("localhost:7070")
 
 ########################################################################################################################
-######################################################## USERS #########################################################
+######################################################## LOGIN #########################################################
 ########################################################################################################################
 
 
-headers = {
-    'Content-type': 'application/json'
-}
+def login():
+    headers_default = {'Content-type': 'application/json'}
 
-conn.request("GET", "/persons", headers=headers)
-# conn.request("GET", "/persons/Juan", headers=headers)
+    conn.request("POST", "/login?username=blue&password=123456", headers=headers_default)
 
-# create_person_post = {
-#     'name': 'Erica'
-# }
-# json_data_post = json.dumps(create_person_post)
-# conn.request("POST", "/persons", json_data_post, headers={'Content-type': 'application/json'})
+    res = conn.getresponse()
+    data = res.read()
 
+    data_json = json.loads(data.decode("utf-8"))
+    print(data_json)
+    if 'token' in data_json:
+        jwt_token = data_json['token']
+    else:
+        print("Token not found")
+        exit(0)
+
+    headers = {
+        'Content-type': 'application/json',
+        'authorization': jwt_token
+    }
+
+    return headers
+
+headers = login()
+
+conn.request("GET", "/users", headers=headers)
+#conn.request("POST", "/users?name=MrRed&email=mrred@gmail.com", headers={'Content-type': 'application/json'})
 
 start = datetime.datetime.now()
 res = conn.getresponse()

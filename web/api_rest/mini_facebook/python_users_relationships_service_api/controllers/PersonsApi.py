@@ -38,8 +38,18 @@ def get_all_persons():
 @persons_api.route('/persons/<string:name>', methods=['GET'])
 def get_person_by_name(name):
     try:
-        # row = persons_service.get_person_by_name(name)
+        row = persons_service.get_person_by_name(name)
         row = name
+        resp = jsonify(row)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+
+@persons_api.route('/persons/personId1/<int:personId1>/personId2/<int:personId2>', methods=['POST'])
+def add_new_relationship(personId1, personId2):
+    try:
+        row = persons_service.add_new_relationship(personId1, personId2)
         resp = jsonify(row)
         resp.status_code = 200
         return resp

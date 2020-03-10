@@ -1,0 +1,41 @@
+version: "3"
+services:
+  neo4jdb:
+    image: neo4j
+    container_name: MyNeo4JServiceDB
+    ports: 
+        - "7474:7474"
+        - "7687:7687"
+    environment:
+        NEO4J_PASSWORD: password
+    networks:
+        - default
+  mysqldb:
+    image: mysql:5.7
+    container_name: MySQLServiceDB
+    ports: 
+        - "3306:3306"
+    environment:
+        MYSQL_USER: dev
+        MYSQL_PASSWORD: 123456
+        MYSQL_ROOT_PASSWORD: test 
+    volumes:
+        - ./databases/dump:/docker-entrypoint-initdb.d
+        - persistent:/var/lib/mysql
+    networks:
+        - default
+  usersapi:
+    build: ./java-users-service-api
+    image: java_users_service_api
+    container_name: javaServiceUsersAPI
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb
+    ports:
+      - 7070:7070
+    networks:
+        - default
+volumes:
+    persistent:
+
