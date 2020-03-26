@@ -1,4 +1,9 @@
 Flask
 flask-cors
-neo4j
+redis
+PyMySQL
+flask-mysql
+flask_sqlalchemy
+flask_marshmallow
+marshmallow-sqlalche
 PyJWT
