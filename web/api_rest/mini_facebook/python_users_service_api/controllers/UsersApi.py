@@ -1,14 +1,17 @@
 from flask import Blueprint
-from app import app
-from services.UsersService import UsersService
 from flask import jsonify, request
 from flask_jwt_extended import (
     jwt_required, fresh_jwt_required, JWTManager, jwt_refresh_token_required,
     jwt_optional, create_access_token, create_refresh_token, get_jwt_identity,
     decode_token
 )
+from flask_restplus import Resource, Api
+from services.UsersService import UsersService
+from app import app
 
 users_api = Blueprint('users_api', __name__)
+
+# app = Api(app = app)
 
 users_service = UsersService()
 

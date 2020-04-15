@@ -24,16 +24,24 @@ services:
         - persistent:/var/lib/mysql
     networks:
         - default
+    healthcheck:
+        # test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+        test: "/usr/bin/mysql --user=root --password=test --execute \"SHOW DATABASES;\""
+        interval: 2s
+        timeout: 20s
+        retries: 10
   usersapi:
-    build: ./java-users-service-api
-    image: java_users_service_api
-    container_name: javaServiceUsersAPI
+    build: ./python_users_service_api
+    image: python_users_service_api
+    container_name: pythonServiceUsersAPI
+    command: python3 main.py
+    restart: on-failure
     depends_on:
       - mysqldb
     links:
       - mysqldb
     ports:
-      - 7070:7070
+      - 5010:5010
     networks:
         - default
 volumes:

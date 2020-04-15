@@ -44,7 +44,7 @@ def login():
 headers = login()
 # print(headers)
 
-conn.request("GET", "/users?id=10", headers=headers)
+conn.request("GET", "/users?id=1", headers=headers)
 
 start = datetime.datetime.now()
 res = conn.getresponse()

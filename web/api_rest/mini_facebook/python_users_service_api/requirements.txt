@@ -5,5 +5,9 @@ PyMySQL
 flask-mysql
 flask_sqlalchemy
 flask_marshmallow
-marshmallow-sqlalche
+marshmallow-sqlalchemy
+flask-jwt-extended
 PyJWT
+flask-swagger
+Werkzeug==0.16.0
+flask_restplus

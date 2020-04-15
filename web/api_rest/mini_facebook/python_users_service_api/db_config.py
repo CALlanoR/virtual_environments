@@ -8,7 +8,7 @@ mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'test'
 app.config['MYSQL_DATABASE_DB'] = 'UsersDB'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'   #'172.20.0.2' #'MySQLServiceDB'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'   #'localhost' 'MySQLServiceDB'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 mysql.init_app(app)
 
