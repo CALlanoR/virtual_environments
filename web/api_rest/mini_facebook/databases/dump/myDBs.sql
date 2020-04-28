@@ -6,18 +6,20 @@ USE UsersDB;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 INSERT INTO `UsersDB`.`user` (`id`, `email`, `name`, `password`, `username`) VALUES ('1', 'mrblue@javerianacali.edu.co', 'Blue Perez', '123456', 'blue');
+INSERT INTO `UsersDB`.`user` (`id`, `email`, `name`, `password`, `username`) VALUES ('2', 'mrwhite@gmail.com', 'White Mejia', 'qwerty', 'white');
+
 
 DROP TABLE IF EXISTS `friend_requests`;
 CREATE TABLE `friend_requests` (

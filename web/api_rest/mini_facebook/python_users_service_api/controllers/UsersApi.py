@@ -5,13 +5,10 @@ from flask_jwt_extended import (
     jwt_optional, create_access_token, create_refresh_token, get_jwt_identity,
     decode_token
 )
-from flask_restplus import Resource, Api
 from services.UsersService import UsersService
 from app import app
 
 users_api = Blueprint('users_api', __name__)
-
-# app = Api(app = app)
 
 users_service = UsersService()
 

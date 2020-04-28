@@ -28,7 +28,7 @@ def login():
     data = res.read()
 
     data_json = json.loads(data.decode("utf-8"))
-    print(data_json)
+    # print(data_json)
     jwt_token = data_json['token']
 
     headers = {
@@ -42,7 +42,7 @@ def login():
 #### LOGIN ####
 ###############
 headers = login()
-# print(headers)
+print(headers)
 
 conn.request("GET", "/users?id=1", headers=headers)
 

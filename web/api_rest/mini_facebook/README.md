@@ -5,6 +5,3 @@ bash build.sh create
 
 ## Destroy the environment (images + containers)
 bash build.sh destroy
-
-## Manual
-docker build -t pythonuserserviceapi .

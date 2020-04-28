@@ -44,6 +44,19 @@ services:
       - 5010:5010
     networks:
         - default
+  daemon:
+    build: ./python_user_relationships_creator_daemon
+    image: python_user_relationships_creator_daemon
+    container_name: pythonUserRelationshipsCreatorDaemon 
+    restart: on-failure
+    depends_on:
+      - mysqldb
+      - neo4jdb
+    links:
+      - mysqldb
+      - neo4jdb
+    networks: 
+      - default
 volumes:
     persistent:
 

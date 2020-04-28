@@ -8,6 +8,4 @@ flask_marshmallow
 marshmallow-sqlalchemy
 flask-jwt-extended
 PyJWT
-flask-swagger
-Werkzeug==0.16.0
-flask_restplus
+flask-swagger-ui==3.25.0
