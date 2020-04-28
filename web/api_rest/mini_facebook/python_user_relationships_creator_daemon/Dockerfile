@@ -1,10 +1,7 @@
-# FROM ubuntu:18.04
 FROM python:3.7
 
 RUN apt-get update
 RUN apt-get install -y cron 
-# RUN apt-get install -y python3.6
-# RUN apt-get install -y python3-pip
 
 # install requirements (early and on their own to leverage caching)
 COPY ./requirements.txt /app/requirements.txt
