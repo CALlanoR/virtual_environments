@@ -1,15 +1,35 @@
 version: "3"
 services:
+  rabbitmq:
+    hostname: rabbit
+    container_name: rabbitMQService
+    image: rabbitmq:management
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+    ports:
+      - "5673:5672"
+      - "15672:15672"
+    healthcheck:
+      test: "rabbitmq-diagnostics -q ping"
+      interval: 10s
+      timeout: 15s
+      retries: 5
   neo4jdb:
     image: neo4j
     container_name: MyNeo4JServiceDB
     ports: 
-        - "7474:7474"
-        - "7687:7687"
+      - "7474:7474"
+      - "7687:7687"
     environment:
         NEO4J_PASSWORD: password
     networks:
-        - default
+      - default
+    # healthcheck:
+    #   test: "${DOCKER_HEALTHCHECK_TEST:-curl http://localhost:7474/}"
+    #   interval: 10s
+    #   timeout: 20s
+    #   retries: 5
   mysqldb:
     image: mysql:5.7
     container_name: MySQLServiceDB
@@ -20,16 +40,29 @@ services:
         MYSQL_PASSWORD: 123456
         MYSQL_ROOT_PASSWORD: test 
     volumes:
-        - ./databases/dump:/docker-entrypoint-initdb.d
-        - persistent:/var/lib/mysql
+      - ./databases/dump:/docker-entrypoint-initdb.d
+      - persistent:/var/lib/mysql
     networks:
         - default
     healthcheck:
-        # test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
-        test: "/usr/bin/mysql --user=root --password=test --execute \"SHOW DATABASES;\""
+        test: "/usr/bin/mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD --execute \"SHOW DATABASES;\""
         interval: 2s
         timeout: 20s
         retries: 10
+  mongodb:
+    image: mongo
+    container_name: MongoServiceDB
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: publicationsDB
+    healthcheck:
+      test: "mongo --eval 'db.stats().ok'"
+      interval: 10s
+      timeout: 10s
+      retries: 10
   usersapi:
     build: ./python_users_service_api
     image: python_users_service_api
@@ -44,6 +77,11 @@ services:
       - 5010:5010
     networks:
         - default
+    healthcheck:
+      test: "${DOCKER_HEALTHCHECK_TEST:-curl localhost:5010/ping}"
+      interval: 2s
+      timeout: 20s
+      retries: 10
   daemon:
     build: ./python_user_relationships_creator_daemon
     image: python_user_relationships_creator_daemon

@@ -14,3 +14,7 @@ class UsersService(object):
 
     def get_user_by_id(self, id):
         return self.users_repository.get_user_by_id(id)
+
+    def users_count(self):
+        response = self.users_repository.count()
+        return int(response['count'])

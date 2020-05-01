@@ -14,7 +14,7 @@ COPY daemon.py /app
 # make script executable
 RUN chmod +x /app/daemon.py
 
-# Add crontab file in the cron directory
+# Add crontab file in the cron directory  Probar con /dev/null 2>&1
 RUN printf "* * * * * /usr/bin/python3 /app/daemon.py >> /var/log/cron.log 2>&1\n" >> /etc/cron.d/crontab
 
 # Give execution rights on the cron job

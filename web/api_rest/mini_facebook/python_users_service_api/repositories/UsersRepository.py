@@ -18,3 +18,10 @@ class UsersRepository(object):
         row = cursor.fetchone()
         cursor.close()
         return row
+
+    def count(self):
+        cursor = self.conn.cursor(pymysql.cursors.DictCursor)
+        cursor.execute("SELECT count(id) as count FROM user")
+        row = cursor.fetchone()
+        cursor.close()
+        return row

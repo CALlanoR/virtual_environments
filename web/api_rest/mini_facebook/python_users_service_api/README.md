@@ -30,3 +30,6 @@ Execute the test with this command:
 in another console execute:
 cd manual_tests
 python3.7 consumer.py
+
+-- Generate swagger doc
+http://localhost:5010/swagger

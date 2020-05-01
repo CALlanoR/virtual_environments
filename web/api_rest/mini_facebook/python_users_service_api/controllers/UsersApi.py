@@ -62,3 +62,21 @@ def get_users():
         return resp
     except Exception as e:
         print(e)
+
+@users_api.route('/ping',
+                 methods = ['GET'])
+def ping():
+    try:
+        app.logger.info("in /ping")
+        count = users_service.users_count()
+        if count > 1:
+            resp = jsonify({'message': 'pong'})
+            resp.status_code = 200
+        else:
+            resp = jsonify({'message': 'error'})
+            resp.status_code = 500
+    except Exception as e:
+        app.logger.error(str(e))
+        resp = jsonify({'message': 'error'})
+        resp.status_code = 500
+    return resp

@@ -42,9 +42,11 @@ def login():
 #### LOGIN ####
 ###############
 headers = login()
-print(headers)
+# print(headers)
 
-conn.request("GET", "/users?id=1", headers=headers)
+# conn.request("GET", "/users?id=1", headers=headers)
+
+conn.request("GET", "/ping", headers={'Content-type': 'application/json'})
 
 start = datetime.datetime.now()
 res = conn.getresponse()
