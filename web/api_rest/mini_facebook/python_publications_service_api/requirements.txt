@@ -1,0 +1,8 @@
+Flask
+flask-cors
+flask_marshmallow
+flask-jwt-extended
+PyJWT
+flask-swagger-ui==3.25.0
+amqp
+celerye

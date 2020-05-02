@@ -1,5 +1,6 @@
+
 # A simple Flask app container.
-FROM python:3.7
+FROM python:3
 MAINTAINER Carlos Llano <callano@javerianacali.edu.co>
 
 # Place app in container.
@@ -13,3 +14,4 @@ RUN cat /opt/www/db_config.py
 RUN pip3 install -r requirements.txt
 
 EXPOSE 5010
+
