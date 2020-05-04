@@ -8,7 +8,7 @@ services:
       - RABBITMQ_DEFAULT_USER=rabbitmq
       - RABBITMQ_DEFAULT_PASS=rabbitmq
     ports:
-      - "5673:5672"
+      - "5672:5672"
       - "15672:15672"
     healthcheck:
       test: "rabbitmq-diagnostics -q ping"
@@ -82,7 +82,7 @@ services:
       interval: 2s
       timeout: 20s
       retries: 10
-  daemon:
+  user_relationships_creator_daemon:
     build: ./python_user_relationships_creator_daemon
     image: python_user_relationships_creator_daemon
     container_name: pythonUserRelationshipsCreatorDaemon 
@@ -94,6 +94,21 @@ services:
       - mysqldb
       - neo4jdb
     networks: 
+      - default
+  publications_consumer_service:
+    build: ./python_publications_consumer
+    image: python_publications_service
+    container_name: pythonPublicationsService
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - mongodb
+    links:
+      - rabbitmq
+      - mongodb
+    environment:
+      AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
+    networks:
       - default
 volumes:
     persistent:
