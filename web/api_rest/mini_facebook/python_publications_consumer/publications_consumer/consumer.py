@@ -4,6 +4,7 @@ import json
 import pika
 
 def _save_publication_in_database(publication):
+    print('publication: {0}'.format(str(publication)))
     client = MongoClient(_get_property('mongodb','url'),
                          username=_get_property('mongodb','username'),
                          password=_get_property('mongodb','password'))
@@ -29,6 +30,7 @@ def main():
                        queue=queue_name)
 
     def callback(ch, method, properties, body):
+        print('body: {0}'.format(str(body)))
         publication = json.loads(body)
         _save_publication_in_database(publication)
 

@@ -17,9 +17,9 @@ def get_all_publications():
 def send_publication():
     credentials = pika.PlainCredentials('rabbitmq',
                                         'rabbitmq')
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost', 
-                                                                   5673, 
-                                                                   '/', 
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost',
+                                                                   5672,
+                                                                   '/',
                                                                    credentials))
     channel = connection.channel()
     channel.exchange_declare(exchange='new_publication_event',

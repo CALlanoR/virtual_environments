@@ -33,7 +33,7 @@ services:
   mysqldb:
     image: mysql:5.7
     container_name: MySQLServiceDB
-    ports: 
+    ports:
         - "3306:3306"
     environment:
         MYSQL_USER: dev
@@ -51,7 +51,7 @@ services:
         retries: 10
   mongodb:
     image: mongo
-    container_name: MongoServiceDB
+    container_name: mongoservicedb  # The name is different because the pymongo has problems with with case-sensitive names
     ports:
       - 27017:27017
     environment:
@@ -63,6 +63,8 @@ services:
       interval: 10s
       timeout: 10s
       retries: 10
+    networks:
+      - default
   usersapi:
     build: ./python_users_service_api
     image: python_users_service_api
@@ -93,7 +95,7 @@ services:
     links:
       - mysqldb
       - neo4jdb
-    networks: 
+    networks:
       - default
   publications_consumer_service:
     build: ./python_publications_consumer
@@ -106,8 +108,6 @@ services:
     links:
       - rabbitmq
       - mongodb
-    environment:
-      AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
     networks:
       - default
 volumes:
