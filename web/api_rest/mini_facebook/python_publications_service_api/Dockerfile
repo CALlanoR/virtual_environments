@@ -7,7 +7,8 @@ MAINTAINER Carlos Llano <callano@javerianacali.edu.co>
 COPY . /opt/www
 WORKDIR /opt/www
 
-RUN sed -e s/localhost/MySQLServiceDB/ < /opt/www/db_config.py > /opt/www/db_config.py
+RUN sed '0,/localhost/{s/localhost/rabbitMQService/}' < /opt/www/db_config.py > /opt/www/db_config.py
+RUN sed '0,/localhost/{s/localhost/mongoservicedb/}' < /opt/www/db_config.py > /opt/www/db_config.py
 RUN cat /opt/www/db_config.py
 
 # Install dependencies.

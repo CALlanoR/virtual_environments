@@ -1,9 +1,9 @@
 from app import app
 from flask import jsonify, request
-from controllers.UsersApi import users_api
+from controllers.PublicationsApi import publications_api
 
 # Register each api here
-app.register_blueprint(users_api)
+app.register_blueprint(publications_api)
 
 @app.errorhandler(404)
 def not_found(error=None):
