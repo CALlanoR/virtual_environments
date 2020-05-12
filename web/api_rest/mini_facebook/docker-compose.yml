@@ -65,10 +65,28 @@ services:
       retries: 10
     networks:
       - default
-  usersapi:
+  haproxyServiceUsersAPI:
+    image: haproxy:2.0
+    container_name: LoadBalancerServiceUsersAPI
+    restart: on-failure
+    depends_on:
+      - usersapi1
+      - usersapi2
+    links:
+      - usersapi1
+      - usersapi2
+    ports:
+      - "8181:80"
+      - "7171:70"
+    volumes:
+      - ./haproxy_users_service_api:/haproxy-override
+      - ./haproxy_users_service_api/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - default
+  usersapi1:
     build: ./python_users_service_api
     image: python_users_service_api
-    container_name: pythonServiceUsersAPI
+    container_name: pythonServiceUsersAPI1
     command: python3 main.py
     restart: on-failure
     depends_on:
@@ -84,10 +102,47 @@ services:
       interval: 2s
       timeout: 20s
       retries: 10
-  publicationsapi:
+  usersapi2:
+    build: ./python_users_service_api
+    image: python_users_service_api
+    container_name: pythonServiceUsersAPI2
+    command: python3 main.py
+    restart: on-failure
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb
+    ports:
+      - 5011:5010
+    networks:
+        - default
+    healthcheck:
+      test: "${DOCKER_HEALTHCHECK_TEST:-curl localhost:5010/ping}"
+      interval: 2s
+      timeout: 20s
+      retries: 10
+  haproxyServicePublicationsAPI:
+    image: haproxy:2.0
+    container_name: LoadBalancerServicePublicationsAPI
+    restart: on-failure
+    depends_on:
+      - publicationsapi1
+      - publicationsapi2
+    links:
+      - publicationsapi1
+      - publicationsapi2
+    ports:
+      - "8282:80"
+      - "7272:70"
+    volumes:
+      - ./haproxy_publications_service_api:/haproxy-override
+      - ./haproxy_publications_service_api/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - default
+  publicationsapi1:
     build: ./python_publications_service_api
     image: python_publications_service_api
-    container_name: pythonServicePublicationsAPI
+    container_name: pythonServicePublicationsAPI1
     command: python3 main.py
     restart: on-failure
     depends_on:
@@ -97,7 +152,28 @@ services:
       - mysqldb
       - rabbitmq
     ports:
-      - 5011:5011
+      - 5016:5015
+    networks:
+        - default
+    healthcheck:
+      test: "${DOCKER_HEALTHCHECK_TEST:-curl localhost:5011/ping}"
+      interval: 2s
+      timeout: 20s
+      retries: 10
+  publicationsapi2:
+    build: ./python_publications_service_api
+    image: python_publications_service_api
+    container_name: pythonServicePublicationsAPI2
+    command: python3 main.py
+    restart: on-failure
+    depends_on:
+      - mysqldb
+      - rabbitmq
+    links:
+      - mysqldb
+      - rabbitmq
+    ports:
+      - 5017:5015
     networks:
         - default
     healthcheck:

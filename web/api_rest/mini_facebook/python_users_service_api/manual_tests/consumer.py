@@ -8,7 +8,8 @@ from time import time
 ########################################################################################################################
 
 #local
-conn = http.client.HTTPConnection("localhost:5010")
+# conn = http.client.HTTPConnection("localhost:5010")
+conn = http.client.HTTPConnection("localhost:8181")
 
 ########################################################################################################################
 ######################################################## LOGIN #########################################################
@@ -44,9 +45,9 @@ def login():
 headers = login()
 # print(headers)
 
-# conn.request("GET", "/users?id=1", headers=headers)
+conn.request("GET", "/users?id=1", headers=headers)
 
-conn.request("GET", "/ping", headers={'Content-type': 'application/json'})
+# conn.request("GET", "/ping", headers={'Content-type': 'application/json'})
 
 start = datetime.datetime.now()
 res = conn.getresponse()

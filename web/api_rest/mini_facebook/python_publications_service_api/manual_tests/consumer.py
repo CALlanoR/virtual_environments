@@ -8,7 +8,9 @@ from time import time
 ########################################################################################################################
 
 # connection to publications api service
-conn = http.client.HTTPConnection("localhost:5011")
+# conn = http.client.HTTPConnection("localhost:5015")
+conn = http.client.HTTPConnection("localhost:8282")
+
 
 ########################################################################################################################
 ######################################################## LOGIN #########################################################
@@ -52,9 +54,9 @@ login_post = {
     'description': 'El Dr. Rashid Buttar acusa a Bill Gates y Anthony Faucci la máxima autoridad en el manejo de la pandemia del coronavirus en EE.UU., de crear SARS-COV2 y de intentar vacunar en masa a la población para diezmarla y controlarla'
 }
 json_data_post = json.dumps(login_post)
-# conn.request("POST", "/publications", json_data_post, headers=headers)
+conn.request("POST", "/publications", json_data_post, headers=headers)
 
-conn.request("GET", "/ping", headers={'Content-type': 'application/json'})
+# conn.request("GET", "/ping", headers={'Content-type': 'application/json'})
 
 start = datetime.datetime.now()
 res = conn.getresponse()
