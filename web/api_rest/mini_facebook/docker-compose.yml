@@ -207,6 +207,24 @@ services:
       - mongodb
     networks:
       - default
+  haproxyAPIGateway:
+    image: haproxy:2.0
+    container_name: LoadBalancerAPIGateway
+    restart: on-failure
+    depends_on:
+      - haproxyServicePublicationsAPI
+      - haproxyServiceUsersAPI
+    links:
+      - haproxyServicePublicationsAPI
+      - haproxyServiceUsersAPI
+    ports:
+      - "8383:80"
+      - "7373:70"
+    volumes:
+      - ./haproxy_api_gateway:/haproxy-override
+      - ./haproxy_api_gateway/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - default
 volumes:
     persistent:
 
