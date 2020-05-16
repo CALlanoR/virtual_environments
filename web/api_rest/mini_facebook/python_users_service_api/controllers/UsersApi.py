@@ -6,7 +6,9 @@ from flask_jwt_extended import (
     decode_token
 )
 from services.UsersService import UsersService
+from db_config import cache_client
 from app import app
+import json
 
 users_api = Blueprint('users_api', __name__)
 
@@ -43,14 +45,26 @@ def get_users():
         user_id = request.args.get('id', default = None, type = int)
         user_name = request.args.get('name', default = None, type = str)
         if user_id is not None:
-            user = users_service.get_user_by_id(user_id)
-            app.logger.info("user: " + str(user))
-            if user is None:
-                resp = jsonify({'message': 'user not found'})
-                resp.status_code = 404
-            else:
-                resp = jsonify(user)
+            app.logger.info("getting user from cache")
+            user = cache_client.get(str(user_id))
+            if user != None:
+                app.logger.info("already exists in cache")
+                app.logger.info(user)
+                resp = jsonify(json.loads(user.decode("utf-8").replace("'",'"')))
                 resp.status_code = 200
+            else:
+                user = users_service.get_user_by_id(user_id)
+                app.logger.info("user does not exist in the cache, creating it.")
+                cache_client.set(str(user_id),
+                                 user,
+                                 expire=20)
+                app.logger.info("user: " + str(user))
+                if user is None:
+                    resp = jsonify({'message': 'user not found'})
+                    resp.status_code = 404
+                else:
+                    resp = jsonify(user)
+                    resp.status_code = 200
         elif user_name is not None:
             # Buscar por nombre
             resp = jsonify({'message': 'not implemented'})
@@ -61,9 +75,11 @@ def get_users():
             resp.status_code = 200
         return resp
     except Exception as e:
-        print(e)
+        app.logger.error("in /users {0}".format(str(e)))
+        resp = jsonify({'message': 'unknown error, please contact the administrator'})
+        resp.status_code = 500
 
-@users_api.route('/ping',
+@users_api.route('/users/ping',
                  methods = ['GET'])
 def ping():
     try:

@@ -91,8 +91,12 @@ services:
     restart: on-failure
     depends_on:
       - mysqldb
+      - memcachedServer1
+      - memcachedServer2
     links:
       - mysqldb
+      - memcachedServer1
+      - memcachedServer2
     ports:
       - 5010:5010
     networks:
@@ -110,8 +114,12 @@ services:
     restart: on-failure
     depends_on:
       - mysqldb
+      - memcachedServer1
+      - memcachedServer2
     links:
       - mysqldb
+      - memcachedServer1
+      - memcachedServer2
     ports:
       - 5011:5010
     networks:
@@ -223,6 +231,20 @@ services:
     volumes:
       - ./haproxy_api_gateway:/haproxy-override
       - ./haproxy_api_gateway/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - default
+  memcachedServer1:
+    image: memcached
+    container_name: MemcachedServer1
+    ports:
+      - "11211:11211"
+    networks:
+      - default
+  memcachedServer2:
+    image: memcached
+    container_name: MemcachedServer2
+    ports:
+      - "11212:11211"
     networks:
       - default
 volumes:

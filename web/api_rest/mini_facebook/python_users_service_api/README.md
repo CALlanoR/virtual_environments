@@ -33,3 +33,6 @@ python3.7 consumer.py
 
 -- Generate swagger doc
 http://localhost:5010/swagger
+
+-- memcached
+https://pymemcache.readthedocs.io/en/latest/index.html

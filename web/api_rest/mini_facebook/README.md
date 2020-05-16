@@ -18,3 +18,8 @@ admin:password
 sudo docker restart LoadBalancerServiceUsersAPI
 http://localhost:7272/stats
 admin:password
+
+# haproxy documentation
+https://www.haproxy.com/documentation/aloha/7-5/traffic-management/lb-layer7/http-redirection/
+
+https://www.haproxy.com/blog/using-haproxy-as-an-api-gateway-part-1/

@@ -1,6 +1,7 @@
 from app import app
 from flaskext.mysql import MySQL
 from flask_jwt_extended import JWTManager
+from pymemcache.client.hash import HashClient
 
 mysql = MySQL()
 
@@ -19,6 +20,12 @@ app.config['MYSQL_USE_POOL'] = {
     'name': 'local'
 }
 mysql.init_app(app)
+
+cache_client = HashClient([('MemcachedServer1', 11211),
+                           ('MemcachedServer2', 11211)])
+                        #   serializer = True,
+                        #   deserializer = True,
+                        #   use_pooling = True)
 
 # Setup the Flask-JWT-Extended extension
 app.config['JWT_SECRET_KEY'] = 'mySecretKey'  # Change this!

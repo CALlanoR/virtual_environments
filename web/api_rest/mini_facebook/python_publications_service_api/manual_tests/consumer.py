@@ -18,7 +18,7 @@ conn = http.client.HTTPConnection("localhost:8282")
 
 def login():
     # connection to users api service
-    conn_login = http.client.HTTPConnection("localhost:5010")
+    conn_login = http.client.HTTPConnection("localhost:8181")
     headers_default = {'Content-type': 'application/json'}
 
     login_post = {
