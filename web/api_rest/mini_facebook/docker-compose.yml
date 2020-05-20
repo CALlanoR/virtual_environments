@@ -247,6 +247,14 @@ services:
       - "11212:11211"
     networks:
       - default
+  nagios:
+    build: ./nagios
+    image: nagios_monitoring
+    container_name: NagiosMonitoring
+    ports:
+      - "9090:80"
+    networks:
+      - default
 volumes:
     persistent:
 

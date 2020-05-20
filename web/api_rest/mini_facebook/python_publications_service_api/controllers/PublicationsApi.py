@@ -38,7 +38,7 @@ def create_publication():
         resp.status_code = 500
         return resp
 
-@publications_api.route('/ping',
+@publications_api.route('/publications/ping',
                         methods = ['GET'])
 def ping():
     try:
