@@ -8,8 +8,8 @@ from time import time
 ########################################################################################################################
 
 #local
-# conn = http.client.HTTPConnection("localhost:5010")
-conn = http.client.HTTPConnection("localhost:8383")
+conn = http.client.HTTPConnection("localhost:5010")
+# conn = http.client.HTTPConnection("localhost:8383")
 
 ########################################################################################################################
 ######################################################## LOGIN #########################################################
@@ -19,7 +19,7 @@ def login():
     headers_default = {'Content-type': 'application/json'}
 
     login_post = {
-        'username': 'blue',
+        'username': 'red',
         'password': '123456'
     }
     json_data_post = json.dumps(login_post)

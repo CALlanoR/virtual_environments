@@ -24,17 +24,20 @@ def login():
         password = json['password']
         user_id = users_service.login(username,
                                       password)
-        app.logger.info("user_id: " + str(user_id['id']))
         if user_id is None:
             resp = jsonify({'message': 'incorrect username or password'})
             resp.status_code = 401
         else:
+            app.logger.info("user_id: " + str(user_id['id']))
             access_token = create_access_token(identity=user_id['id'])
             resp = jsonify({'token': 'Bearer {}'.format(access_token)})
             resp.status_code = 200
         return resp
     except Exception as e:
-        print(e)
+        message = "unknown error, please contact the administrator"
+        app.logger.error(message)
+        resp = jsonify({'message': message})
+        resp.status_code = 500
 
 @users_api.route('/users',
                  methods = ['GET'])
