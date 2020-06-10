@@ -11,7 +11,7 @@ def setup_neo4j_driver(host, port, login, password):
     except:
         pass
 
-driver = setup_neo4j_driver("localhost", "7687", "neo4j", "neo4j")
+driver = setup_neo4j_driver("localhost", "7687", "neo4j", "password")
 # print(driver)
 
 with driver.session() as session:
@@ -21,14 +21,14 @@ with driver.session() as session:
     # delete all relations
     session.run("MATCH ()-[r]-() DELETE r")
     
-    juan = session.run("CREATE (juan:Person {name:$name, age:43}) "
-                       "RETURN id(juan)", name="Juan").single().value()
-    valentina = session.run("CREATE (valentina:Person {name:$name, age:39}) "
-                            "RETURN id(valentina)", name="Valentina").single().value()
-    jacobo = session.run("CREATE (jacobo:Person {name:$name, age:25}) "
-                       "RETURN id(jacobo)", name="Jacobo").single().value()
-    yuritza = session.run("CREATE (yuritza:Person {name:$name, age:32}) "
-                    "RETURN id(yuritza)", name="Yuritza").single().value()
+    juan = session.run("CREATE (juan:Person {id:0, name:$name, email:$email, login:$login, password:$password}) "
+                       "RETURN id(juan)", name="Juan", email="juan@email.com", login="juan123", password="12345").single().value()
+    valentina = session.run("CREATE (valentina:Person {id:1, name:$name, email:$email, login:$login, password:$password}) "
+                            "RETURN id(valentina)", name="Valentina", email="valentina@email.com", login="valen123", password="12345").single().value()
+    jacobo = session.run("CREATE (jacobo:Person {id:2, name:$name, email:$email, login:$login, password:$password}) "
+                       "RETURN id(jacobo)", name="Jacobo",email="jacobo@email.com", login="jacobo123", password="12345").single().value()
+    yuritza = session.run("CREATE (yuritza:Person {id:3, name:$name, email:$email, login:$login, password:$password}) "
+                    "RETURN id(yuritza)", name="Yuritza",email="yuritza@email.com", login="yuri123", password="12345").single().value()
 
     session.run("""Match (juan:Person{name:'Juan'}) 
                    Match (valentina:Person{name:'Valentina'})

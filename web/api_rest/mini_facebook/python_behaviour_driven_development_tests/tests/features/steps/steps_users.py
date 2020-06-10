@@ -21,9 +21,4 @@ def get_user_by_id(context, id):
     assert_that(data, contains_string('name'))
     assert_that(data, contains_string('username'))
 
-
-# {
-#   "email": "mrblue@javerianacali.edu.co", 
-#   "name": "Blue Perez", 
-#   "username": "blue"
-# }
+    

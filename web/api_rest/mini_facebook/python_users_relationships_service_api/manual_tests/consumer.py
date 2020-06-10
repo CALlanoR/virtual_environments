@@ -8,10 +8,10 @@ from time import time
 ########################################################################################################################
 
 #local
-# conn = http.client.HTTPConnection("localhost:8080")
+conn = http.client.HTTPConnection("localhost:5000")
 
 #container
-conn = http.client.HTTPConnection("0.0.0.0:5000")
+# conn = http.client.HTTPConnection("localhost:5000")
 
 ########################################################################################################################
 ######################################################## USERS #########################################################
@@ -22,14 +22,34 @@ headers = {
     'Content-type': 'application/json'
 }
 
-conn.request("GET", "/persons", headers=headers)
-# conn.request("GET", "/persons/Juan", headers=headers)
+#Create person
 
 # create_person_post = {
-#     'name': 'Erica'
+#     'id': 3,
+#     'name': 'Carlos',
+#     'email': 'carlos@gmail.com',
+#     'login': 'llano',
+#     'password': '123456'
 # }
 # json_data_post = json.dumps(create_person_post)
-# conn.request("POST", "/persons", json_data_post, headers={'Content-type': 'application/json'})
+# conn.request("POST", "/persons/", json_data_post, headers=headers)
+
+#Friends of a person
+
+#conn.request("GET", "/persons/1/friends", headers=headers)
+
+#Friends of the friends of a person
+
+#conn.request("GET", "/persons/0/mayYouKnow", headers=headers)
+
+#Add a new relationship
+
+conn.request("POST", "/persons/person1/3/person2/4", headers=headers)
+
+#Delete a relationship
+
+# conn.request("POST", "/persons/delete/person1/3/person2/4", headers=headers)
+
 
 
 start = datetime.datetime.now()

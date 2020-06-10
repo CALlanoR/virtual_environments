@@ -1,5 +1,4 @@
-from flask import Blueprint
-from app import app
+from flask import Blueprint, request
 from services.PersonsService import PersonsService
 from flask import jsonify
 
@@ -7,21 +6,23 @@ persons_api = Blueprint('persons_api', __name__)
 
 persons_service = PersonsService()
 
-# To Do in Class
-# @persons_api.route('/persons', methods=['POST'])
-# def add_person():
-#     try:
-#         _json = request.json
-#         _name = _json['name']
-#         # validate the received values
-#         if _name and request.method == 'POST':
-#             persons_service.add_person(_name)
-#             resp.status_code = 200
-#             return resp
-#         else:
-#             return not_found()
-#     except Exception as e:
-#         print(e)
+@persons_api.route('/persons/', methods=['POST'])
+def add_person():
+    try:
+        _json = request.json
+        _id = _json['id']
+        _name = _json['name']
+        _email = _json['email']
+        _login = _json['login']
+        _password = _json['password']
+        # validate the received values
+        if _name and request.method == 'POST':
+            persons_service.add_person(int(_id), _name, _email, _login, _password)
+            return 'person with id: ' +_id +' inserted'
+        else:
+            return not_found()
+    except Exception as e:
+        print(e)
 
 @persons_api.route('/persons', methods=['GET'])
 def get_all_persons():
@@ -35,24 +36,55 @@ def get_all_persons():
     except Exception as e:
         print(e)
 
-@persons_api.route('/persons/<string:name>', methods=['GET'])
-def get_person_by_name(name):
+@persons_api.route('/persons/<int:personId>/friends', methods=['GET'])
+def get_friends(personId):
     try:
-        row = persons_service.get_person_by_name(name)
-        row = name
+        row = persons_service.get_friends(personId)
         resp = jsonify(row)
         resp.status_code = 200
         return resp
     except Exception as e:
         print(e)
 
-@persons_api.route('/persons/personId1/<int:personId1>/personId2/<int:personId2>', methods=['POST'])
-def add_new_relationship(personId1, personId2):
+@persons_api.route('/persons/<string:name>/byName', methods=['GET'])
+def get_person_by_name(name):
     try:
-        row = persons_service.add_new_relationship(personId1, personId2)
+        row = persons_service.get_person_by_name(name)
         resp = jsonify(row)
         resp.status_code = 200
         return resp
+    except Exception as e:
+        print(e)
+
+@persons_api.route('/persons/<int:personId>/mayYouKnow', methods=['GET'])
+def get_friends_from_my_friends(personId):
+    try:
+        row = persons_service.get_friends_from_my_friends(personId)
+        resp = jsonify(row)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+
+@persons_api.route('/persons/person1/<int:personId1>/person2/<int:personId2>', methods=['POST'])
+def add_new_relationship(personId1, personId2):
+    try:
+        if personId1 and personId2:
+            persons_service.add_new_relationship(personId1, personId2)
+            return str(personId1)+' and '+str(personId2)+' are friends now.'
+        else:
+            return not_found()
+    except Exception as e:
+        print(e)
+
+@persons_api.route('/persons/delete/person1/<int:personId1>/person2/<int:personId2>', methods=['POST'])
+def delete_relationship(personId1, personId2):
+    try:
+        if personId1 and personId2:
+            persons_service.delete_relationship(personId1, personId2)
+            return str(personId1)+' and '+str(personId2)+' are not longer friends.'
+        else:
+            return not_found()
     except Exception as e:
         print(e)
 
