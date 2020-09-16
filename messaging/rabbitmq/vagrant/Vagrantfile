@@ -14,11 +14,13 @@ NETMASK           = "255.255.255.0"
 
 # Default Virtualbox .box
 # See: https://wiki.debian.org/Teams/Cloud/VagrantBaseBoxes
-BOX               = 'ubuntu/xenial64'
+BOX               = "generic/ubuntu1804"
 
 HOSTS = {
-  "rabbitmq.server1"  => [NETWORK+"115", RAM, GUI, BOX, "rabbitmq.sh"],
-  "rabbitmq.client"   => [NETWORK+"116", RAM, GUI, BOX, "node.sh"], 
+  "rabbitmqserver"   => [NETWORK+"115", RAM, GUI, BOX, "rabbitmq.sh"],
+  "consumer" => [NETWORK+"116", RAM, GUI, BOX, "node.sh"],
+  "producer" => [NETWORK+"117", RAM, GUI, BOX, "node.sh"],
+  "mysql" => [NETWORK+"118", RAM, GUI, BOX, "mysql.sh"]
 }
 
 # ---- Vagrant configuration ----
@@ -28,10 +30,14 @@ Vagrant.configure(2) do |config|
     ipaddr, ram, gui, box, provisioning_script = cfg
 
     config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+    config.vm.synced_folder "./examples", "/home/vagrant"
+
     config.vm.define name do |machine|
       machine.vm.box   = box
       machine.vm.guest = :ubuntu
-      machine.vm.provision :shell, path: provisioning_script      
+      machine.vm.provision :shell, path: provisioning_script
+      machine.vm.boot_timeout = 300
 
       machine.vm.provider "virtualbox" do |vbox|
         vbox.gui    = gui

@@ -38,3 +38,5 @@ into the second linux terminal to do:
 sudo docker-compose stop
 
 sudo docker-compose rm
+
+http://localhost:15672

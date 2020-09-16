@@ -1,0 +1,5 @@
+vocabularyRef	vocabularyName	url	version	description	status
+ABMS	Provider Specialty (American Board of Medical Specialties)	http://www.abms.org/member-boards/specialty-subspecialty-certificates	2018-06-26 ABMS	Provider Specialty (American Board of Medical Specialties)	A
+APC	Ambulatory Payment Classification (CMS)	http://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalOutpatientPPS/Hospital-Outpatient-Regulations-and-Notices.html	2018-January-Addendum-A	act	A
+ATC	WHO Anatomic Therapeutic Chemical Classification	FDB UK distribution package	RXNORM 2018-08-12	descr test	A
+CPT4	Current Procedural Terminology version 4 (AMA)	http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html	2018 Release	Current Procedural Terminology version 4 (AMA)	A

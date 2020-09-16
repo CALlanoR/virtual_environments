@@ -2,7 +2,12 @@
 import pika
 import sys
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq_server'))
+credentials = pika.PlainCredentials('admin', 'admin')
+connection = pika.BlockingConnection(pika.ConnectionParameters(
+                                        'rabbitmq_server', 
+                                        5672, 
+                                        '/', 
+                                        credentials))
 channel = connection.channel()
 
 channel.exchange_declare(exchange='logs',

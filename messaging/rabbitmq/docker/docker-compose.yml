@@ -1,15 +1,19 @@
-
 version: "3"
 services:
-    rabbitmq_server:
-        container_name: 'rabbitmq_server'
-        build: './rabbitmq_server'
-        networks:
-            - default
-    rabbitmq_client:
-        build: './rabbitmq_client'
-        links: 
-            - rabbitmq_server
-        networks:
-            - default
-        tty: true
+  rabbitmq_server:
+      image: rabbitmq:3-management-alpine
+      container_name: rabbitmq_server
+      environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+      ports:
+          - 5672:5672
+          - 15672:15672
+  rabbitmq_client:
+      build: './rabbitmq_client'
+      links: 
+          - rabbitmq_server
+      networks:
+          - default
+      tty: true

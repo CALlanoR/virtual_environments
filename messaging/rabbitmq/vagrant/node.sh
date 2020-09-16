@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Install pika
-sudo apt-get update
-sudo apt-get install python-pip git -y
-sudo pip install pika
+sudo apt-get update -y
+sudo apt-get -y install python3-pip git
+sudo pip3 install pika
 
-# export LC_ALL="en_US.UTF-8"
-# export LC_CTYPE="en_US.UTF-8"
-# sudo dpkg-reconfigure locales
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+sudo dpkg-reconfigure locales
 
-# sudo pip install --upgrade pip
+sudo pip3 install --upgrade pip
