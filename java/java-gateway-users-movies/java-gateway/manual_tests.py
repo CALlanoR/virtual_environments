@@ -18,7 +18,13 @@ conn = http.client.HTTPConnection("localhost:9999")
 def login():
     headers_default = {'Content-type': 'application/json'}
 
-    conn.request("POST", "/api/gateway/usersservice/login?username=blue&password=123456", headers=headers_default)
+
+    login_post = {
+        'username': 'black',
+        'password': 'qwerty'
+    }
+    json_data_post = json.dumps(login_post)
+    conn.request("POST", "/api/gateway/usersservice/login", json_data_post, headers={'Content-type': 'application/json'})
 
     res = conn.getresponse()
     data = res.read()
@@ -44,7 +50,7 @@ headers = login()
 #### Users Service ####
 #######################
 
-conn.request("GET", "/api/gateway/usersservice/users", headers=headers)
+# conn.request("GET", "/api/gateway/usersservice/users", headers=headers)
 #conn.request("POST", "/users?name=MrRed&email=mrred@gmail.com", headers={'Content-type': 'application/json'})
 
 ########################

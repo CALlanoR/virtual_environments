@@ -10,5 +10,5 @@ logging:
     reactor.netty: ERROR
 
 services:
-  users: http://javaServiceUsersAPI:7070
-  movies: http://pythonServiceMoviesAPI:5000
+  users: http://192.168.56.119:8080
+  movies: http://localhost:5000

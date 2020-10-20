@@ -1,0 +1,46 @@
++ images
+    - sudo docker images
+    - sudo docker rmi <<IMAGE_ID>>
+    - sudo docker image prune  # Delete dangling images
+    - sudo docker image prune -a  # Delete all unused images
+    - sudo docker build -t my_website_image . 
+
++ Containers
+    - sudo docker ps -a
+    - sudo docker start <<NAME or CONTAINER_ID>>
+    - sudo docker stop <<NAME or CONTAINER_ID>>
+    - sudo docker rm <<NAME or CONTAINER_ID>>
+    - sudo docker rm -f <<NAME or CONTAINER_ID>>  # Delete a running container
+    - sudo docker logs <<NAME or CONTAINER_ID>>
+    - sudo docker exec -ti <<NAME or CONTAINER_ID>> bash
+    - sudo docker run -di -p HOST_PORT:CONTAINER_PORT --name=<<NAME>> <<IMAGE_NAME>>  # Create container with image
+    - sudo docker container prune  # Delete stopped containers
+    - sudo docker cp TARGET CONTAINER_ID:SOURCE  # docker cp index.html web:/index.html
+    - sudo docker rename OLD_NAME NEW_NAME
+    - sudo docker stats  # View stats of all containers
+
++ Build
+    - sudo docker build -t <<IMAGE_NAME>> .
+
++ Inspect
+    - sudo docker inspect <<CONTAINER_ID>>
+    - sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' <<CONTAINER_ID>>
+
++ Examples:
+    + MySQL (https://hub.docker.com/_/mysql)
+        - sudo docker run --name myMySQL -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
+        - sudo docker inspect myMySQL
+        - use the ip in mysql workbech
+        - sudo docker logs myMySQL
+
+    + Nginx (https://hub.docker.com/_/nginx)
+        - View nginx folder
+
+    + RabbitMQ
+        - sudo docker run -d --hostname my-rabbit --name myRabbit rabbitmq:3-management
+        - sudo docker inspect myRabbit
+        - http://container-ip:15672 in a browser
+        - guest/guest
+
+
+

@@ -30,7 +30,7 @@ public class UserService {
 		// This returns a JSON or XML with the users
 		return userRepository.findAll();
     }
-    
+
     public boolean existsUsernameAndPassword(String username, String password) {
         User user = userRepository.findByUsernameAndPassword(username, password);
         logger.info(user.toString());

@@ -20,7 +20,8 @@ HOSTS = {
   "rabbitmqserver"   => [NETWORK+"115", RAM, GUI, BOX, "rabbitmq.sh"],
   "consumer" => [NETWORK+"116", RAM, GUI, BOX, "node.sh"],
   "producer" => [NETWORK+"117", RAM, GUI, BOX, "node.sh"],
-  "mysql" => [NETWORK+"118", RAM, GUI, BOX, "mysql.sh"]
+  "mysql" => [NETWORK+"118", RAM, GUI, BOX, "mysql.sh"],
+  "kotlin" => [NETWORK+"119", RAM, GUI, BOX, "kotlin.sh"]
 }
 
 # ---- Vagrant configuration ----
