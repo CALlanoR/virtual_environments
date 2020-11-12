@@ -1,6 +1,5 @@
 # A simple Flask app container.
 FROM python:3.7
-MAINTAINER Carlos Llano <callano@javerianacali.edu.co>
 
 # Place app in container.
 COPY . /opt/www

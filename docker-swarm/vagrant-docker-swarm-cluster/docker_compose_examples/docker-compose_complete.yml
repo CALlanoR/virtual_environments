@@ -1,0 +1,64 @@
+version: "3"
+services:
+  rabbitmq_server:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq_server
+    env_file:
+      - .env.dev
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: "rabbitmq-diagnostics -q ping"
+      interval: 10s
+      timeout: 15s
+      retries: 5
+  rabbitmq_client:
+    build: './rabbitmq_client'
+    links: 
+        - rabbitmq_server
+    networks:
+        - default
+    tty: true
+  neo4jdb:
+    image: neo4j
+    container_name: MyNeo4JServiceDB
+    ports: 
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+        NEO4J_PASSWORD: password
+    networks:
+      - default
+  neo4j_client:
+    build: './neo4j_client'
+    links: 
+        - neo4jdb
+    networks:
+        - default
+    tty: true
+  mysqldb:
+    image: mysql:5.7
+    container_name: MySQLServiceDB
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: test 
+    volumes:
+      - ./databases/dump:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
+    networks:
+      - default
+    healthcheck:
+      test: "/usr/bin/mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+volumes:
+  mysql:

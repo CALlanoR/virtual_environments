@@ -26,3 +26,7 @@ __pycache__/
 build/
 bin/
 *.class
+
+.vagrant/
+*.log
+worker_token

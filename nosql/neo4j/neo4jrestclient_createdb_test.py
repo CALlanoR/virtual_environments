@@ -1,6 +1,6 @@
 from neo4jrestclient.client import GraphDatabase
 
-db = GraphDatabase("http://localhost:7474", username="neo4j", password="neo4j")
+db = GraphDatabase("http://localhost:7474", username="neo4j", password="password")
 
 '''In this example, users and things will be nodes in our database.
 Each node can be associated with labels, used to describe the type of node.

@@ -1,0 +1,25 @@
+https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-introduction
+
+# Borra todos los nodos creados
+MATCH (n) DETACH DELETE n
+
+# Borra todas las relaciones creadas
+MATCH ()-[r]-() DELETE r
+
+CREATE (juan:Person {name: 'Juan', sex:'M', age:35, city:'Cali'})
+CREATE (erica:Person {name: 'Erica'})
+CREATE (tomas:Person {name: 'Tomas'})
+CREATE (laura:Person {name: 'Laura'})
+CREATE (valentina:Person {name: 'Valentina'})
+CREATE (jose:Person {name: 'Jose'})
+
+CREATE (juan)-[:FRIEND]->(erica)-[:FRIEND]->(laura), (juan)-[:FRIEND]->(tomas)-[:FRIEND]->(jose)
+CREATE (tomas)-[:FRIEND]->(valentina)
+
+Los amigos de John
+MATCH (juan:Person {name: "Juan"})-[:FRIEND]->(juanFriends) RETURN juan, juanFriends
+
+
+
+Los amigos de sus amigos (quizas conozca)
+MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN juan.name, fof.name
