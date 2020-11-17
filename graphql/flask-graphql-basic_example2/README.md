@@ -1,4 +1,4 @@
-
+## Documentation
 https://docs.graphene-python.org/projects/sqlalchemy/en/latest/tutorial/
 
 https://docs.graphene-python.org/projects/sqlalchemy/en/latest/tips/
@@ -7,6 +7,18 @@ https://docs.graphene-python.org/en/latest/types/mutations/
 
 https://dev.to/mesadhan/python-flask-graphql-with-graphene-nla
 
+http://www.leeladharan.com/sqlalchemy-query-with-or-and-like-common-filters
+
+# Query builder (alternative)
+https://pypika.readthedocs.io/en/latest/
+
+
+## Running
+python app.py runserver
+
+127.0.0.1:5000/graphql
+
+## Examples
 {
   allEmployees {
     edges {
@@ -36,7 +48,7 @@ https://dev.to/mesadhan/python-flask-graphql-with-graphene-nla
 
 
 mutation {
-  createDepartment(name: "marketing", city: "Medellin") {
+  createDepartment(name: "marketing", city: "Cali") {
     department {
       name
       city
@@ -52,6 +64,30 @@ mutation {
     name,
     city
   }
+}
+
+{
+  name(name: "Engineering") {
+    id,
+    name,
+    city
+  }
+}
+
+{
+  city(city: "Santiago de Cali") {
+    id,
+    name,
+    city
+  }
+}
+
+{
+ filterNameCity(name: "Engineering", city: "Santiago de Cali") { 
+    id,
+    name,
+    city
+ }
 }
 
 mutation {

@@ -2,6 +2,7 @@ import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
 from models import db_session, Department as DepartmentModel, Employee as EmployeeModel
+from sqlalchemy import and_
 
 class Department(SQLAlchemyObjectType):
     class Meta:
@@ -84,22 +85,37 @@ class Query(graphene.ObjectType):
     # Disable sorting over this field
     all_departments = SQLAlchemyConnectionField(Department.connection, sort=None)
 
-    # Find department by name
+    # Find department by name and city
     find_department = graphene.Field(lambda: Department, name=graphene.String())
+    name = graphene.Field(lambda: Department, name=graphene.String())
+    city = graphene.Field(lambda: Department, city=graphene.String())
+    filter_name_city = graphene.List(lambda: Department,
+                                     name=graphene.String(),
+                                     city=graphene.String(),)
+
+    def resolve_name(self, context, **kwargs):
+        return Department.get_query(context).filter_by(**kwargs).first()
+
+    def resolve_city(self, context, **kwargs):
+        return Department.get_query(context).filter_by(**kwargs).first()
 
     def resolve_find_department(self, context, **kwargs):
         return Department.get_query(context).filter_by(**kwargs).first()
 
-    # Find department by city
-    find_department = graphene.Field(lambda: Department, name=graphene.String())
-
-    def resolve_find_department(self, context, **kwargs):
-        return Department.get_query(context).filter_by(**kwargs).first()
+    def resolve_filter_name_city(self, context, **kwargs):
+        print("-------------------------kwargs-----------------------------")
+        print(kwargs)
+        print("------------------------------------------------------")
+        name=kwargs.get('name')
+        city=kwargs.get('city')
+        query = Department.get_query(context).filter(and_(DepartmentModel.name==name, 
+                                                          DepartmentModel.city==city))
+        print("===========")
+        print(query)
+        print("===========")
+        return query.all()
 
 schema = graphene.Schema(query=Query,
                          mutation=MyMutations)
 
 
-
-    # def resolve_user(self, info, id):
-    #     return [user for user in users if user.id == int(id)]
