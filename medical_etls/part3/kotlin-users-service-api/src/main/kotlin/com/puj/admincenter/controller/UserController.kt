@@ -45,4 +45,13 @@ class UserController(private val userService: UserService) {
     fun create(@RequestBody @Valid createUserDto: CreateUserDto, 
                @RequestHeader(value="authorization", required=true) authorization: String): ResponseEntity<*>
         = userService.create(createUserDto)
+
+    @DeleteMapping(
+        value = ["/{userId}"],
+        consumes = ["application/json"],
+        produces = ["application/json"]
+    )
+    fun delete(@PathVariable userId: Int,
+                @RequestHeader(value="authorization", required=true) authorization: String): ResponseEntity<*>
+        = userService.delete(userId) 
 }

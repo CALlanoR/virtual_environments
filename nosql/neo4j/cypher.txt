@@ -23,3 +23,29 @@ MATCH (juan:Person {name: "Juan"})-[:FRIEND]->(juanFriends) RETURN juan, juanFri
 
 Los amigos de sus amigos (quizas conozca)
 MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN juan.name, fof.name
+
+
+
+CREATE (symptoms:ConceptGroup {name: 'conceptgroup symptoms', type:'Flu'})
+
+CREATE (flu:Concept {description: 'Flu'})
+CREATE (headache:Concept {description: 'Headache'})
+CREATE (fever:Concept {description: 'Fever'})
+CREATE (vomit:Concept {description: 'Vomit'})
+
+CREATE (symptoms)-[:CONTAINS]->(flu)
+CREATE (symptoms)-[:CONTAINS]->(headache)
+CREATE (symptoms)-[:CONTAINS]->(fever)
+CREATE (symptoms)-[:CONTAINS]->(vomit)
+
+CREATE (medications:ConceptGroup {name: 'conceptgroup medications', type:'Flu'})
+
+CREATE (Aspirin:Concept {description: 'Aspirin'})
+CREATE (Doxycycline:Concept {description: 'Doxycycline'})
+CREATE (Ibuprofen:Concept {description: 'Ibuprofen'})
+
+CREATE (medications)-[:CONTAINS]->(Aspirin)
+CREATE (medications)-[:CONTAINS]->(Doxycycline)
+CREATE (medications)-[:CONTAINS]->(Ibuprofen)
+
+CREATE (symptoms)-[:ASSOCIATED_WITH]->(medications)

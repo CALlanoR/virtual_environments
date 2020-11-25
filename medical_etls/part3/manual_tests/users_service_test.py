@@ -20,12 +20,12 @@ conn = http.client.HTTPConnection("localhost:8080")
 ######################################################## LOGIN #########################################################
 ########################################################################################################################
 
-login_post = {
-    'username': 'blue',
-    'password': '123456'
-}
-json_data_post = json.dumps(login_post)
-conn.request("POST", "/login", json_data_post, headers={'Content-type': 'application/json'})
+# login_post = {
+#     'username': 'blue',
+#     'password': '123456'
+# }
+# json_data_post = json.dumps(login_post)
+# conn.request("POST", "/login", json_data_post, headers={'Content-type': 'application/json'})
 
 
 ########################################################################################################################
@@ -38,16 +38,25 @@ conn.request("POST", "/login", json_data_post, headers={'Content-type': 'applica
 
 # headers = {
 #     'Content-type': 'application/json',
-#     'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibGFjayIsImlkZW50aXR5IjoiYmxhY2siLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjAyMDI0MzY2LCJleHAiOjE2MDIwMjQ5NjZ9.GhUpEW5xthqzcSIGVGUDjZA4UHhmDn5nlO6laM_d54BIkQhmL4qdM4cDLLLEQoXGG-G5AuvU5a4oEXiQOid0lg'
+#     'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibHVlIiwiaWRlbnRpdHkiOiJibHVlIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYwNjI1MDM4MywiZXhwIjoxNjA2MjUwOTgzfQ.z7P1qmqH0PWsC4i81NawX1Tp5p8M8Bl39FPoVCTeiVvxPorzysOq2Ql7I_ENyPjwqhdSxHW0Wrua6SEp9_qClA'
 # }
 # conn.request("GET", "/users/1", headers=headers)
+
+
+headers = {
+    'Content-type': 'application/json',
+    'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibHVlIiwiaWRlbnRpdHkiOiJibHVlIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYwNjI3MjQ1MywiZXhwIjoxNjA2MjczMDUzfQ.Su_POgVhOwQtyW3TXvRLwzK6aD278naT4pEXzeJRllkJzz2QfPXpKEmeRHHIo5U-t-zCB97f0GFSpvVM2GGZdA'
+}
+conn.request("DELETE", "/users/3", headers=headers)
+
+
 
 ############################################
 ########## Crear un nuevo usuario ##########
 ############################################
 # headers = {
 #     'Content-type': 'application/json',
-#     'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibGFjayIsImlkZW50aXR5IjoiYmxhY2siLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjAyMDI0MzY2LCJleHAiOjE2MDIwMjQ5NjZ9.GhUpEW5xthqzcSIGVGUDjZA4UHhmDn5nlO6laM_d54BIkQhmL4qdM4cDLLLEQoXGG-G5AuvU5a4oEXiQOid0lg'
+#     'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibHVlIiwiaWRlbnRpdHkiOiJibHVlIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYwNjI1MDM4MywiZXhwIjoxNjA2MjUwOTgzfQ.z7P1qmqH0PWsC4i81NawX1Tp5p8M8Bl39FPoVCTeiVvxPorzysOq2Ql7I_ENyPjwqhdSxHW0Wrua6SEp9_qClA'
 # }
 
 # user_post = {

@@ -23,13 +23,15 @@ import helloworld_pb2_grpc
 
 class Greeter(helloworld_pb2_grpc.GreeterServicer):
     def SayHello(self, request, context):
+
         # logica del negocio
         return helloworld_pb2.HelloReply(message='Hello, %s!' % request.name)
 
     def SayHelloAgain(self, request, context):
+        # Logica de negocio
         return helloworld_pb2.HelloReply(message='Hello again, %s!' % request.name)
 
-def serve():
+def server():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     helloworld_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
     server.add_insecure_port('[::]:50051')
@@ -38,4 +40,4 @@ def serve():
 
 if __name__ == '__main__':
     logging.basicConfig()
-    serve()
+    server()

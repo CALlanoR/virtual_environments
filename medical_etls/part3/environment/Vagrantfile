@@ -17,9 +17,9 @@ NETMASK           = "255.255.255.0"
 BOX               = "generic/ubuntu1804"
 
 HOSTS = {
-  "kotlinUsersService" => [NETWORK+"119", RAM, GUI, BOX, "kotlin.sh"],
-  "kotlinMoviesService" => [NETWORK+"120", RAM, GUI, BOX, "kotlin.sh"],
-  "javaGatewayService" => [NETWORK+"121", RAM, GUI, BOX, "kotlin.sh"],
+#   "kotlinUsersService" => [NETWORK+"119", RAM, GUI, BOX, "kotlin.sh"],
+#   "kotlinMoviesService" => [NETWORK+"120", RAM, GUI, BOX, "kotlin.sh"],
+#  "javaGatewayService" => [NETWORK+"121", RAM, GUI, BOX, "kotlin.sh"],
 #  "rabbitmqserver"   => [NETWORK+"115", RAM, GUI, BOX, "rabbitmq.sh"],
 #  "consumer" => [NETWORK+"116", RAM, GUI, BOX, "node.sh"],
 #  "producer" => [NETWORK+"117", RAM, GUI, BOX, "node.sh"],

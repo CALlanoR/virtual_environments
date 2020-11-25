@@ -57,4 +57,17 @@ class UserService(private val userRepository: UserRepository) {
         return ResponseEntity<IdResponseDto>(responseDto,
                                              HttpStatus.CREATED)
     }
+
+    fun delete(userId: Int): ResponseEntity<*> {
+        val currentUser = userRepository.findById(userId);
+        return if(currentUser.isPresent()) {
+            userRepository.deleteUserById(userId)
+            LOG.info("User with id $userId was deleted successfully")
+
+            ResponseEntity<Any>(HttpStatus.OK)
+        } else {
+            LOG.error("User not found")
+            ResponseEntity<Any>(HttpStatus.NOT_FOUND)
+        }
+    }
 }

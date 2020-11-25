@@ -11,6 +11,9 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import java.util.*
 
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.data.jpa.repository.Modifying
+
 @Repository
 interface UserRepository : JpaRepository<User, Int>,
                            JpaSpecificationExecutor<User> {
@@ -30,4 +33,13 @@ interface UserRepository : JpaRepository<User, Int>,
         WHERE user.email = :email
     """)
     fun existsByEmail(@Param("email") email: String): Boolean
+
+    @Transactional
+    @Modifying
+    @Query("""
+        DELETE
+        FROM User user
+        WHERE user.id = :id
+    """)
+    fun deleteUserById(@Param("id") id: Int): Int
 }

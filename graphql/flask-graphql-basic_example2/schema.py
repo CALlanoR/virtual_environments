@@ -59,7 +59,7 @@ class DeleteDepartment(graphene.Mutation):
         city=graphene.String()
 
     ok = graphene.Boolean()
-    department=graphene.Field(Department)     
+    department=graphene.Field(Department)
 
     def mutate(self, context, **kwargs):
         query=Department.get_query(context)
@@ -68,7 +68,7 @@ class DeleteDepartment(graphene.Mutation):
 
         department=query.filter(DepartmentModel.name==name, DepartmentModel.city==city).delete()
         db_session.commit()
-        ok=True        
+        ok=True
 
         return DeleteDepartment(department=department, ok = ok)
 
