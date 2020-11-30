@@ -27,9 +27,13 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.count()
     }
 
+    fun getAllUsers(pageable: Pageable,
+                    authorization: String): ResponseEntity<*> {
+        return ResponseEntity.ok(userRepository.findAll(pageable))
+    }
+
     fun getById(userId: Int,
                 authorization: String): ResponseEntity<*> {
-
         val user = userRepository.findById(userId)  // Hace solo el query
         return if (user.isPresent()) {
             ResponseEntity.ok(UserDto.convert(user.get()))

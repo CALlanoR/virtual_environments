@@ -38,4 +38,4 @@ def get_users(context):
 @then('the user get as a result {code}')
 def valid_users(context, code):
     status = context.response
-    assert_that(str(status), equal_to("200"))
+    assert_that(str(status), equal_to(code))

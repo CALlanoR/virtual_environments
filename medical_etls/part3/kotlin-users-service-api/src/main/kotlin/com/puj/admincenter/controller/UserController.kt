@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import javax.validation.Valid
 import javax.servlet.http.HttpServletRequest
 import java.security.Principal
@@ -27,6 +30,16 @@ class UserController(private val userService: UserService) {
     companion object {
         val logger = LoggerFactory.getLogger(UserController::class.java)!!
     }
+
+    @GetMapping(
+        value = ["/"],
+        consumes = ["application/json"],
+        produces = ["application/json"]
+    )
+    fun getAllUsers(@RequestHeader(value="authorization", required=true) authorization: String,
+                    @PageableDefault(size = 100) pageable: Pageable): ResponseEntity<*>
+        = userService.getAllUsers(pageable,
+                                  authorization)
 
     @GetMapping(
         value = ["/{userId}"],

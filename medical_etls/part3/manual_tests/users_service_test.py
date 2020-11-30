@@ -33,6 +33,19 @@ conn = http.client.HTTPConnection("localhost:8080")
 ########################################################################################################################
 
 #################################################
+########## Encontrar todos los usuarios #########
+#################################################
+
+# headers = {
+#     'Content-type': 'application/json',
+#     'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibHVlIiwiaWRlbnRpdHkiOiJibHVlIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYwNjc2NDgwOSwiZXhwIjoxNjA2NzY1NDA5fQ.bMLVhc-RL13fw8WyTa9cW3aTgU2pMzKulX8pMyEn1iCNzeWn61bc81OB9R78WvL4tLnnVjIDyA0oJBIWPEPxeQ'
+# }
+# conn.request("GET", "/users/", headers=headers)
+
+
+
+
+#################################################
 ########## Encontrar un usuario por id ##########
 #################################################
 
@@ -43,12 +56,11 @@ conn = http.client.HTTPConnection("localhost:8080")
 # conn.request("GET", "/users/1", headers=headers)
 
 
-headers = {
-    'Content-type': 'application/json',
-    'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibHVlIiwiaWRlbnRpdHkiOiJibHVlIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYwNjI3MjQ1MywiZXhwIjoxNjA2MjczMDUzfQ.Su_POgVhOwQtyW3TXvRLwzK6aD278naT4pEXzeJRllkJzz2QfPXpKEmeRHHIo5U-t-zCB97f0GFSpvVM2GGZdA'
-}
-conn.request("DELETE", "/users/3", headers=headers)
-
+# headers = {
+#     'Content-type': 'application/json',
+#     'authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJibHVlIiwiaWRlbnRpdHkiOiJibHVlIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYwNjI3MjQ1MywiZXhwIjoxNjA2MjczMDUzfQ.Su_POgVhOwQtyW3TXvRLwzK6aD278naT4pEXzeJRllkJzz2QfPXpKEmeRHHIo5U-t-zCB97f0GFSpvVM2GGZdA'
+# }
+# conn.request("DELETE", "/users/3", headers=headers)
 
 
 ############################################
@@ -60,10 +72,10 @@ conn.request("DELETE", "/users/3", headers=headers)
 # }
 
 # user_post = {
-#     'email': 'mrwhite@gmail.com',
-#     'username': 'white',
-#     'password': 'qwerty',
-#     'name': 'James White'
+    # 'email': 'mrwhite@gmail.com',
+    # 'username': 'white',
+    # 'password': 'qwerty',
+    # 'name': 'James White'
 # }
 # json_data_post = json.dumps(user_post)
 # conn.request("POST", "/users", json_data_post, headers=headers)
