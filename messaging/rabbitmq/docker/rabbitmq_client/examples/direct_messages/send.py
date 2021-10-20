@@ -16,3 +16,4 @@ channel.basic_publish(exchange='',
                       body='Hello World!')
 print(" [x] Sent 'Hello World!'")
 connection.close()
+

@@ -9,7 +9,7 @@ curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 SCRIPT
 
-BOX_NAME = "ubuntu/xenial64"
+BOX_NAME = "ubuntu/xenial64"  # Ubuntu 16.04
 MEMORY = "512"
 MANAGERS = 2
 MANAGER_IP = "172.20.20.1"
@@ -17,6 +17,11 @@ WORKERS = 2
 WORKER_IP = "172.20.20.10"
 CPUS = 2
 VAGRANTFILE_API_VERSION = "2"
+
+# Note:
+# We will use 512 MB memory and 2 CPU each in all our machine.
+# We will launch 2 manager nodes, managers IP will be assigned the IP address starting from 172.20.20.1X.
+# We will launch 2 woker nodes with IP start with 172.20.20.10X.
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #Common setup

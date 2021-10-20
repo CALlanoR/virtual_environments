@@ -5,7 +5,6 @@ https://docs.scrapy.org/en/latest/intro/install.html
 
 https://docs.scrapy.org/en/latest/intro/tutorial.html
 
-https://medium.com/better-programming/how-to-turn-the-web-into-data-with-python-and-scrapy-7bad725cf5a
 
 # Getting Started
 ```
@@ -99,3 +98,5 @@ In other words, web scraping has many use cases, and Python is completely capabl
 ##  Task
 
 https://www.pluralsight.com/guides/implementing-web-scraping-with-scrapy
+
+https://medium.com/better-programming/how-to-scrape-multiple-pages-of-a-website-using-a-python-web-scraper-4e2c641cff8

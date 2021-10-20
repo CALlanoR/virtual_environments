@@ -6,6 +6,11 @@ cd /home/callanor/xv6
 git clone git://github.com/mit-pdos/xv6-public.git
 
 sudo docker run -it -v /home/callanor/Documents/personal/virtual_environments/xv6:/xv6 grantbot/xv6:latest
+sudo docker start <<name>>
+sudo docker exec -ti <<name>> bash
+
+sudo docker run -di --name=myxv6 -v /home/callanor/Documents/personal/virtual_environments/xv6:/xv6 grantbot/xv6:latest
+sudo docker exec -ti myxv6 bash
 
 cd cd xv6/xv6-public/
 

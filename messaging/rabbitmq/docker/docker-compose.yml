@@ -1,7 +1,7 @@
 version: "3"
 services:
   rabbitmq_server:
-      image: rabbitmq:3-management-alpine
+      image: rabbitmq:3.8.10-management-alpine
       container_name: rabbitmq_server
       environment:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
@@ -16,4 +16,6 @@ services:
           - rabbitmq_server
       networks:
           - default
+      volumes:
+        - "./:/home/workdir"
       tty: true

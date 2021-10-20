@@ -60,3 +60,6 @@ sudo docker-compose --version
 docker stack deploy --compose-file docker-compose.yml vossibility
 
 docker node ps $(docker node ls -q)
+
+#  Management Command Line Tool 
+https://www.rabbitmq.com/management-cli.html

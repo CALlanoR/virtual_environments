@@ -1,5 +1,4 @@
-FROM ubuntu:16.04
-MAINTAINER Carlos Llano <carlos_llano@hotmail.com>
+FROM ubuntu:18.04
 
 # Install pika
 RUN apt-get clean
@@ -12,5 +11,4 @@ RUN pip install --upgrade pip
 RUN pip install pika
 
 RUN mkdir /home/workdir
-COPY examples /home/workdir
 WORKDIR /home/workdir 
