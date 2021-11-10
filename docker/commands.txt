@@ -1,3 +1,21 @@
++ Install Vagrant
+    - https://www.vagrantup.com/
+
++ Install Docker
+    - https://docs.docker.com/get-docker/
+
++ Install Docker-Compose
+    - https://docs.docker.com/compose/install/
+
++ Install VirtualBox
+    - https://www.virtualbox.org/wiki/Downloads
+
++ Lanzamiento oficial:
+    - https://www.youtube.com/watch?v=zgR8otZkwHc
+    - https://www.youtube.com/watch?v=wW9CAH9nSLs
+
+=========================================================================================
+
 + To use a vagrant machine containing the containers
     - in the folder vagrant_environment:
         - vagrant up
@@ -50,19 +68,31 @@
 + Examples:
     Note: To verify open ports: netstat -natp
 
+    + Python (https://hub.docker.com/_/python)
+        - sudo docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3.9 python python_script.py
+
     + MySQL (https://hub.docker.com/_/mysql)
-        - sudo docker run -p 3306:3306 --name myMySQL -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
+        - sudo docker run -p 3306:3306 --name myMySQL5.7Test -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
         - sudo docker inspect myMySQL
         - use the ip in mysql workbech
         - sudo docker logs myMySQL
 
+        - sudo docker run -p 3307:3306 --name MySQL8Test -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0.27
+        - sudo docker inspect MySQL8Test
+        - In DBeaver:
+             - activate SSL (Use SSL and Allow public key retrieval)
+             - empty Database
+
+    + PostgreSQL (https://hub.docker.com/_/postgres)
+        - sudo docker run --name postgresql -e POSTGRES_PASSWORD=root -d postgres:14.0
+
     + Nginx (https://hub.docker.com/_/nginx)
-        - View nginx folder
+        - View web -> docker -> static_website_with_http2
 
     + RabbitMQ (https://hub.docker.com/_/rabbitmq)
         - sudo docker run -d -p 15672:15672 --hostname my-rabbit --name myRabbit rabbitmq:3-management
         - sudo docker inspect myRabbit
-        - http://container-ip:15672 in a browser
+        - http://container-ip:15672 in a browser 
         - guest/guest
 
     + httpd (https://hub.docker.com/_/httpd)

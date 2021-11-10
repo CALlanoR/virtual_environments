@@ -4,7 +4,7 @@ from boto3.dynamodb.conditions import Key, Attr
 
 def query(key):
     dynamodb_table = boto3.resource('dynamodb',
-                              region_name="us-east-1").Table('DevHealthNexusPatientKeys')
+                              region_name="us-east-1").Table('DevHealthNexusPatientKeysByQuarter')
 
     response = dynamodb_table.query(
         KeyConditionExpression=Key('ENCRYPTED_KEYS').eq(key))
@@ -12,8 +12,12 @@ def query(key):
 
 
 if __name__ == '__main__':
-    key = "MhwkwhSWlZEkUMueobhbCypjI1wb7KZ0iH7kgXhsbZ8=,hW+UBaox7hA1DVw1btDFTsPFWgL/XpmvTtJNCeYMjug="
-    print(f"key: {key}")
+
+    # DevHealthNexusPatientKeys
+    # +TIpGrQdkJOadhPb5EDHuqI/fT3ekn1aYoCT9VzVl/o=bTxzkv6QCEjelVdKa4YFdmqvuBRYn7En91v/wulAuik=
+
+    key = "+JwTPSx7rYZTd9sdq+Zu08sga9zMBfCoBU1RWDpKHvI=Q/jYLNTCKCqq7WshUYma50vWvGGk3Qnd9fBPUzXCJjg="
+    # print(f"key: {key}")
     items = query(key)
     # print(type(items))
     # patients = items['Items'][0]['PATIENTS']
@@ -22,7 +26,6 @@ if __name__ == '__main__':
     # print(type(patients_dict))
     # print(items_dict)
     # print(items['PERSON_EDUCATION_DESC'], ":", items['PERSON_HISPANIC_ORIGIN_DESC'])
-    print("...........................")
     print(items)
     # print(patients_dict)
     # print(patients_dict['PATIENT_ID'])

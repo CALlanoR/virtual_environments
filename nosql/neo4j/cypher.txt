@@ -1,4 +1,6 @@
-https://neo4j.com/docs/cypher-manual/current/introduction/#cypher-introduction
+https://neo4j.com/docs/cypher-manual/current/
+
+https://neo4j.com/docs/cypher-refcard/current/
 
 # Borra todos los nodos creados
 MATCH (n) DETACH DELETE n

@@ -2,13 +2,12 @@
 
 ## Create certificates
 
-openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout nginx.key -out nginx.crt
-
+openssl req -x509 -newkey rsa:4096 -nodes -sha256 -days 365  -keyout nginx.key -out nginx.crt
 ## Create image
 
 sudo docker build -t nginx_with_http2 .
 
-sudo docker run --name some-nginx-http2 -p 443:443 -p 80:80 -d nginx_with_http2
+sudo docker run --name some-nginx-http2 -p 443:443 -d nginx_with_http2
 
 ## Test
 

@@ -1,83 +1,124 @@
-from neo4j import GraphDatabase, basic_auth
+from neo4j_connection import Neo4jConnection
 
-def setup_neo4j_driver(host, port, login, password):
-    try:
-        uri = f"bolt://{host}:{port}"
-        driver = GraphDatabase.driver(uri,
-                                      auth=basic_auth(login, password),
-                                      encrypted=False)
+conn = Neo4jConnection(uri="neo4j://localhost:7687",
+                       user="neo4j",
+                       pwd="callanor")
 
-        return driver
-    except:
-        pass
+conn.query("MATCH (n) DETACH DELETE n")
+conn.query("MATCH ()-[r]-() DELETE r")
 
-driver = setup_neo4j_driver("localhost", "7687", "neo4j", "neo4j")
-# print(driver)
+query = """
+    CREATE (p:Person {name:$name, age:$age})
+    RETURN id(p)
+"""
+conn.query(query, parameters = {'name': 'Juan', 'age': 43})
+conn.query(query, parameters = {'name': 'Erica', 'age': 25})
+conn.query(query, parameters = {'name': 'Tomas', 'age': 32})
+conn.query(query, parameters = {'name': 'Valentina', 'age': 39})
+conn.query(query, parameters = {'name': 'Laura', 'age': 25})
+conn.query(query, parameters = {'name': 'Jose', 'age': 32})
 
-with driver.session() as session:
-    # delete all nodes
-    session.run("MATCH (n) DETACH DELETE n")
+query = """
+    Match (juan:Person{name:'Juan'}) 
+    Match (tomas:Person{name:'Tomas'})
+    Match (jose:Person{name:'Jose'})
+    Create (juan)-[:FRIEND]->(tomas)-[:FRIEND]->(jose)
+"""
+conn.query(query)
 
-    # delete all relations
-    session.run("MATCH ()-[r]-() DELETE r")
-    
-    juan = session.run("CREATE (juan:Person {name:$name, age:43}) "
-                       "RETURN id(juan)", name="Juan").single().value()
-    erica = session.run("CREATE (erica:Person {name:$name, age:25}) "
-                       "RETURN id(erica)", name="Erica").single().value()
-    tomas = session.run("CREATE (tomas:Person {name:$name, age:32}) "
-                    "RETURN id(tomas)", name="Tomas").single().value()
-    valentina = session.run("CREATE (valentina:Person {name:$name, age:39}) "
-                            "RETURN id(valentina)", name="Valentina").single().value()
-    laura = session.run("CREATE (laura:Person {name:$name, age:25}) "
-                       "RETURN id(laura)", name="Laura").single().value()
-    jose = session.run("CREATE (jose:Person {name:$name, age:32}) "
-                    "RETURN id(jose)", name="Jose").single().value()
+query = """
+    Match (tomas:Person{name:'Tomas'})
+    Match (valentina:Person{name:'Valentina'})
+    Create (tomas)-[:FRIEND]->(valentina)
+"""
+conn.query(query)
 
-    session.run("""Match (juan:Person{name:'Juan'}) 
-                   Match (tomas:Person{name:'Tomas'})
-                   Match (jose:Person{name:'Jose'})
-                   Create (juan)-[:FRIEND]->(tomas)-[:FRIEND]->(jose) """)
+query = """
+    Match (juan:Person{name:'Juan'}) 
+    Match (erica:Person{name:'Erica'})
+    Match (laura:Person{name:'Laura'})
+    Create (juan)-[:FRIEND]->(erica)-[:FRIEND]->(laura)
+"""
+conn.query(query)
 
-    session.run("""Match (tomas:Person{name:'Tomas'})
-                   Match (valentina:Person{name:'Valentina'})
-                   Create (tomas)-[:FRIEND]->(valentina)""")
+query_beer = """
+    CREATE (b:Beer {name:$name})
+    RETURN id(b)
+"""
+conn.query(query_beer, parameters = {'name': 'Club Colombia'})
+conn.query(query_beer, parameters = {'name': 'Poker'})
 
-    session.run("""Match (juan:Person{name:'Juan'}) 
-                   Match (erica:Person{name:'Erica'})
-                   Match (laura:Person{name:'Laura'})
-                   Create (juan)-[:FRIEND]->(erica)-[:FRIEND]->(laura) """)
+query = """
+    Match (juan:Person{name:'Juan'})
+    Match (erica:Person{name:'Erica'})
+    Match (club:Beer{name:'Club Colombia'})
+    Match (poker:Beer{name:'Poker'})
+    Create (juan)-[:LIKES]->(club)
+    Create (erica)-[:LIKES]->(poker)
+"""
+conn.query(query)
 
-    result = session.run("MATCH (n:Person) RETURN n.name as name, n.age as age LIMIT 25").data()
-    print("----------------------------")
-    print("Todos las personas")
-    for person in result:
-        name = person['name']
-        age = person['age']
-        print(f"name: {name} - age: {age}")
+query = """
+    MATCH (n:Person) RETURN n.name as name, n.age as age LIMIT 25
+"""
+result = conn.query(query)
+print("----------------------------")
+print("Todos las personas")
+for person in result:
+    name = person['name']
+    age = person['age']
+    print(f"name: {name} - age: {age}")
 
-    result = session.run("MATCH (tomas {name: 'Tomas'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
-    print("----------------------------")
-    print("Amigos de Tomas:")
-    for person in result:
-        name = person['name']
-        age = person['age']
-        print(f"name: {name} - age: {age}")
+query = """
+    Match (tomas:Person{name:'Tomas'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
+"""
+result = conn.query(query)
+print("----------------------------")
+print("Amigos de Tomas:")
+for person in result:
+    name = person['name']
+    age = person['age']
+    print(f"name: {name} - age: {age}")
 
-    result = session.run("MATCH (juan {name: 'Juan'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
-    print("----------------------------")
-    print("Amigos de Juan:")
-    for person in result:
-        name = person['name']
-        age = person['age']
-        print(f"name: {name} - age: {age}")
+query = """
+    MATCH (juan {name: 'Juan'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
+"""
+result = conn.query(query)
+print("----------------------------")
+print("Amigos de Juan:")
+for person in result:
+    name = person['name']
+    age = person['age']
+    print(f"name: {name} - age: {age}")
 
-    result = session.run("MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name").data()
-    print("----------------------------")
-    print("Quizas conozcas:")
-    for person in result:
-        name = person['name']
-        age = person['age']
-        print(f"name: {name} - age: {age}")
+query = """
+    MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
+"""
+result = conn.query(query)
+print("----------------------------")
+print("Quizas conozcas:")
+for person in result:
+    name = person['name']
+    age = person['age']
+    print(f"name: {name} - age: {age}")
 
-driver.close()
+query = """
+    MATCH (beer:Beer)
+    MATCH (:Person {name: 'Juan'})-->(beer) RETURN beer.name as name
+"""
+result = conn.query(query)
+print("----------------------------")
+print("Que cerveza le gusta a Juan: {}".format(result[0]['name']))
+
+query = """
+    MATCH (person:Person)
+    MATCH (beer:Beer{name:'Poker'})
+    MATCH (person)-[:LIKES]->(beer) RETURN person.age as age, person.name as name
+"""
+result = conn.query(query)
+print("----------------------------")
+print("A quienes les gusta la Poker:")
+for person in result:
+    name = person['name']
+    age = person['age']
+    print(f"name: {name} - age: {age}")
