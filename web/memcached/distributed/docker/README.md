@@ -4,6 +4,10 @@
 sudo docker-compose up -d
 
 ## Install python client
+
+sudo docker run -itd --name memcached_client --link  ubuntu:18.04 /bin/bash
+
+
 sudo apt-get update
 
 sudo apt-get install -y python3-dev

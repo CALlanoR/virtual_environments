@@ -21,7 +21,8 @@ print('One post: {0}'.format(result.inserted_id))
 post_2 = {
     'title': 'Virtual Environments',
     'content': 'Use virtual environments, you guys',
-    'author': 'Scott'
+    'author': 'Scott',
+    'date': '2021-11-21'
 }
 post_3 = {
     'title': 'Learning Python',

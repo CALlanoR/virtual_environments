@@ -1,6 +1,6 @@
 import pylibmc
-mc = pylibmc.Client(["localhost:11211", 
-                     "localhost:11212"], 
+mc = pylibmc.Client(["memcachedserver1:11211", 
+                     "memcachedserver2:11211"], 
                     binary=True, 
                     behaviors={"tcp_nodelay": True, 
                                "ketama": True,

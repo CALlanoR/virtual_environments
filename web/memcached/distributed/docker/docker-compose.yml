@@ -1,10 +1,30 @@
 version: "3"
 services:
-    memcached_server_1:
-      image: memcached
-      ports:
-        - "11211:11211"
-    memcached_server_2:
-      image: memcached
-      ports:
-        - "11212:11211"
+  memcached_server_1:
+    image: memcached
+    hostname: memcachedserver1
+    container_name: memcachedserver1
+    ports:
+      - "11211:11211"
+    networks:
+      - default
+  memcached_server_2:
+    image: memcached
+    hostname: memcachedserver2
+    container_name: memcachedserver2
+    ports:
+      - "11211:11211"
+    networks:
+      - default
+  memcached_client:
+    build: ./memcached_client
+    container_name: memcached_client
+    tty: true
+    links:
+      - memcached_server_1
+      - memcached_server_2
+    depends_on:
+      - memcached_server_1
+      - memcached_server_2
+    networks:
+      - default

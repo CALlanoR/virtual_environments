@@ -7,6 +7,7 @@ r_server.set('test_key', 'test_value') #with the created redis object we can
 
 print('previous set key: ' + str(r_server.get('test_key')) ) # the previous set key is fetched
 
+
 '''In the previous example you saw that we introduced a redis
 data type: the string, now we will set an integer and try to
 increase its value using redis object built-in methods'''
