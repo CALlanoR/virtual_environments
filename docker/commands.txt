@@ -68,8 +68,21 @@
 + Examples:
     Note: To verify open ports: netstat -natp
 
+    + sudo docker run -it ubuntu:latest /bin/bash
+
     + Python (https://hub.docker.com/_/python)
         - sudo docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3.9 python python_script.py
+
+    + C/C++ (Operating System Environment)
+        - sudo docker run -di --name mySOEnvironment ubuntu:latest /bin/bash
+          Note: Two options:
+            1. Install manually each package of docker.sh in vagrant_environment folder
+            2. Create image with the same instructions
+               2.1 Create Dockerfile
+               2.2 sudo docker build -t operating_system .
+               2.3 sudo docker run -di --name mySOEnvironment -v $(pwd)/examples:/examples operating_system:latest /bin/bash
+               2.4 sudo docker exec -ti mySOEnvironment /bin/bash
+               2.5 gcc -o fork00 process/fork00.c
 
     + MySQL (https://hub.docker.com/_/mysql)
         - sudo docker run -p 3306:3306 --name myMySQL5.7Test -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7

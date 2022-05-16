@@ -58,49 +58,49 @@ query = """
 """
 conn.query(query)
 
-query = """
-    MATCH (n:Person) RETURN n.name as name, n.age as age LIMIT 25
-"""
-result = conn.query(query)
-print("----------------------------")
-print("Todos las personas")
-for person in result:
-    name = person['name']
-    age = person['age']
-    print(f"name: {name} - age: {age}")
+# query = """
+#     MATCH (n:Person) RETURN n.name as name, n.age as age LIMIT 25
+# """
+# result = conn.query(query)
+# print("----------------------------")
+# print("Todos las personas")
+# for person in result:
+#     name = person['name']
+#     age = person['age']
+#     print(f"name: {name} - age: {age}")
 
-query = """
-    Match (tomas:Person{name:'Tomas'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
-"""
-result = conn.query(query)
-print("----------------------------")
-print("Amigos de Tomas:")
-for person in result:
-    name = person['name']
-    age = person['age']
-    print(f"name: {name} - age: {age}")
+# query = """
+#     Match (tomas:Person{name:'Tomas'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
+# """
+# result = conn.query(query)
+# print("----------------------------")
+# print("Amigos de Tomas:")
+# for person in result:
+#     name = person['name']
+#     age = person['age']
+#     print(f"name: {name} - age: {age}")
 
-query = """
-    MATCH (juan {name: 'Juan'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
-"""
-result = conn.query(query)
-print("----------------------------")
-print("Amigos de Juan:")
-for person in result:
-    name = person['name']
-    age = person['age']
-    print(f"name: {name} - age: {age}")
+# query = """
+#     MATCH (juan {name: 'Juan'})-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
+# """
+# result = conn.query(query)
+# print("----------------------------")
+# print("Amigos de Juan:")
+# for person in result:
+#     name = person['name']
+#     age = person['age']
+#     print(f"name: {name} - age: {age}")
 
-query = """
-    MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
-"""
-result = conn.query(query)
-print("----------------------------")
-print("Quizas conozcas:")
-for person in result:
-    name = person['name']
-    age = person['age']
-    print(f"name: {name} - age: {age}")
+# query = """
+#     MATCH (juan {name: 'Juan'})-[:FRIEND]->()-[:FRIEND]->(fof) RETURN fof.age as age, fof.name as name
+# """
+# result = conn.query(query)
+# print("----------------------------")
+# print("Quizas conozcas:")
+# for person in result:
+#     name = person['name']
+#     age = person['age']
+#     print(f"name: {name} - age: {age}")
 
 query = """
     MATCH (beer:Beer)
