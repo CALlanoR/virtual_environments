@@ -30,3 +30,6 @@ bin/
 .vagrant/
 *.log
 worker_token
+
+xv6-public/
+xv6-public/**

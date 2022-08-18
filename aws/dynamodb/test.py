@@ -16,7 +16,7 @@ if __name__ == '__main__':
     # DevHealthNexusPatientKeys
     # +TIpGrQdkJOadhPb5EDHuqI/fT3ekn1aYoCT9VzVl/o=bTxzkv6QCEjelVdKa4YFdmqvuBRYn7En91v/wulAuik=
 
-    key = "+JwTPSx7rYZTd9sdq+Zu08sga9zMBfCoBU1RWDpKHvI=Q/jYLNTCKCqq7WshUYma50vWvGGk3Qnd9fBPUzXCJjg="
+    key = "W/7AS0q2sF7kPkAa8HhsgqOyz0GexDg75O+VdsE7dSw=iUZsd9S25OV3Ykq0sUcomU6msYdWWDGCNd+Jx/38UEE="
     # print(f"key: {key}")
     items = query(key)
     # print(type(items))
