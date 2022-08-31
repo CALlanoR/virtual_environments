@@ -21,8 +21,8 @@ docker_rabbitmq_server
 
 Create two terminals and execute this command in each one:
 
-sudo docker exec -ti docker_rabbitmq_client_1 bash
-sudo docker exec -ti docker_rabbitmq_client_2 bash
+sudo docker exec -ti docker-rabbitmq_client-1 bash
+sudo docker exec -ti docker-rabbitmq_client-2 bash
 
 into the first linux terminal to do:
 
