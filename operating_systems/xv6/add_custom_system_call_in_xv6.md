@@ -44,7 +44,7 @@ Open the sysproc.c file where system call functions are defined.
 int
 sys_getyear(void)
 {
-return 1975;
+    return 1975;
 }
 ```
 

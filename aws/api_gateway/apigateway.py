@@ -11,10 +11,10 @@ response = client.get_rest_api(
 
 print(response)
 
-apis=response.get("items")
-for api in apis:
-    print(api)
-    print("apiName: {} - apiId: {}".format(api.get("name"), api.get("id")))
+# apis=response.get("items")
+# for api in apis:
+#     print(api)
+#     print("apiName: {} - apiId: {}".format(api.get("name"), api.get("id")))
 
 # print("-------get_base_path_mappings-------")
 
@@ -23,7 +23,7 @@ for api in apis:
 
 # print("-------get_rest_api-------")
 
-response_json = json.dumps(response, indent=2)
+# response_json = json.dumps(response, indent=2)
 
-print(response_json)
+# print(response_json)
 

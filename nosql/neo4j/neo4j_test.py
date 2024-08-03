@@ -2,7 +2,7 @@ from neo4j_connection import Neo4jConnection
 
 conn = Neo4jConnection(uri="neo4j://localhost:7687",
                        user="neo4j",
-                       pwd="callanor")
+                       pwd="password")
 
 conn.query("MATCH (n) DETACH DELETE n")
 conn.query("MATCH ()-[r]-() DELETE r")
