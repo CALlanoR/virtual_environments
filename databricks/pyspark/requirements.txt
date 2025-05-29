@@ -1,0 +1,7 @@
+databricks-connect==16.2.0
+databricks
+psycopg2-binary
+pyspark
+databricks-sql-connector
+pandas 
+JayDeBeApi==1.2.3

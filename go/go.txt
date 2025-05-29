@@ -1,0 +1,141 @@
+Install
+=======
+https://go.dev/dl/
+sudo tar -xzvf go.tar.gz -C /usr/local
+echo export PATH=$HOME/go/bin:/usr/local/go/bin:$PATH
+go version
+
+Booleans
+========
+var flag bool = true
+
+Integers and floats
+===================
+var x int = 10
+var y float64 = 30.2
+var r int = x + int(y)
+
+var versus :=
+=============
+var x,y int = 10, 20
+var x, y = 10, "hello"
+
+var (
+    x int
+    y = 20
+    z int = 30
+    d, e = 40, "hello"
+    f, g string
+)
+
+The following two statements do exactly the same thing: they declare x to be an int with the
+value of 10:
+
+var x = 10
+x := 10
+
+var x, y = 10, "hello"
+x, y := 10, "hello"
+
+const (for numeric, bool, strings, runes, complex, real, imag, len and cap)
+=====
+const x int64 = 10
+
+const (
+    idKey = "id"
+    nameKey = "name"
+)
+
+const x = 10  (untyped constant declaration)
+
+const typedX int = 10 (typed constant declaration)
+
+===================
+
+Composite types
+===============
+
+arrays (de tamaño fijo no se pueden modificar su longitud)
+==========================================================
+var x[3]int (all positions initialized tto zero)
+
+var x = [3]int{10, 20, 30}
+
+var x = [...]int{1, 2, 3}
+var y = [3]int{1, 2, 3}
+fmt.Println(x == y) // prints true
+
+Go only has one-dimensional arrays, but you can simulate multidimensional arrays:
+var x [2][3]int
+
+don’t use arrays unless you know the exact length you need
+ahead of time.
+
+limitaciones de los arrays:
+1. Tamaño fijo (no son dinamicos)
+2. Costoso cuando se pasa a una funcion
+3. Incompatibles con la mayoria de las apis de go (se trabaja mas con slices)
+4. Para pasar a una funcion lo mejor es por punteros y agrega complejidad
+5. Limita la comparacion (solo si usa tipos que soporten comparacion) usando ==
+
+slices
+======
+No especifica el tamaño cuando se declaration
+No se puede usar == o != para ver si son iguales dos slices
+The primary goal is to minimize the number of times the slice needs to grow.
+
+var x = []int{10, 20, 30}
+var x [][]int
+
+var x []int
+x = append(x, 10)
+
+var x = []int{1, 2, 3}
+x = append(x, 4)
+
+x = append(x, 5, 6, 7) Mas de un valor a la vez
+
+make
+====
+x := make([]int, 5) crea un slice de 5 pero todo inicializado en 0, si se usa append agrega al final se debe asignar en cada posicion
+
+x := make([]int, 5, 10), con capacity de 10
+x := make([]int, 0, 10) con cero longitud y capacidad 10
+
+Como crea los slices? si sabe el tamaño que tendra o lo hace con make en 0 y con capacity?
+
+you should either never use append with a sub‐slice or make sure that append doesn’t cause an overwrite by using a full slice expression.
+
+When you take a slice from a slice, you are not making a copy of the data. Instead, you now have two variables that are sharing memory. 
+This means that changes to an element in a slice affect all slices that share that element.
+
+maps
+====
+Maps are Go’s built-in associative data type (sometimes called hashes or dicts in other languages).
+To create an empty map, use the builtin make: make(map[key-type]val-type).
+
+
+0. Has trabajado en varios lenguajes de programacion cual te gusta mas o 
+cual te parece mejor? porque go?
+
+1. Usas estilo de codigo cuando programas en go? gofmt (golang formatter)
+por ide o por linea de comando? gofmt -w main.go
+gofmt -w -l directory/
+
+2. Has desarrollado algun programa en go que sea compatible con linux, windows y mac?
+
+3. Strings, mutables o inmutables? read only.
+
+4. Que usas para concatenar strings? + o strings.Builder?
+
+5. Cual es la diferencia entre arrays y slices?
+arrays de longitud fija, slice longitud dinamica.
+que es la capacidad de un slice?
+
+6. Apuntadores en go, para que los has manejando?
+
+7. Mostrame algun codigo.
+
+8. Diferencia entre variables locales y globales.
+
+9.  

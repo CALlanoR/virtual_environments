@@ -5,6 +5,6 @@ import "fmt"
 func main() {
     var x int = 10
     x = x + 1
-    fmt.Println("Hello, World!")
-    fmt.Println("x: ", x)
+	y := 20
+    fmt.Println("x: ", x, "y: ", y)
 }

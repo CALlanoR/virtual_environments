@@ -53,6 +53,16 @@
     - sudo docker port <<CONTAINER_ID>>
 
 + Volumes
+    sudo docker run -d \
+    --name postgres_db \
+    -p 5432:5432 \
+    -e POSTGRES_USER=callanor \
+    -e POSTGRES_PASSWORD=callanor \
+    -e POSTGRES_DB=iot_database \
+    -v /home/callanor/Documents/github/virtual_environments/docker/postgres_data:/var/lib/postgresql/data \
+    -v /home/callanor/Documents/github/virtual_environments/docker/postgres_config:/etc/postgresql \
+    postgres:latest
+
     - docker volume ls
     - docker volume inspect
     - docker volume prune
@@ -69,6 +79,7 @@
     Note: To verify open ports: netstat -natp
 
     + sudo docker run -it ubuntu:latest /bin/bash
+        - sudo docker inspect ubuntu:latest | grep -i version
 
     + Python (https://hub.docker.com/_/python)
         - sudo docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3.9 python python_script.py
@@ -76,13 +87,12 @@
     + C/C++ (Operating System Environment)
         - sudo docker run -di --name mySOEnvironment ubuntu:latest /bin/bash
           Note: Two options:
-            1. Install manually each package of docker.sh in vagrant_environment folder
-            2. Create image with the same instructions
-               2.1 Create Dockerfile
-               2.2 sudo docker build -t operating_system .
-               2.3 sudo docker run -di --name mySOEnvironment -v $(pwd)/examples:/examples operating_system:latest /bin/bash
-               2.4 sudo docker exec -ti mySOEnvironment /bin/bash
-               2.5 gcc -o fork00 process/fork00.c
+            1. Create image with the same instructions
+               1.1 cat Dockerfile
+               1.2 sudo docker build -t operating_system .
+               1.3 sudo docker run -di --name mySOEnvironment -v $(pwd)/examples:/examples operating_system:latest /bin/bash
+               1.4 sudo docker exec -ti mySOEnvironment /bin/bash
+               1.5 gcc -o fork00 process/fork00.c
 
     + MySQL (https://hub.docker.com/_/mysql)
         - sudo docker run -p 3306:3306 --name myMySQL5.7Test -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
@@ -95,6 +105,13 @@
         - In DBeaver:
              - activate SSL (Use SSL and Allow public key retrieval)
              - empty Database
+
+            Abre DBeaver y edita tu conexión a MySQL.
+
+            Ve a la pestaña "Driver properties".
+            Busca la propiedad useSSL o requireSSL.
+            Establece su valor a false.
+            Haz clic en "Test Connection..." para verificar si la conexión funciona.
 
     + PostgreSQL (https://hub.docker.com/_/postgres)
         - sudo docker run --name postgresql -e POSTGRES_PASSWORD=root -d postgres:14.0

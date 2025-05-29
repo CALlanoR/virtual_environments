@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Smart Thermostat IoT Setup'
+Parameters:
+  ProjectName:
+    Type: String
+    Default: 'smarthome'
+    Description: 'Name prefix for our smart home resources'
+Resources:
+  ThermostatPolicy:
+    Type: AWS::IoT::Policy
+    Properties:
+      PolicyName: !Sub "${ProjectName}-thermostat-policy"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - iot:Publish
+              - iot:Subscribe
+              - iot:Connect
+              - iot:Receive
+            Resource: "*"
+  ThermostatThing:
+    Type: AWS::IoT::Thing
+    Properties:
+      ThingName: !Sub "${ProjectName}-thermostat"
+Outputs:
+  ThingName:
+    Description: 'Name of our smart thermostat'
+    Value: !Ref ThermostatThing
+  PolicyName:
+    Description: 'Name of the thermostat security policy'
+    Value: !Ref ThermostatPolicy
+
+
+CERT_ARN=$(aws iot create-keys-and-certificate --set-as-active --query 'certificateArn' --output text)
+
+aws iot attach-thing-principal --thing-name smarthome-thermostat --principal $CERT_ARN
+
+aws iot attach-policy --policy-name smarthome-thermostat-policy --target $CERT_ARN

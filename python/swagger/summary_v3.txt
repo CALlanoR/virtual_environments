@@ -1,0 +1,243 @@
+Controller: client-rest-controller
+  GET:
+    - 1. /clients/reports
+    - 2. /clients/reports/restrictions
+    - 3. /clients/reports/validate-download/type-report/{typeReport}
+    - 4. /clients/reports/downloaded/type-report/{typeReport}/year/{year}/month/{month}
+  POST:
+    - 5. /clients/reports
+    - 6. /clients/reports/restrictions
+  PUT:
+    - 7. /clients/reports/restrictions/{restrictionId}
+
+Controller: concept-groups-rest-controller
+  DELETE:
+    - 1. /conceptgroups/types/{id}
+    - 2. /conceptgroups/client
+    - 3. /conceptgroups/client/restriction
+    - 4. /conceptgroups/{conceptGroupId}/version/{conceptGroupVersionId}/concepts
+    - 5. /conceptgroups/{conceptGroupId}/concepts
+    - 6. /conceptgroups/classtypes
+    - 7. /conceptgroups/relationships/{conceptGroupRelationshipId}
+  GET:
+    - 8. /conceptgroups/{conceptGroupId}
+    - 9. /conceptgroups/{conceptGroupId}/version/{conceptGroupVersionId}
+    - 10. /conceptgroups/types/{id}
+    - 11. /conceptgroups/client
+    - 12. /conceptgroups/client/restriction
+    - 13. /conceptgroups
+    - 14. /conceptgroups/{conceptGroupId}/concepts
+    - 15. /conceptgroups/types
+    - 16. /conceptgroups/{conceptGroupId}/vocabulary-utilitydomain/
+    - 17. /conceptgroups/{conceptGroupId}/vocabularies
+    - 18. /conceptgroups/{conceptGroupId}/versions
+    - 19. /conceptgroups/{conceptGroupId}/utilitydomain/vocabulary
+    - 20. /conceptgroups/{conceptGroupId}/relationships
+    - 21. /conceptgroups/{conceptGroupId}/related
+    - 22. /conceptgroups/{conceptGroupId}/compare/conceptgroup-version-1/{conceptVersionId1}/conceptgroup-version-2/{conceptVersionId2}
+    - 23. /conceptgroups/{conceptGroupId}/classtype
+    - 24. /conceptgroups/utilitydomain
+    - 25. /conceptgroups/types/hierarchy
+    - 26. /conceptgroups/concept/{conceptId}
+    - 27. /conceptgroups/client/{clientId}
+    - 28. /conceptgroups/client/restriction/{clientId}
+  POST:
+    - 29. /conceptgroups/client
+    - 30. /conceptgroups/client/restriction
+    - 31. /conceptgroups
+    - 32. /conceptgroups/{conceptGroupId}/version
+    - 33. /conceptgroups/{conceptGroupId}/version/{conceptGroupVersionId}/upload-file-concepts
+    - 34. /conceptgroups/{conceptGroupId}/version/{conceptGroupVersionId}/download-file-concepts
+    - 35. /conceptgroups/{conceptGroupId}/version/{conceptGroupVersionId}/concepts
+    - 36. /conceptgroups/{conceptGroupId}/version-origin-id/{conceptGroupVersionOriginId}/version-target-id/{conceptGroupVersionTargetId}/concepts
+    - 37. /conceptgroups/{conceptGroupId}/copy-difference/conceptgroup-version-origin/{conceptgroupVersionIdOrigin}/conceptgroup-version-target/{conceptgroupVersionIdTarget}
+    - 38. /conceptgroups/{conceptGroupId}/concepts
+    - 39. /conceptgroups/{conceptGroupId}/classtypes/{classTypeId}/order/{order}
+    - 40. /conceptgroups/types
+    - 41. /conceptgroups/relationships
+    - 42. /conceptgroups/conceptgroup-origin/{conceptGroupOriginId}/conceptgroup-version-origin/{conceptGroupVersionOriginId}/conceptgroup-target/{conceptGroupTargetId}/conceptgroup-version-target/{conceptGroupVersionTargetId}/concepts
+    - 43. /conceptgroups/conceptgroup-origin/{conceptGroupOriginId}/conceptgroup-target/{conceptGroupTargetId}/concepts
+    - 44. /conceptgroups/classtypes
+  PUT:
+    - 45. /conceptgroups/{conceptGroupId}
+    - 46. /conceptgroups/{conceptGroupId}/version/{conceptGroupVersionId}
+    - 47. /conceptgroups/types/{id}
+    - 48. /conceptgroups/client
+    - 49. /conceptgroups/client/restriction
+
+Controller: concepts-rest-controller
+  DELETE:
+    - 1. /concepts/synonyms
+    - 2. /concepts/relationship
+    - 3. /concepts/classtypes
+  GET:
+    - 4. /concepts/{conceptId}
+    - 5. /concepts
+    - 6. /concepts/classtypes
+    - 7. /concepts/{conceptId}/utilitydomains
+    - 8. /concepts/{conceptId}/synonyms
+    - 9. /concepts/{conceptId}/classtype
+    - 10. /concepts/utiliydomainId/{utilityDomainId}/vocabularyId/{vocabularyId}/conceptShortDescription/{conceptShortDescription}
+    - 11. /concepts/textsearch
+  POST:
+    - 12. /concepts
+    - 13. /concepts/{conceptId}/classtypes/{classTypeId}/order/{order}
+    - 14. /concepts/synonyms
+    - 15. /concepts/relationship
+    - 16. /concepts/classtypes
+  PUT:
+    - 17. /concepts/{conceptId}
+
+Controller: crosswalk-rest-controller
+  DELETE:
+    - 1. /crosswalk/relationshiptypes/{crosswalkRelationshipTypeId}
+    - 2. /crosswalk/client
+    - 3. /crosswalk/{crosswalkId}/version/{versionId}/relationships
+    - 4. /crosswalk/concepts/relationships
+    - 5. /crosswalk/{crosswalkId}/version/{versionId}/all-relationships
+  GET:
+    - 6. /crosswalk/{crosswalkId}
+    - 7. /crosswalk/{crosswalkId}/version/{versionId}
+    - 8. /crosswalk/relationshiptypes/{crosswalkRelationshipTypeId}
+    - 9. /crosswalk
+    - 10. /crosswalk/{crosswalkId}/version
+    - 11. /crosswalk/{crosswalkId}/version/{versionId}/relationships
+    - 12. /crosswalk/relationshiptypes
+    - 13. /crosswalk/{crosswalkId}/version/{versionId}/concepts-related-that-do-not-belong-to-conceptgroup/{conceptGroupId}
+    - 14. /crosswalk/{crosswalkId}/relationships
+    - 15. /crosswalk/{crosswalkId}/compare/crosswalk-version-1/{crosswalkVersionId1}/crosswalk-version-2/{crosswalkVersionId2}
+    - 16. /crosswalk/concepts/{conceptId}/relatedconcepts
+    - 17. /crosswalk/client/{clientId}
+  POST:
+    - 18. /crosswalk/client
+    - 19. /crosswalk
+    - 20. /crosswalk/{crosswalkId}/version
+    - 21. /crosswalk/{crosswalkId}/version/{versionId}/relationships
+    - 22. /crosswalk/{crosswalkId}/version/{versionId}/copy-concepts-related-that-do-not-belong-to-conceptgroup/{conceptGroupId}
+    - 23. /crosswalk/{crosswalkId}/copy-difference/crosswalk-version-origin/{crosswalkVersionIdOrigin}/crosswalk-version-target/{crosswalkVersionIdTarget}
+    - 24. /crosswalk/{crosswalkId}/copy-all-relationships/to-crosswalk-version/{versionId}
+    - 25. /crosswalk/{crosswalkId}/copy-all-relationships/from-version-origin/{versionOriginId}/to-version-target/{versionTargetId}
+    - 26. /crosswalk/relationshiptypes
+    - 27. /crosswalk/concepts/relationships
+  PUT:
+    - 28. /crosswalk/{crosswalkId}
+    - 29. /crosswalk/{crosswalkId}/version/{versionId}
+    - 30. /crosswalk/relationshiptypes/{crosswalkRelationshipTypeId}
+    - 31. /crosswalk/client
+
+Controller: language-rest-controller
+  GET:
+    - 1. /languages
+    - 2. /languages/{languageId}
+
+Controller: market-basket-rest-controller
+  GET:
+    - 1. /marketbasket
+    - 2. /marketbasket/{conceptGroupId}/related
+  POST:
+    - 3. /marketbasket
+    - 4. /marketbasket/{conceptGroupId}/generate-marketbasket-codes
+    - 5. /marketbasket/{conceptGroupId}/copy-market-basket
+    - 6. /marketbasket/diagnoses-brand-ingredients
+
+Controller: relationship-rest-controller
+  DELETE:
+    - 1. /relationships/{Id}
+  GET:
+    - 2. /relationships/{Id}
+    - 3. /relationships
+  POST:
+    - 4. /relationships
+  PUT:
+    - 5. /relationships/{Id}
+
+Controller: source-rest-controller
+  DELETE:
+    - 1. /sources/{sourceById}
+  GET:
+    - 2. /sources/{sourceById}
+    - 3. /sources
+  POST:
+    - 4. /sources
+  PUT:
+    - 5. /sources/{sourceById}
+
+Controller: statistics-rest-controller
+  GET:
+    - 1. /statistics
+
+Controller: tasks-rest-controller
+  GET:
+    - 1. /tasks/{taskId}
+    - 2. /tasks/conceptgroup/{conceptGroupId}
+
+Controller: umls-relationship-rest-controller
+  DELETE:
+    - 1. /umls-relationships/{Id}
+  GET:
+    - 2. /umls-relationships/{Id}
+    - 3. /umls-relationships
+  POST:
+    - 4. /umls-relationships
+  PUT:
+    - 5. /umls-relationships/{Id}
+
+Controller: utility-domain-rest-controller
+  DELETE:
+    - 1. /utilitydomains/{utilityDomainId}
+    - 2. /utilitydomains/{utilityDomainId}/concept/{conceptId}
+    - 3. /utilitydomains/concept/{conceptId}
+  GET:
+    - 4. /utilitydomains/{utilityDomainId}
+    - 5. /utilitydomains
+    - 6. /utilitydomains/vocabularies
+    - 7. /utilitydomains/hierarchy
+  POST:
+    - 8. /utilitydomains
+  PUT:
+    - 9. /utilitydomains/{utilityDomainId}
+
+Controller: vocabulary-rest-controller
+  DELETE:
+    - 1. /vocabularies/{vocabularyId}
+    - 2. /vocabularies/{vocabularyId}/version/{vocabularyVersionId}
+    - 3. /vocabularies/client
+    - 4. /vocabularies/{vocabularyId}/version/{vocabularyVersionId}/concepts
+    - 5. /vocabularies/{vocabularyId}/version/{vocabularyVersionId}/all-concepts
+  GET:
+    - 6. /vocabularies/{vocabularyId}
+    - 7. /vocabularies/{vocabularyId}/version/{vocabularyVersionId}
+    - 8. /vocabularies/family/{familyId}
+    - 9. /vocabularies/client
+    - 10. /vocabularies
+    - 11. /vocabularies/{vocabularyId}/version
+    - 12. /vocabularies/{vocabularyId}/version/{vocabularyVersionId}/concepts
+    - 13. /vocabularies/family
+    - 14. /vocabularies/{vocabularyId}/compare/vocabulary-version-1/{vocabularyVersionId1}/vocabulary-version-2/{vocabularyVersionId2}
+    - 15. /vocabularies/versions/concepts
+    - 16. /vocabularies/versions/concept/{conceptId}
+    - 17. /vocabularies/version
+    - 18. /vocabularies/client/{clientId}
+  POST:
+    - 19. /vocabularies/client
+    - 20. /vocabularies
+    - 21. /vocabularies/{vocabularyId}/version
+    - 22. /vocabularies/{vocabularyId}/version/{vocabularyVersionId}/concepts
+    - 23. /vocabularies/{vocabularyId}/version-origin/{vocabularyVersionOriginId}/version-target/{vocabularyVersionTargetId}/concepts
+    - 24. /vocabularies/{vocabularyId}/copy-difference/vocabulary-version-origin/{vocabularyVersionIdOrigin}/vocabulary-version-target/{vocabularyVersionIdTarget}
+    - 25. /vocabularies/family
+    - 26. /vocabularies/copy-concepts/vocabulary/{vocabularyId}/to-vocabulary-version/{vocabularyVersionId}
+  PUT:
+    - 27. /vocabularies/{vocabularyId}
+    - 28. /vocabularies/{vocabularyId}/version/{vocabularyVersionId}
+    - 29. /vocabularies/{vocabularyId}/inactive-vocabulary-version/{vocabularyVersionIdToInactive}/active-vocabulary-version/{vocabularyVersionIdToActive}
+    - 30. /vocabularies/family/{familyId}
+    - 31. /vocabularies/client
+
+============== Summary ==============
+GET: 75
+POST: 49
+PUT: 20
+DELETE: 26
+
+Total endpoints: 170

@@ -1,0 +1,2380 @@
+Folder: CodeGroups
+  GET {{url}}/conceptgroups/client/164?size=1000
+    Query Parameters:
+      size: 1000
+
+  GET {{url}}/conceptgroups/client/?size=1000
+    Query Parameters:
+      size: 1000
+
+  POST {{url}}/conceptgroups/client
+    Query Parameters:
+      : 
+    Raw Body:
+      {
+	"cliendId": 164,
+	"conceptGroupType": [
+		{
+			"id": 35608,
+			"conceptGroupTypeId": 36,
+			"type": "system"
+		},
+		{
+			"id": 35653,
+			"conceptGroupTypeId": 39,
+			"type": "system"
+		}
+	]
+}
+
+  DELETE {{url}}/conceptgroups/client?=
+    Query Parameters:
+      : 
+    Raw Body:
+      {
+	"cliendId": 164,
+	"conceptGroupType": [
+		{
+			"id": 35608,
+			"conceptGroupTypeId": 36,
+			"type": "system"
+		}
+	]
+}
+
+  PUT {{url}}/conceptgroups/client
+    Raw Body:
+      {
+	"cliendId": 164,
+	"conceptGroupType": [
+		{
+			"id": 35608,
+			"conceptGroupTypeId": 36,
+			"type": "system"
+		},
+		{
+			"id": 35653,
+			"conceptGroupTypeId": 39,
+			"type": "system"
+		},
+		{
+			"id": 35598,
+			"conceptGroupTypeId": 40,
+			"type": "system"
+		},
+		{
+			"id": 35635,
+			"conceptGroupTypeId": 41,
+			"type": "system"
+		},
+		{
+			"id": 35618,
+			"conceptGroupTypeId": 42,
+			"type": "system"
+		},
+		{
+			"id": 35644,
+			"conceptGroupTypeId": 43,
+			"type": "system"
+		},
+		{
+			"id": 35639,
+			"conceptGroupTypeId": 44,
+			"type": "system"
+		},
+		{
+			"id": 35643,
+			"conceptGroupTypeId": 45,
+			"type": "system"
+		},
+		{
+			"id": 35579,
+			"conceptGroupTypeId": 46,
+			"type": "system"
+		},
+		{
+			"id": 35638,
+			"conceptGroupTypeId": 47,
+			"type": "system"
+		},
+		{
+			"id": 35637,
+			"conceptGroupTypeId": 48,
+			"type": "system"
+		},
+		{
+			"id": 35619,
+			"conceptGroupTypeId": 49,
+			"type": "system"
+		},
+		{
+			"id": 35551,
+			"conceptGroupTypeId": 53,
+			"type": "system"
+		},
+		{
+			"id": 35557,
+			"conceptGroupTypeId": 54,
+			"type": "system"
+		},
+		{
+			"id": 35556,
+			"conceptGroupTypeId": 55,
+			"type": "system"
+		},
+		{
+			"id": 35554,
+			"conceptGroupTypeId": 56,
+			"type": "system"
+		},
+		{
+			"id": 35561,
+			"conceptGroupTypeId": 57,
+			"type": "system"
+		},
+		{
+			"id": 35564,
+			"conceptGroupTypeId": 58,
+			"type": "system"
+		},
+		{
+			"id": 35569,
+			"conceptGroupTypeId": 59,
+			"type": "system"
+		},
+		{
+			"id": 35571,
+			"conceptGroupTypeId": 60,
+			"type": "system"
+		},
+		{
+			"id": 35570,
+			"conceptGroupTypeId": 61,
+			"type": "system"
+		},
+		{
+			"id": 35575,
+			"conceptGroupTypeId": 62,
+			"type": "system"
+		},
+		{
+			"id": 35578,
+			"conceptGroupTypeId": 63,
+			"type": "system"
+		},
+		{
+			"id": 35583,
+			"conceptGroupTypeId": 64,
+			"type": "system"
+		},
+		{
+			"id": 35589,
+			"conceptGroupTypeId": 65,
+			"type": "system"
+		},
+		{
+			"id": 35590,
+			"conceptGroupTypeId": 66,
+			"type": "system"
+		},
+		{
+			"id": 35584,
+			"conceptGroupTypeId": 67,
+			"type": "system"
+		},
+		{
+			"id": 35507,
+			"conceptGroupTypeId": 68,
+			"type": "system"
+		},
+		{
+			"id": 35585,
+			"conceptGroupTypeId": 69,
+			"type": "system"
+		},
+		{
+			"id": 35586,
+			"conceptGroupTypeId": 70,
+			"type": "system"
+		},
+		{
+			"id": 35606,
+			"conceptGroupTypeId": 71,
+			"type": "system"
+		},
+		{
+			"id": 35510,
+			"conceptGroupTypeId": 72,
+			"type": "system"
+		},
+		{
+			"id": 35511,
+			"conceptGroupTypeId": 73,
+			"type": "system"
+		},
+		{
+			"id": 35587,
+			"conceptGroupTypeId": 74,
+			"type": "system"
+		},
+		{
+			"id": 35588,
+			"conceptGroupTypeId": 75,
+			"type": "system"
+		},
+		{
+			"id": 35641,
+			"conceptGroupTypeId": 76,
+			"type": "system"
+		},
+		{
+			"id": 35636,
+			"conceptGroupTypeId": 77,
+			"type": "system"
+		},
+		{
+			"id": 35620,
+			"conceptGroupTypeId": 113,
+			"type": "system"
+		},
+		{
+			"id": 35555,
+			"conceptGroupTypeId": 166,
+			"type": "system"
+		},
+		{
+			"id": 35558,
+			"conceptGroupTypeId": 167,
+			"type": "system"
+		},
+		{
+			"id": 35559,
+			"conceptGroupTypeId": 168,
+			"type": "system"
+		},
+		{
+			"id": 35560,
+			"conceptGroupTypeId": 169,
+			"type": "system"
+		},
+		{
+			"id": 35563,
+			"conceptGroupTypeId": 170,
+			"type": "system"
+		},
+		{
+			"id": 35566,
+			"conceptGroupTypeId": 171,
+			"type": "system"
+		},
+		{
+			"id": 35567,
+			"conceptGroupTypeId": 172,
+			"type": "system"
+		},
+		{
+			"id": 35568,
+			"conceptGroupTypeId": 173,
+			"type": "system"
+		},
+		{
+			"id": 35574,
+			"conceptGroupTypeId": 174,
+			"type": "system"
+		},
+		{
+			"id": 35580,
+			"conceptGroupTypeId": 175,
+			"type": "system"
+		},
+		{
+			"id": 35599,
+			"conceptGroupTypeId": 176,
+			"type": "system"
+		},
+		{
+			"id": 35600,
+			"conceptGroupTypeId": 177,
+			"type": "system"
+		},
+		{
+			"id": 35601,
+			"conceptGroupTypeId": 178,
+			"type": "system"
+		},
+		{
+			"id": 35605,
+			"conceptGroupTypeId": 179,
+			"type": "system"
+		},
+		{
+			"id": 35611,
+			"conceptGroupTypeId": 180,
+			"type": "system"
+		},
+		{
+			"id": 35612,
+			"conceptGroupTypeId": 181,
+			"type": "system"
+		},
+		{
+			"id": 35625,
+			"conceptGroupTypeId": 182,
+			"type": "system"
+		},
+		{
+			"id": 35627,
+			"conceptGroupTypeId": 183,
+			"type": "system"
+		},
+		{
+			"id": 35640,
+			"conceptGroupTypeId": 184,
+			"type": "system"
+		},
+		{
+			"id": 35642,
+			"conceptGroupTypeId": 185,
+			"type": "system"
+		},
+		{
+			"id": 35591,
+			"conceptGroupTypeId": 203,
+			"type": "system"
+		},
+		{
+			"id": 35626,
+			"conceptGroupTypeId": 38,
+			"type": "system"
+		},
+		{
+			"id": 35592,
+			"conceptGroupTypeId": 236,
+			"type": "system"
+		},
+		{
+			"id": 35613,
+			"conceptGroupTypeId": 1056,
+			"type": "system"
+		},
+		{
+			"id": 35597,
+			"conceptGroupTypeId": 1189,
+			"type": "system"
+		},
+		{
+			"id": 35553,
+			"conceptGroupTypeId": 1049,
+			"type": "system"
+		},
+		{
+			"id": 35654,
+			"conceptGroupTypeId": 1213,
+			"type": "system"
+		},
+		{
+			"id": 35624,
+			"conceptGroupTypeId": 1214,
+			"type": "system"
+		},
+		{
+			"id": 35621,
+			"conceptGroupTypeId": 1227,
+			"type": "system"
+		},
+		{
+			"id": 35622,
+			"conceptGroupTypeId": 1228,
+			"type": "system"
+		},
+		{
+			"id": 35623,
+			"conceptGroupTypeId": 1229,
+			"type": "system"
+		},
+		{
+			"id": 35614,
+			"conceptGroupTypeId": 1233,
+			"type": "system"
+		},
+		{
+			"id": 35607,
+			"conceptGroupTypeId": 3378,
+			"type": "system"
+		},
+		{
+			"id": 35519,
+			"conceptGroupTypeId": 2074,
+			"type": "system"
+		},
+		{
+			"id": 35518,
+			"conceptGroupTypeId": 2075,
+			"type": "system"
+		},
+		{
+			"id": 35520,
+			"conceptGroupTypeId": 2076,
+			"type": "system"
+		},
+		{
+			"id": 35529,
+			"conceptGroupTypeId": 2077,
+			"type": "system"
+		},
+		{
+			"id": 35533,
+			"conceptGroupTypeId": 2078,
+			"type": "system"
+		},
+		{
+			"id": 35532,
+			"conceptGroupTypeId": 2079,
+			"type": "system"
+		},
+		{
+			"id": 35522,
+			"conceptGroupTypeId": 2080,
+			"type": "system"
+		},
+		{
+			"id": 35525,
+			"conceptGroupTypeId": 2081,
+			"type": "system"
+		},
+		{
+			"id": 35526,
+			"conceptGroupTypeId": 2082,
+			"type": "system"
+		},
+		{
+			"id": 35546,
+			"conceptGroupTypeId": 2083,
+			"type": "system"
+		},
+		{
+			"id": 35544,
+			"conceptGroupTypeId": 2084,
+			"type": "system"
+		},
+		{
+			"id": 35530,
+			"conceptGroupTypeId": 2085,
+			"type": "system"
+		},
+		{
+			"id": 35548,
+			"conceptGroupTypeId": 2086,
+			"type": "system"
+		},
+		{
+			"id": 35527,
+			"conceptGroupTypeId": 2087,
+			"type": "system"
+		},
+		{
+			"id": 35528,
+			"conceptGroupTypeId": 2088,
+			"type": "system"
+		},
+		{
+			"id": 35541,
+			"conceptGroupTypeId": 2090,
+			"type": "system"
+		},
+		{
+			"id": 35549,
+			"conceptGroupTypeId": 2091,
+			"type": "system"
+		},
+		{
+			"id": 35534,
+			"conceptGroupTypeId": 2092,
+			"type": "system"
+		},
+		{
+			"id": 35531,
+			"conceptGroupTypeId": 2093,
+			"type": "system"
+		},
+		{
+			"id": 35524,
+			"conceptGroupTypeId": 2094,
+			"type": "system"
+		},
+		{
+			"id": 35537,
+			"conceptGroupTypeId": 2095,
+			"type": "system"
+		},
+		{
+			"id": 35540,
+			"conceptGroupTypeId": 2096,
+			"type": "system"
+		},
+		{
+			"id": 35538,
+			"conceptGroupTypeId": 2097,
+			"type": "system"
+		},
+		{
+			"id": 35521,
+			"conceptGroupTypeId": 2098,
+			"type": "system"
+		},
+		{
+			"id": 35523,
+			"conceptGroupTypeId": 2099,
+			"type": "system"
+		},
+		{
+			"id": 35542,
+			"conceptGroupTypeId": 2100,
+			"type": "system"
+		},
+		{
+			"id": 35536,
+			"conceptGroupTypeId": 2101,
+			"type": "system"
+		},
+		{
+			"id": 35543,
+			"conceptGroupTypeId": 2102,
+			"type": "system"
+		},
+		{
+			"id": 35547,
+			"conceptGroupTypeId": 2103,
+			"type": "system"
+		},
+		{
+			"id": 35545,
+			"conceptGroupTypeId": 2104,
+			"type": "system"
+		},
+		{
+			"id": 35535,
+			"conceptGroupTypeId": 2105,
+			"type": "system"
+		},
+		{
+			"id": 35616,
+			"conceptGroupTypeId": 2119,
+			"type": "system"
+		},
+		{
+			"id": 35539,
+			"conceptGroupTypeId": 2120,
+			"type": "system"
+		},
+		{
+			"id": 35609,
+			"conceptGroupTypeId": 2153,
+			"type": "system"
+		},
+		{
+			"id": 35633,
+			"conceptGroupTypeId": 2320,
+			"type": "system"
+		},
+		{
+			"id": 35634,
+			"conceptGroupTypeId": 2321,
+			"type": "system"
+		},
+		{
+			"id": 35630,
+			"conceptGroupTypeId": 2361,
+			"type": "system"
+		},
+		{
+			"id": 35572,
+			"conceptGroupTypeId": 2485,
+			"type": "system"
+		},
+		{
+			"id": 35573,
+			"conceptGroupTypeId": 2484,
+			"type": "system"
+		},
+		{
+			"id": 35632,
+			"conceptGroupTypeId": 2486,
+			"type": "system"
+		},
+		{
+			"id": 35631,
+			"conceptGroupTypeId": 2504,
+			"type": "system"
+		},
+		{
+			"id": 35628,
+			"conceptGroupTypeId": 2505,
+			"type": "system"
+		},
+		{
+			"id": 35629,
+			"conceptGroupTypeId": 2506,
+			"type": "system"
+		},
+		{
+			"id": 35581,
+			"conceptGroupTypeId": 2616,
+			"type": "system"
+		},
+		{
+			"id": 35617,
+			"conceptGroupTypeId": 3640,
+			"type": "system"
+		},
+		{
+			"id": 35615,
+			"conceptGroupTypeId": 2661,
+			"type": "system"
+		},
+		{
+			"id": 35565,
+			"conceptGroupTypeId": 35,
+			"type": "system"
+		},
+		{
+			"id": 35550,
+			"conceptGroupTypeId": 2880,
+			"type": "system"
+		},
+		{
+			"id": 35593,
+			"conceptGroupTypeId": 3277,
+			"type": "system"
+		},
+		{
+			"id": 35594,
+			"conceptGroupTypeId": 3278,
+			"type": "system"
+		},
+		{
+			"id": 35595,
+			"conceptGroupTypeId": 3279,
+			"type": "system"
+		},
+		{
+			"id": 35506,
+			"conceptGroupTypeId": 135,
+			"type": "system"
+		},
+		{
+			"id": 35657,
+			"conceptGroupTypeId": 3078,
+			"type": "system"
+		},
+		{
+			"id": 35562,
+			"conceptGroupTypeId": 4002,
+			"type": "system"
+		},
+		{
+			"id": 35596,
+			"conceptGroupTypeId": 3280,
+			"type": "system"
+		},
+		{
+			"id": 35656,
+			"conceptGroupTypeId": 4366,
+			"type": "system"
+		},
+		{
+			"id": 35658,
+			"conceptGroupTypeId": 4367,
+			"type": "system"
+		},
+		{
+			"id": 35647,
+			"conceptGroupTypeId": 1152,
+			"type": "system"
+		},
+		{
+			"id": 35646,
+			"conceptGroupTypeId": 1141,
+			"type": "system"
+		},
+		{
+			"id": 35648,
+			"conceptGroupTypeId": 1153,
+			"type": "system"
+		},
+		{
+			"id": 35645,
+			"conceptGroupTypeId": 4532,
+			"type": "system"
+		},
+		{
+			"id": 35512,
+			"conceptGroupTypeId": 4564,
+			"type": "system"
+		},
+		{
+			"id": 35516,
+			"conceptGroupTypeId": 4565,
+			"type": "system"
+		},
+		{
+			"id": 35603,
+			"conceptGroupTypeId": 1210,
+			"type": "system"
+		},
+		{
+			"id": 35508,
+			"conceptGroupTypeId": 4566,
+			"type": "system"
+		},
+		{
+			"id": 35513,
+			"conceptGroupTypeId": 4567,
+			"type": "system"
+		},
+		{
+			"id": 35514,
+			"conceptGroupTypeId": 4596,
+			"type": "system"
+		},
+		{
+			"id": 35515,
+			"conceptGroupTypeId": 4629,
+			"type": "system"
+		},
+		{
+			"id": 35517,
+			"conceptGroupTypeId": 4662,
+			"type": "system"
+		},
+		{
+			"id": 35509,
+			"conceptGroupTypeId": 4695,
+			"type": "system"
+		},
+		{
+			"id": 35655,
+			"conceptGroupTypeId": 4860,
+			"type": "system"
+		},
+		{
+			"id": 35652,
+			"conceptGroupTypeId": 4893,
+			"type": "system"
+		},
+		{
+			"id": 35651,
+			"conceptGroupTypeId": 4894,
+			"type": "system"
+		},
+		{
+			"id": 35650,
+			"conceptGroupTypeId": 4895,
+			"type": "system"
+		},
+		{
+			"id": 35649,
+			"conceptGroupTypeId": 4896,
+			"type": "system"
+		},
+		{
+			"id": 35582,
+			"conceptGroupTypeId": 37,
+			"type": "system"
+		},
+		{
+			"id": 35552,
+			"conceptGroupTypeId": 3771,
+			"type": "system"
+		},
+		{
+			"id": 35602,
+			"conceptGroupTypeId": 1211,
+			"type": "system"
+		},
+		{
+			"id": 35604,
+			"conceptGroupTypeId": 1212,
+			"type": "system"
+		}
+	]
+}
+
+Folder: Source
+  GET {{url}}/sources
+    Query Parameters:
+      name: 5499 update
+
+  GET {{url}}/sources/54000
+
+  POST {{url}}/sources
+    Raw Body:
+      {
+    "id": null,
+    "name": "test 1015",
+    "cliendId": 164,
+    "type": null,
+    "description": "SGIL-Test",
+    "active": 1,
+    "thirdpartyId": null,
+    "aliasName": null
+}
+
+  POST {{url}}/sources
+    Raw Body:
+      {
+    "id": 5499,
+    "name": "testing other",
+    "cliendId": 164,
+    "type": null,
+    "description": "SGIL-Test",
+    "active": 0,
+    "thirdpartyId": null,
+    "aliasName": null
+}
+
+  PUT {{url}}/sources/5499?sourceById=5499
+    Query Parameters:
+      sourceById: 5499
+    Raw Body:
+      {
+    "id": null,
+    "name": "5499 update",
+    "cliendId": 164,
+    "type": null,
+    "description": "5499 update",
+    "active": 1,
+    "thirdpartyId": null,
+    "aliasName": null
+}
+
+  PUT {{url}}/sources/6000
+    Raw Body:
+      {
+    "id": null,
+    "name": "namex",
+    "cliendId": 164,
+    "type": null,
+    "description": "SGIL-Test",
+    "active": 1,
+    "thirdpartyId": null,
+    "aliasName": null
+}
+
+  DELETE {{url}}/sources/5499
+
+  DELETE {{url}}/sources/5499
+
+  POST {{url}}/sources
+    Raw Body:
+      {
+    "id": null,
+    "name": "test 1015",
+    "cliendId": 164,
+    "type": null,
+    "description": "SGIL-Test",
+    "active": 1,
+    "thirdpartyId": null,
+    "aliasName": null
+}
+
+  GET {{url}}/sources/9
+
+Folder: Statistics
+  GET {{url}}/statistics
+
+Folder: Language
+  GET {{url}}/languages?search=shortCode==abk
+    Query Parameters:
+      search: shortCode==abk
+
+  GET {{url}}/languages/1
+
+Folder: UmlsRelationships
+  GET {{url}}/umls-relationships
+
+  GET {{url}}/umls-relationships?search=type=='custom'
+    Query Parameters:
+      search: type=='custom'
+
+  GET {{url}}/umls-relationships/2
+
+  GET {{url}}/umls-relationships/10000
+
+  POST {{url}}/umls-relationships
+    Raw Body:
+      {
+    "relationshipId": "testsgs3",
+    "code": "testsgs3",
+    "reverseRelationshipId": null,
+    "parentChild": null,
+    "definesAncestry": null,
+    "statusCode": "A",
+    "type": null,
+    "sourcesId": 502
+
+}
+
+  POST {{url}}/umls-relationships
+    Raw Body:
+      {
+    "id": 0,
+    "relationshipId": "adjacent_to-12",
+    "statusCode": "A",
+    "sourcesId": 51105,
+    "code": "3",
+    "type": "system"
+}
+
+  PUT {{url}}/umls-relationships/1928
+    Raw Body:
+      {
+    "id": 1928,
+    "relationshipId": "testsgs3",
+    "statusCode": "I",
+    "sourcesId": 502,
+    "code": "testsgs3",
+    "type": "system"
+}
+
+  PUT {{url}}/umls-relationships/2500
+    Raw Body:
+      {
+ "id": 2500,
+    "relationshipId": "testsgs3",
+    "statusCode": "I",
+    "sourcesId": 502,
+    "code": "testsgs3",
+    "type": "system"
+}
+
+  DELETE {{url}}/umls-relationships/1928
+    Raw Body:
+      {
+  "id": 0,
+  "relationshipId": "testsgs",
+  "code": "testsgs",
+  "reverseRelationshipId": null,
+  "parentChild": null,
+  "definesAncestry": null,
+  "statusCode": "A",
+  "type": null,
+  "sourcesId": 0
+}
+
+Folder: UtilityDomain
+  GET {{url}}/utilitydomains
+
+  GET {{url}}/utilitydomains/hierarchy
+
+  GET {{url}}/utilitydomains/hierarchy?sinceId=10
+    Query Parameters:
+      sinceId: 10
+
+  GET {{url}}/utilitydomains/vocabularies
+
+  GET {{url}}/utilitydomains/3281
+
+  GET {{url}}/utilitydomains/50000
+
+  POST {{url}}/utilitydomains
+    Raw Body:
+      {
+    "name": "SGIL",
+    "description": "SGIL",
+    "parentId": null,
+    "statusCode": "A",
+    "type": "system"
+}
+
+  PUT {{url}}/utilitydomains/3281
+    Raw Body:
+      {
+    "name": "SGILA",
+    "description": "SGILA",
+    "parentId": null,
+    "statusCode": "A",
+    "type": "system"
+}
+
+  DELETE {{url}}/utilitydomains/32810
+
+  DELETE {{url}}/utilitydomains/3281
+
+  DELETE {{url}}/utilitydomains/3281/concept/106549374
+
+  PUT {{url}}/utilitydomains/32810
+    Raw Body:
+      {
+    "name": "SGILA",
+    "description": "SGILA",
+    "parentId": null,
+    "statusCode": "A",
+    "type": "system"
+}
+
+Folder: Relationships
+  GET {{url}}/relationships?search=type=='custom'
+    Query Parameters:
+      search: type=='custom'
+
+  GET {{url}}/relationships
+
+  GET {{url}}/relationships/908
+
+  POST {{url}}/relationships
+    Raw Body:
+      {
+    "relationshipIdRef": "Has time aspectxx",
+    "name": "XXX",
+    "definesAncestry": "1",
+    "equivalent": 0,
+    "reverseRelationshipId": "Time aspect of",
+    "relationshipConceptId": 44818774,
+    "statusCode": "A",
+    "sourcesId": 20,
+    "type": "custom",
+    "parentOf": 0,
+    "childOf": 0,
+    "relationshipParentId": null
+}
+
+  PUT {{url}}/relationships/907
+    Raw Body:
+      {
+    "relationshipIdRef": "Has time aspectxx",
+    "name": "XXX",
+    "definesAncestry": "1",
+    "equivalent": 0,
+    "reverseRelationshipId": "Time aspect of",
+    "relationshipConceptId": null,
+    "statusCode": "A",
+    "relationshipId": 907,
+    "sourcesId": 20,
+    "type": "system",
+    "parentOf": 0,
+    "childOf": 0,
+    "relationshipParentId": null
+}
+
+  PUT {{url}}/relationships/90700
+    Raw Body:
+      {
+    "relationshipIdRef": "Has time aspectxx",
+    "name": "XXXsa",
+    "definesAncestry": "1",
+    "equivalent": 0,
+    "reverseRelationshipId": "Time aspect of",
+    "relationshipConceptId": 44818774,
+    "statusCode": "A",
+    "sourcesId": 20,
+    "type": "custom",
+    "parentOf": 0,
+    "childOf": 0,
+    "relationshipParentId": null
+}
+
+  DELETE {{url}}/relationships/907
+
+Folder: MarketBasket
+  POST {{url}}/marketbasket/diagnoses-brand-ingredients
+    Raw Body:
+      {
+  "listMarketBaskets": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    10, 
+    11
+  ],
+  "typeListBrandIngredient": "All"
+}
+
+  POST {{url}}/marketbasket/1/generate-marketbasket-codes
+    Raw Body:
+      {
+  "userId": 0,
+  "newName": "string",
+  "activeVersion": true,
+  "ingredientVersionId": 0,
+  "folderId": "string"
+}
+
+  POST {{url}}/marketbasket/13162/generate-marketbasket-codes
+    Raw Body:
+      {
+  "userId": 0,
+  "newName": "string",
+  "activeVersion": true,
+  "ingredientVersionId": 617,
+  "folderId": "string"
+}
+
+  POST {{url}}/marketbasket/13162/generate-marketbasket-codes
+    Raw Body:
+      {
+  "userId": 0,
+  "newName": "string",
+  "activeVersion": true,
+  "ingredientVersionId": 213593,
+  "folderId": "string"
+}
+
+  POST {{url}}/marketbasket/1126534/generate-marketbasket-codes
+    Raw Body:
+      {"groupId":1126534,"userId":5041,"newName":"","activeVersion":true,"ingredientVersionId":6871912}
+
+  GET {{url}}/marketbasket?size=100&page=0
+    Query Parameters:
+      size: 100
+      page: 0
+
+  GET {{url}}/marketbasket/1126534/related
+
+  POST {{url}}/marketbasket/1126534/copy-market-basket
+    Raw Body:
+      {"userId":"5041","newName":"Copy_of_SgilTest","groupId":1126534,"folderId":"15843"}
+
+  POST {{url}}/marketbasket
+    Raw Body:
+      {
+    "groupName": "SgilTestMKB",
+    "name": "SgilTestMKB",
+    "groupTypeId": 1214,
+    "folderId": 15811143,
+    "thirdPartyId2": "",
+    "thirdPartyId1": "",
+    "longDescription": "Market Basket for SgilTestMKB",
+    "groupClass": "custom",
+    "permissionType": null,
+    "statusCode": "A",
+    "sourcesId": 501
+}
+
+  POST {{url}}/marketbasket
+    Raw Body:
+      {
+    "deletedAt": "2025-02-12",
+    "folderId": 18352,
+    "groupClass": "item 5618",
+    "groupName": "item 5618",
+    "groupTypeId": 1214,
+    "longDescription": "Market Basket foritem 5618",
+    "pxOrDx": 0,
+    "sourcesId": 10,
+    "statusCode": 1
+}
+
+Folder: Client
+  GET {{url}}/clients/reports/restrictions?clientId=1
+    Query Parameters:
+      clientId: 1
+
+  GET {{url}}/clients/reports/restrictions?clientId=2
+    Query Parameters:
+      clientId: 2
+
+  GET {{url}}/clients/reports/downloaded/type-report/conceptgroups/year/2024/month/12?clientId=765
+    Query Parameters:
+      clientId: 765
+
+  GET {{url}}/clients/reports
+
+  GET {{url}}/clients/reports/validate-download/type-report/crosswalk
+
+  GET {{url}}/clients/reports/validate-download/type-report/crosswalks?clientId=66
+    Query Parameters:
+      clientId: 66
+
+  GET {{url}}/clients/reports/restrictions?clientId=2
+    Query Parameters:
+      clientId: 2
+
+  POST {{url}}/clients/reports
+    Raw Body:
+      {
+    "id": 8984,
+    "clientId": 1,
+    "username": "mateo.gil@sourcemeridian.com",
+    "generationDate": "2023-11-07",
+    "typeReport": "conceptgroups",
+    "uniqueIdentifier": 86918
+}
+
+  POST {{url}}/clients/reports/restrictions
+    Raw Body:
+      {
+    "id": 0,
+    "clientId": 2,
+    "maxNumber": 12,
+    "typeReport": "crosswalk"
+}
+
+  POST {{url}}/clients/reports/restrictions
+    Raw Body:
+      {
+    "id": 14,
+    "clientId": 2,
+    "maxNumber": 12,
+    "typeReport": "crosswalk"
+}
+
+  PUT {{url}}/clients/reports/restrictions/1589
+    Raw Body:
+      {
+    "id": 115894,
+    "clientId": 2,
+    "maxNumber": 12,
+    "typeReport": "crosswalk",
+    "date": "2025-01-01"
+}
+
+  PUT {{url}}/clients/reports/restrictions/158900
+    Raw Body:
+      {
+    "id": 158900,
+    "clientId": 20000,
+    "maxNumber": 12,
+    "typeReport": "crosswalk",
+    "date": "2025-01-01"
+}
+
+Folder: Task
+  Folder: New Folder
+  GET {{url}}/tasks/73cb4bf9-43cc-4cf7-8477-fb6f16c0cece
+
+  GET {{url}}/tasks/conceptgroup/15284?conceptGroupVersionId=2657&isRefreshingPatientCount=true
+    Query Parameters:
+      conceptGroupVersionId: 2657
+      isRefreshingPatientCount: true
+
+  GET {{url}}/tasks/conceptgroup/15284?conceptGroupVersionId=2657
+    Query Parameters:
+      conceptGroupVersionId: 2657
+
+  GET {{url}}/tasks/conceptgroup/15284?conceptGroupVersionId=2657&isRefreshingPatientCount=true
+    Query Parameters:
+      conceptGroupVersionId: 2657
+      isRefreshingPatientCount: true
+
+Folder: Crosswalk
+  Folder: Create Crosswalk
+    POST {{url}}/crosswalk
+      Raw Body:
+        {
+    "shortName": "Crosswalk1",
+    "longName": "Crosswalk1",
+    "active": true,
+    "description": "Crosswalk1",
+    "sourcesId": 501
+}
+
+    POST {{url}}/crosswalk
+      Raw Body:
+        {
+    "shortName": "Crosswalk3",
+    "longName": "Crosswalk3",
+    "active": true,
+    "description": "Crosswalk3",
+    "sourcesId": 501
+}
+
+  Folder: Update Crosswalk
+    PUT {{url}}/crosswalk/6175
+      Raw Body:
+        {
+    "shortName": "Crosswalk21",
+    "longName": "Crosswalk21",
+    "active": true,
+    "description": "Crosswalk21",
+    "sourcesId": 501,
+    "id": 6175
+}
+
+    PUT {{url}}/crosswalk/617500
+      Raw Body:
+        {
+    "shortName": "Crosswalk21",
+    "longName": "Crosswalk21",
+    "active": true,
+    "description": "Crosswalk21",
+    "sourcesId": 501,
+    "id": 6175
+}
+
+  Folder: GetSingleCrosswalk
+    GET {{url}}/crosswalk/6175
+      Raw Body:
+        {"shortName":"Crosswalk1","longName":"Crosswalk1","active":true,"description":"Crosswalk1","sourcesId":501}
+
+    GET {{url}}/crosswalk/617300
+      Raw Body:
+        {"shortName":"Crosswalk1","longName":"Crosswalk1","active":true,"description":"Crosswalk1","sourcesId":501}
+
+  Folder: GetAllCrosswalk
+    GET {{url}}/crosswalk?sort=shortName,asc&size=500
+      Query Parameters:
+        sort: shortName,asc
+        size: 500
+
+  Folder: createCrosswalkVersion
+    POST {{url}}/crosswalk/6175/version
+      Raw Body:
+        {
+    "versionName": "v1",
+    "validStartDate": "2025-01-01",
+    "active": true,
+    "crossWalkId": "6175"
+}
+
+    POST {{url}}/crosswalk/6175000/version
+      Raw Body:
+        {
+    "versionName": "v1",
+    "validStartDate": "2025-01-01",
+    "active": true,
+    "crossWalkId": "6175000"
+}
+
+  Folder: getCrosswalkVersionById
+    GET {{url}}/crosswalk/6175/version/11081
+
+  Folder: UpdateCrosswalkVersion
+    PUT {{url}}/crosswalk/6175/version/11081
+      Raw Body:
+        {
+    "crossWalkId": "6175",
+    "versionName": "v1",
+    "crosswalkId": 6175,
+    "validStartDate": "2025-01-06",
+    "validEndDate": "2025-01-10",
+    "clientId": 765,
+    "type": "custom",
+    "active": true,
+    "versionId": 11081
+}
+
+    PUT {{url}}/crosswalk/6175/version/110810000
+      Raw Body:
+        {
+    "crossWalkId": "6175",
+    "versionName": "v1",
+    "crosswalkId": 6175,
+    "validStartDate": "2025-01-06",
+    "validEndDate": "2025-01-10",
+    "clientId": 765,
+    "type": "custom",
+    "active": true,
+    "versionId": 11081
+}
+
+    PUT {{url}}/crosswalk/61750000/version/11081
+      Raw Body:
+        {
+    "crossWalkId": "6175",
+    "versionName": "v1",
+    "crosswalkId": 6175,
+    "validStartDate": "2025-01-06",
+    "validEndDate": "2025-01-10",
+    "clientId": 765,
+    "type": "custom",
+    "active": true,
+    "versionId": 11081
+}
+
+  Folder: getAllCrosswalkVersionsByCrosswalkId
+    GET {{url}}/crosswalk/6175
+
+  Folder: getAllRelationshipsByCrosswalkId
+    GET {{url}}/crosswalk/6175/relationships?sort=shortDescription,asc&page=0
+      Query Parameters:
+        sort: shortDescription,asc
+        page: 0
+
+    GET {{url}}/crosswalk/6175000/relationships?sort=shortDescription,asc&page=0
+      Query Parameters:
+        sort: shortDescription,asc
+        page: 0
+
+  Folder: getAllRelationshipsByCrosswalkVersionId
+    GET {{url}}/crosswalk/6175/version/11081/relationships?sort=shortDescription,asc&size=100&page=0
+      Query Parameters:
+        sort: shortDescription,asc
+        size: 100
+        page: 0
+
+  Folder: AddRelationshipsToCrosswalkVersion
+    POST {{url}}/crosswalk/6175/version/11083/relationships
+      Raw Body:
+        {"crossWalkId":6175,"versionId":11083,"ids":[176905084]}
+
+  Folder: deleteRelationshipsToCrosswalkVersion
+    DELETE {{url}}/crosswalk/6175/version/11083/relationships
+      Raw Body:
+        {"ids":[176905084]}
+
+  Folder: deleteAllRelationshipsToCrosswalkVersion
+    DELETE {{url}}/crosswalk/6175/version/11083/all-relationships
+
+  Folder: copyConceptsFromVocabularyToVocabularyVersion
+    POST {{url}}/crosswalk/6175/copy-all-relationships/to-crosswalk-version/11083
+      Raw Body:
+        {}
+
+    POST {{url}}/crosswalk/6175/copy-all-relationships/to-crosswalk-version/1108300
+      Raw Body:
+        {}
+
+    POST {{url}}/crosswalk/600175/copy-all-relationships/to-crosswalk-version/11083
+      Raw Body:
+        {}
+
+  Folder: duplicateAllRelationshipsCrosswalkVersion
+    POST {{url}}/crosswalk/6175/copy-all-relationships/to-crosswalk-version/11083
+      Raw Body:
+        {}
+
+    POST {{url}}/crosswalk/617500/copy-all-relationships/to-crosswalk-version/11083
+      Raw Body:
+        {}
+
+    POST {{url}}/crosswalk/6175/copy-all-relationships/to-crosswalk-version/11083000
+      Raw Body:
+        {}
+
+  Folder: compareTwoVocabularyVersions
+    GET {{url}}/crosswalk/6175/compare/crosswalk-version-1/11082/crosswalk-version-2/11083
+
+  Folder: copyDifferenceBetweenTwoCrosswalkVersions
+    POST {{url}}/crosswalk/6175/copy-difference/crosswalk-version-origin/11081/crosswalk-version-target/11083
+      Raw Body:
+        {}
+
+    POST {{url}}/crosswalk/6175/copy-difference/crosswalk-version-origin/1108100/crosswalk-version-target/11083
+      Raw Body:
+        {}
+
+    POST {{url}}/crosswalk/6175/copy-difference/crosswalk-version-origin/11081/crosswalk-version-target/1108300
+      Raw Body:
+        {}
+
+    POST {{url}}/crosswalk/617500/copy-difference/crosswalk-version-origin/11081/crosswalk-version-target/11083
+      Raw Body:
+        {}
+
+  Folder: getAllCrosswalkByClientId
+    GET {{url}}/crosswalk/client/5
+
+    GET {{url}}/crosswalk/client/500000
+
+    GET {{url}}/crosswalk/client/138
+
+    GET {{url}}/crosswalk/client/488
+
+  Folder: createCrosswalkClient
+    POST {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    POST {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    POST {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "138",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    POST {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557000",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+  Folder: updateCrosswalkClient
+    PUT {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    PUT {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    PUT {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "138",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    PUT {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557000",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+  Folder: getCrosswalkRelationshipTypes
+    GET {{url}}/crosswalk/relationshiptypes
+
+  Folder: getCrosswalkRelationshipType
+    GET {{url}}/crosswalk/relationshiptypes/3631/
+
+    GET {{url}}/crosswalk/relationshiptypes/6/
+
+  Folder: delete crosswalk client
+    DELETE {{url}}/crosswalk/client
+      Raw Body:
+        {"clientId":"3557","crosswalk":[{"crosswalkId":951,"type":"system"}]}
+
+    DELETE {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    DELETE {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "138",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+    DELETE {{url}}/crosswalk/client
+      Raw Body:
+        {
+    "clientId": "3557000",
+    "crosswalk": [
+        {
+            "crosswalkId": 544,
+            "type": "system"
+        },
+        {
+            "crosswalkId": 951,
+            "type": "system"
+        }
+    ]
+}
+
+  Folder: CreateCrosswalkRelationships
+    POST {{url}}/crosswalk/relationshiptypes
+      Raw Body:
+        {
+    "name": "SGilTest",
+    "sourcesId": null,
+    "equivalent": true,
+    "parent": true,
+    "child": false
+}
+
+  Folder: UpdateCrosswalkRelationships
+    PUT {{url}}/crosswalk/relationshiptypes/3638
+      Raw Body:
+        {
+    "name": "SGilTest1235",
+    "sourcesId": 501,
+    "equivalent": true,
+    "parent": true,
+    "child": false
+}
+
+    PUT {{url}}/crosswalk/relationshiptypes/36
+      Raw Body:
+        {
+    "name": "SGilTest1235",
+    "sourcesId": 501,
+    "equivalent": true,
+    "parent": true,
+    "child": false
+}
+
+  Folder: getCrosswalkRelatedConcepts
+    GET {{url}}/crosswalk/concepts/103206433/relatedconcepts/?size=500&page=0&sort.sorted=true&sort=relationshipTypeName,asc
+      Query Parameters:
+        size: 500
+        page: 0
+        sort.sorted: true
+        sort: relationshipTypeName,asc
+
+  Folder: createConceptRelationship
+    POST {{url}}/crosswalk/concepts/relationships
+      Raw Body:
+        {
+    "conceptId1": 106596303,
+    "conceptId2": "106596304",
+    "crosswalkRelationshipTypeId": 887,
+    "crosswalkId": 6175,
+    "active": true
+}
+
+    POST {{url}}/crosswalk/concepts/relationships
+      Raw Body:
+        {
+    "conceptId1": 106596303,
+    "conceptId2": "106596304",
+    "crosswalkRelationshipTypeId": 887,
+    "crosswalkId": 6175,
+    "active": true
+}
+
+    POST {{url}}/crosswalk/concepts/relationships
+      Raw Body:
+        {
+    "conceptId1": 1,
+    "conceptId2": "106596304",
+    "crosswalkRelationshipTypeId": 887,
+    "crosswalkId": 1,
+    "active": true
+}
+
+  Folder: deleteConceptRelationship
+    DELETE {{url}}/crosswalk/concepts/relationships
+      Raw Body:
+        {"ids":[176905091]}
+
+    DELETE {{url}}/crosswalk/concepts/relationships
+      Raw Body:
+        {"ids":[176905091]}
+
+  Folder: getConceptsRelatedThatDontBelongToTheConceptgroup
+    POST {{url}}/crosswalk/6204/version/11088/copy-concepts-related-that-do-not-belong-to-conceptgroup/1126595?conceptGroupVersionId=6872001
+      Query Parameters:
+        conceptGroupVersionId: 6872001
+
+    POST {{url}}/crosswalk/1/version/11088/copy-concepts-related-that-do-not-belong-to-conceptgroup/1126595?conceptGroupVersionId=6872001
+      Query Parameters:
+        conceptGroupVersionId: 6872001
+
+Folder: Vocabularies
+  GET {{url}}/vocabularies?size=1000&page=0&type=custom&sort=idRef,asc
+    Query Parameters:
+      size: 1000
+      page: 0
+      type: custom
+      sort: idRef,asc
+
+  GET {{url}}/vocabularies/7881
+
+  POST {{url}}/vocabularies
+    Raw Body:
+      {
+    "name": "As",
+    "idRef": "As",
+    "reference": "As",
+    "description": "As",
+    "sourcesId": 501,
+    "statusCode": "A",
+    "requiresLicense": "no",
+    "isVocabularyFamily": false
+}
+
+  DELETE {{url}}/vocabularies/844300
+
+  PUT {{url}}/vocabularies/8442
+    Raw Body:
+      {"name":"As1","idRef":"As1","reference":"As","description":"As","sourcesId":501,"statusCode":"A","requiresLicense":"no","licenseDescription":"","isVocabularyFamily":false}
+
+  GET {{url}}/vocabularies/client
+
+  GET {{url}}/vocabularies/client/3557
+
+  POST {{url}}/vocabularies/client
+    Raw Body:
+      {
+    "clientId": 3557,
+    "vocabulary": [
+        {
+            "vocabularyId": 1,
+            "idRef": "ABMS",
+            "name": "Provider Specialty (American Board of Medical Specialties)",
+            "reference": "http://www.abms.org/member-boards/specialty-subspecialty-certificates",
+            "version": "2018-06-26 ABMS",
+            "description": "Provider Specialty (American Board of Medical Specialties)",
+            "statusCode": "A",
+            "sourcesId": 740,
+            "type": "system",
+            "requiresLicense": null,
+            "licenseDescription": null,
+            "familyId": null
+        }
+    ]
+}
+
+  PUT {{url}}/vocabularies/client
+    Raw Body:
+      {
+    "clientId": 3557,
+    "vocabulary": [
+        {
+            "vocabularyId": 1,
+            "idRef": "ABMS",
+            "name": "Provider Specialty (American Board of Medical Specialties)",
+            "reference": "http://www.abms.org/member-boards/specialty-subspecialty-certificates",
+            "version": "2018-06-26 ABMS",
+            "description": "Provider Specialty (American Board of Medical Specialties)",
+            "statusCode": "A",
+            "sourcesId": 740,
+            "type": "system",
+            "requiresLicense": null,
+            "licenseDescription": null,
+            "familyId": null
+        }
+    ]
+}
+
+  DELETE {{url}}/vocabularies/client
+    Raw Body:
+      {
+    "clientId": 3557,
+    "vocabulary": [
+        {
+            "vocabularyId": 1,
+            "idRef": "ABMS",
+            "name": "Provider Specialty (American Board of Medical Specialties)",
+            "reference": "http://www.abms.org/member-boards/specialty-subspecialty-certificates",
+            "version": "2018-06-26 ABMS",
+            "description": "Provider Specialty (American Board of Medical Specialties)",
+            "statusCode": "A",
+            "sourcesId": 740,
+            "type": "system",
+            "requiresLicense": null,
+            "licenseDescription": null,
+            "familyId": null
+        }
+    ]
+}
+
+  GET {{url}}/vocabularies/version
+
+  GET {{url}}/vocabularies/8442/version
+
+  GET {{url}}/vocabularies/8442/version/14564
+
+  POST {{url}}/vocabularies/844200/version
+    Raw Body:
+      {
+    "versionName": "v12",
+    "description": "VocabularySG",
+    "active": true,
+    "vocabularyId": "8442"
+}
+
+  POST {{url}}/vocabularies/copy-concepts/vocabulary/8410/to-vocabulary-version/14563
+    Raw Body:
+      {"vocabularyId":"8410","versionId":14563}
+
+  PUT {{url}}/vocabularies/8410/version/14563
+    Raw Body:
+      {
+    "versionId": 14563,
+    "releaseDate": null,
+    "vocabularyId": "8410",
+    "clientId": 765,
+    "versionName": "v1.1",
+    "type": "custom",
+    "versionUpdateDate": null,
+    "endDate": null,
+    "description": "VocabularySGtest",
+    "totalConcepts": 3,
+    "active": true
+}
+
+  DELETE {{url}}/vocabularies/8410/version/14568
+
+  GET {{url}}/vocabularies/versions/concepts/?page=0&size=100&vocabularyVersionId=14567
+    Query Parameters:
+      page: 0
+      size: 100
+      vocabularyVersionId: 14567
+
+  GET {{url}}/vocabularies/versions/concept/106596368
+
+  PUT {{url}}/vocabularies/8410/inactive-vocabulary-version/14563/active-vocabulary-version/14567
+
+  POST {{url}}/vocabularies/8409/version-origin/14561/version-target/14569/concepts
+
+  POST {{url}}/vocabularies/8409/version/14569/concepts
+    Raw Body:
+      {"vocabularyId":8409,"versionId":14569,"conceptIds":["106596303"]}
+
+  GET {{url}}/vocabularies/8409/version/14561/concepts/
+
+  DELETE {{url}}/vocabularies/8409/version/14569/concepts
+    Raw Body:
+      {"conceptIds":[106596303]}
+
+  DELETE {{url}}/vocabularies/8409/version/14569/all-concepts
+
+  GET {{url}}/vocabularies/8409/compare/vocabulary-version-1/14561/vocabulary-version-2/14569?page=0
+    Query Parameters:
+      page: 0
+
+  POST {{url}}/vocabularies/8409/copy-difference/vocabulary-version-origin/14561/vocabulary-version-target/14569
+    Raw Body:
+      {"vocabularyId":"8409","originId":14561,"targetId":14569}
+
+  POST {{url}}/vocabularies/family
+    Raw Body:
+      {
+    "name": "VocabularyFamilySG",
+    "statusCode": "A",
+    "type": "custom"
+}
+
+  PUT {{url}}/vocabularies/family/8448
+    Raw Body:
+      {"name":"VocabularyFamily1","statusCode":"A","type":"custom"}
+
+  GET {{url}}/vocabularies/family/8448
+
+  GET {{url}}/vocabularies/family?type=custom&size=100&page=0
+    Query Parameters:
+      type: custom
+      size: 100
+      page: 0
+
+Folder: Concepts
+  GET {{url}}/concepts
+
+  GET localhost:8083/concepts/textsearch?q.parser=structured&page=0&start=0&size=100&q=(and%20(phrase%20field=vocabularyid%20%278409%27))&sort=conceptid,asc
+    Query Parameters:
+      q.parser: structured
+      page: 0
+      start: 0
+      size: 100
+      q: (and%20(phrase%20field=vocabularyid%20%278409%27))
+      sort: conceptid,asc
+
+  GET {{url}}/concepts/utiliydomainId/3050/vocabularyId/7881/conceptShortDescription/c?page=1
+    Query Parameters:
+      page: 1
+
+  GET {{url}}/concepts/106175147
+
+  POST localhost:8083/concepts/relationship
+    Raw Body:
+      {
+    "conceptId1": 106596369,
+    "conceptId2": 106596368,
+    "relationshipId": 1,
+    "relationshipLevel": 1
+}
+
+  DELETE localhost:8083/concepts/relationship
+    Raw Body:
+      {
+    "ids": [
+        123309
+    ]
+}
+
+  POST localhost:8083/concepts
+    Raw Body:
+      {
+    "pxordx": null,
+    "codeType": null,
+    "conceptClassId": null,
+    "type": "custom",
+    "vocabularyId": "7881",
+    "vocabulary": {
+        "id": 7881,
+        "idRef": "0001",
+        "name": "Vocabulary carlos",
+        "reference": "Test Carlos",
+        "version": null,
+        "description": "Vocabulary for test",
+        "statusCode": "A",
+        "sourcesId": 501,
+        "type": "custom",
+        "requiresLicense": "no",
+        "licenseDescription": null,
+        "familyId": 1775
+    },
+    "track": null,
+    "code": "0626",
+    "longDescription": "Concept for SGS",
+    "shortDescription": "Concept SGS",
+    "codeStatus": "A",
+    "codeChange": "A",
+    "codeChangeYear": 2024,
+    "sexCode": null,
+    "anatOrCond": null,
+    "validStartDate": null,
+    "validEndDate": null,
+    "invalidReason": null,
+    "isoLanguageId": 128,
+    "jsonIdentifier": null,
+    "jsonContent": null,
+    "alternateCode": "BitrhDate",
+    "patientCount": null,
+    "utilityDomainIds": [
+        106175147
+    ]
+}
+
+  GET localhost:8083/concepts/106596406/classtype
+
+  GET localhost:8083/concepts/classtypes?size=500&active=1&excludeGroupTypeName=(%27Restriction%27)
+    Query Parameters:
+      size: 500
+      active: 1
+      excludeGroupTypeName: (%27Restriction%27)
+
+  POST localhost:8083/concepts/classtypes
+    Raw Body:
+      {
+   "conceptsClasses": [
+    {
+        "conceptId": 106596407,
+        "classTypeId": 132,
+        "order": 0
+    }
+   ]
+}
+
+  POST localhost:8083/concepts/106596407/classtypes/132/order/2
+
+  DELETE localhost:8083/concepts/classtypes
+    Raw Body:
+      {
+   "ids": [
+    539882,
+    539881
+   ]
+}
+
+  PUT localhost:8083/concepts/106596407
+    Raw Body:
+      {
+    "pxordx": null,
+    "codeType": null,
+    "conceptClassId": null,
+    "type": "custom",
+    "vocabularyId": 7881,
+    "vocabulary": {
+        "id": 7881,
+        "idRef": "0001",
+        "name": "Vocabulary SG",
+        "reference": "Test SG",
+        "version": null,
+        "description": "Vocabulary for test",
+        "statusCode": "A",
+        "sourcesId": 501,
+        "type": "custom",
+        "requiresLicense": "no",
+        "licenseDescription": null,
+        "familyId": 1775
+    },
+    "track": null,
+    "code": "0626",
+    "longDescription": "Concept for my testSG",
+    "shortDescription": "Concept CarlosSG",
+    "codeStatus": "A",
+    "codeChange": "A",
+    "codeChangeYear": 2024,
+    "sexCode": null,
+    "anatOrCond": null,
+    "validStartDate": null,
+    "validEndDate": null,
+    "invalidReason": null,
+    "isoLanguageId": 128,
+    "jsonIdentifier": null,
+    "jsonContent": null,
+    "alternateCode": "BitrhDate",
+    "patientCount": null,
+    "utilityDomainIds": [
+        106175147
+    ]
+}
+
+  POST {{url}}/concepts/synonyms
+    Raw Body:
+      {
+    "conceptId": "10659640900",
+    "synonyms": [
+        {
+            "conceptSynonymName": "sgsynosasmym",
+            "synonymType": "synonym",
+            "isoLanguageId": 128
+        }
+    ]
+}
+
+  GET {{url}}/concepts/106596409/synonyms?size=100&sinceId=0&sort=conceptSynonymName,asc
+    Query Parameters:
+      size: 100
+      sinceId: 0
+      sort: conceptSynonymName,asc
+
+  DELETE {{url}}/concepts/synonyms
+    Raw Body:
+      {"ids":[60407608]}
+
+  GET localhost:8083/concepts/8049/utilitydomains
+
+Folder: conceptgroups
+  GET {{url}}/conceptgroups?codeConcept=0001A-0173A
+    Query Parameters:
+      codeConcept: 0001A-0173A
+
+  GET localhost:8083/conceptgroups/462063
+
+  GET {{url}}/conceptgroups/780446/versions?sinceId=3396564
+    Query Parameters:
+      sinceId: 3396564
+
+  GET localhost:8083/conceptgroups/462063/utilitydomain/vocabulary
+
+  POST {{url}}/conceptgroups/1126594/version
+    Raw Body:
+      {
+    "active": false,
+    "versionName": "sgil / 2025-02-06 / v3",
+    "conceptGroupId": 1126594
+}
+
+  GET {{url}}/conceptgroups/1126594/version/71032721
+
+  PUT {{url}}/conceptgroups/1126594/version/7103275
+    Raw Body:
+      {"versionName":"sgil / 2025-02-06 / v3","active":true,"releaseDate":null,"validEndDate":null}
+
+  GET localhost:8083/conceptgroups/1126594/concepts
+    Raw Body:
+      {"versionName":"sgil / 2025-02-06 / v3","active":true,"releaseDate":null,"validEndDate":null}
+
+  GET localhost:8083/conceptgroups/concept/100513110
+    Raw Body:
+      {"versionName":"sgil / 2025-02-06 / v3","active":true,"releaseDate":null,"validEndDate":null}
+
+  POST {{url}}/conceptgroups/1126594/version-origin-id/7103272/version-target-id/7103275/concepts
+
+  POST {{url}}/conceptgroups/1126594/version/7103275/concepts
+    Raw Body:
+      {"conceptGroupId":"1126594","conceptGroupVersionId":7103275,"conceptIds":["100513086"]}
+
+  DELETE localhost:8083/conceptgroups/1126594/version/7103275/concepts
+    Raw Body:
+      {"conceptGroupId":"1126594","conceptGroupVersionId":7103275,"conceptIds":["100513086"]}
+
+  POST {{url}}/conceptgroups/conceptgroup-origin/1128265/conceptgroup-target/1126594/concepts
+
+  POST {{url}}/conceptgroups/conceptgroup-origin/1128266/conceptgroup-version-origin/7103685/conceptgroup-target/1128266/conceptgroup-version-target/7103686/concepts
+
+  POST {{url}}/conceptgroups/462066/copy-difference/conceptgroup-version-origin/2448062/conceptgroup-version-target/2445442
+
+  GET localhost:8083/conceptgroups/780446/vocabularies
+
+  GET localhost:8083/conceptgroups/utilitydomain
+    Query Parameters:
+      longDescriptionConcept: 1
+
+  GET localhost:8083/conceptgroups/780307/vocabulary-utilitydomain/
+
+  POST {{url}}/conceptgroups
+    Raw Body:
+      {
+    "groupName": "cgasssa2",
+    "groupTypeId": 66,
+    "folderId": null
+}
+
+  GET localhost:8083/conceptgroups/11282910/classtype
+
+  POST localhost:8083/conceptgroups/classtypes
+    Raw Body:
+      {
+    "conceptGroupsClasses": [
+        {
+            "conceptGroupId": 1128291,
+            "classTypeId": 1068,
+            "order": 1
+        }
+    ]
+}
+
+  POST localhost:8083/conceptgroups/1128292/classtypes/1068/order/1
+
+  DELETE localhost:8083/conceptgroups/classtypes
+    Raw Body:
+      {
+    "ids": [
+        1297
+    ]
+}
+
+  PUT localhost:8083/conceptgroups/1128293
+    Raw Body:
+      {
+    "groupName": "1cgasssa2",
+    "groupTypeId": 66,
+    "folderId": null
+}
+
+  POST {{url}}/conceptgroups/780446/concepts
+    Raw Body:
+      {
+    "conceptIds": [
+        100513102
+    ]
+}
+
+  DELETE localhost:8083/conceptgroups/780446/concepts
+    Raw Body:
+      {
+    "conceptIds": [
+        100513102
+    ]
+}
+
+  GET {{url}}/conceptgroups/1126594/relationships?size=1000&page=0
+    Query Parameters:
+      size: 1000
+      page: 0
+
+  POST {{url}}/conceptgroups/relationships
+    Raw Body:
+      {
+    "conceptGroupId": "1126594",
+    "relatedConceptGroupId": "780446",
+    "relationshipId": "1956"
+}
+
+  DELETE localhost:8083/conceptgroups/relationships/23097
+
+  GET localhost:8083/conceptgroups/1126594/related
+
+  GET {{url}}/conceptgroups/types?size=500&active=1&excludeGroupTypeName=(%27Restriction%27)
+    Query Parameters:
+      size: 500
+      active: 1
+      excludeGroupTypeName: (%27Restriction%27)
+
+  POST {{url}}/conceptgroups/types
+    Raw Body:
+      {
+    "groupType": "ConceptgroupTypeSGS2",
+    "groupTypeName": "ConceptgroupTypeSGS2",
+    "type": "custom",
+    "active": 1,
+    "parentId": ""
+}
+
+  PUT {{url}}/conceptgroups/types/5819
+    Raw Body:
+      {"groupType":"ConceptgroupTypeSG3","groupTypeName":"ConceptgroupTypeSGS3","type":"custom","active":1,"parentId":null}
+
+  GET {{url}}/conceptgroups/types/5820
+
+  DELETE {{url}}/conceptgroups/types/5820
+
+  GET {{url}}/conceptgroups/types/hierarchy?page=0&search=(type==system%20and%20groupTypeNameChild=in=(Market_Basket_Ingredient,Market_Basket_Codes,Market_Basket_Diagnosis))
+    Query Parameters:
+      page: 0
+      search: (type==system%20and%20groupTypeNameChild=in=(Market_Basket_Ingredient,Market_Basket_Codes,Market_Basket_Diagnosis))
+
+  GET {{url}}/conceptgroups/1126594/compare/conceptgroup-version-1/7103684/conceptgroup-version-2/6872000?size=100&page=0&start=0
+    Query Parameters:
+      size: 100
+      page: 0
+      start: 0
+
+  POST {{url}}/conceptgroups/1126594/version/6872000/upload-file-concepts?capability=healthnexus
+    Query Parameters:
+      capability: healthnexus
+
+  POST localhost:8083/conceptgroups/client
+    Raw Body:
+      {
+    "clientId": 138,
+    "conceptGroupType": [
+        {
+            "conceptGroupTypeId": 3177 ,
+            "type": "restricted"
+        }
+    ]
+}
+
+  DELETE localhost:8083/conceptgroups/client
+    Raw Body:
+      {
+    "clientId": 7651,
+    "conceptGroupType": [
+        {
+            "conceptGroupTypeId": 5652 ,
+            "type": "custom"
+        }
+    ]
+}
+
+  GET localhost:8083/conceptgroups/client?clientId=138
+    Query Parameters:
+      clientId: 138
+
+  GET localhost:8083/conceptgroups/client/765
+
+  PUT {{url}}/conceptgroups/client
+    Raw Body:
+      {
+    "clientId": "3557",
+    "conceptGroupType": [
+       
+        {
+            "conceptGroupTypeId": 4629,
+            "type": "system"
+        }
+    ]
+}
+
+  POST {{url}}/conceptgroups/780446/version/3714296/download-file-concepts
+
+  POST localhost:8083/conceptgroups/client
+    Raw Body:
+      {
+    "clientId": "3625",
+    "conceptGroupType": [
+        {
+            "conceptGroupTypeId": 135,
+            "type": "system"
+        },
+        {
+            "conceptGroupTypeId": 68,
+            "type": "system"
+        },
+        {
+            "conceptGroupTypeId": 4566,
+            "type": "system"
+        }
+    ]
+}
+
+  DELETE {{url}}/conceptgroups/client
+    Raw Body:
+      {
+    "clientId": "3625",
+    "conceptGroupType": [
+        {
+            "conceptGroupTypeId": 4566,
+            "type": "system"
+        },
+        {
+            "conceptGroupTypeId": 68,
+            "type": "system"
+        }
+    ]
+}
+
+  GET localhost:8083/conceptgroups/client
+
+  GET localhost:8083/conceptgroups/client/765
+
