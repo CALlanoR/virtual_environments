@@ -1,0 +1,33 @@
+# Dockerfile.prod para Backend ADK (Corregido para Cloud Build)
+
+# Usamos la versión de Python que sabemos que funciona con tus dependencias
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED True
+
+# Establecemos un único directorio de trabajo para toda la construcción
+WORKDIR /app
+
+# Copiamos primero el archivo de requerimientos para aprovechar el cache
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# --- SECCIÓN DE AUTENTICACIÓN CORREGIDA ---
+# Copiamos la llave JSON desde la raíz del contexto a la raíz de nuestro WORKDIR.
+# Cloud Build encontrará "project-mlops-10-streamlit-a946cc39ccf4.json" en el contexto.
+COPY project-mlops-10-streamlit-a946cc39ccf4.json ./gcp-credentials.json
+
+# Establecemos la variable de entorno para que apunte a la ruta correcta DENTRO del contenedor.
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-credentials.json
+# --- FIN DE LA CORRECCIÓN ---
+
+# Copiamos el código fuente de la aplicación
+COPY src/ ./src
+
+# Exponemos el puerto estándar para servicios web en contenedores
+EXPOSE 8080
+
+# Comando final para iniciar el servidor ADK.
+# Escuchará en el puerto 8080, que es el estándar para Cloud Run.
+#CMD ["adk", "api_server", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["adk", "api_server", "--host", "0.0.0.0", "--port", "8080", "--cors-origins", "*"]

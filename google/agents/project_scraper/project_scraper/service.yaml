@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: servicio-adk-google-backend-kevin-inofuente
+spec:
+  template:
+    spec:
+      containers:
+        - image: us-central1-docker.pkg.dev/project-mlops-10-streamlit/repo-adk-google-scraper-analizador-backend/image-v5-adk-google-scraper-analizador-backend:latest
+          env:
+          ports:
+            - containerPort: 8080

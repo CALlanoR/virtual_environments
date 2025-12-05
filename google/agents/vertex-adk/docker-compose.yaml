@@ -1,0 +1,17 @@
+
+services:
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent
+    image: vertex-agent
+    volumes:
+      - .:/ws/code 
+    working_dir: /ws/code 
+    environment:
+      PYTHONPATH: /ws/code/src
+    ports:
+      - 5678:5678
+      - 8000:8000
+    command: ["tail", "-f", "/dev/null"]

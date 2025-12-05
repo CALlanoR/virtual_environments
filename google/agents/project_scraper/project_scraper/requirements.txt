@@ -1,0 +1,8 @@
+google-adk
+streamlit
+requests
+apify-client
+python-dotenv
+
+#Para el analizador
+google-generativeai

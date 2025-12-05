@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'Dockerfile.prod', '-t', 'us-central1-docker.pkg.dev/project-mlops-10-streamlit/repo-adk-google-scraper-analizador-backend/image-v5-adk-google-scraper-analizador-backend:latest', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/project-mlops-10-streamlit/repo-adk-google-scraper-analizador-backend/image-v5-adk-google-scraper-analizador-backend:latest']

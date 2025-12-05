@@ -1,0 +1,30 @@
+services:
+
+  server:
+    build: .
+    container_name: mcp_server
+    # Use uvicorn to run the ASGI app and bind it to all network interfaces.
+    command: uvicorn server:app --host 0.0.0.0 --port 8000
+    environment:
+      - DB_HOST=healthnexus-dev-postgresql.cluster-cpvabibwgvmk.us-east-1.rds.amazonaws.com
+      - DB_NAME=allconcepts_omop_api_dev
+      - DB_USER=rest_endpoint
+      - DB_PASSWORD=eub5Vb!Nww3epI
+      - DB_PORT=5432
+    ports:
+      - "8000:8000"
+
+  client:
+    build: .
+    container_name: mcp_client
+    command: >
+      sh -c "
+        # Wait for the server to be ready before starting the client
+        until nc -z server 8000; do
+          echo 'Waiting for server to start...'
+          sleep 1;
+        done;
+        python mcp_client.py
+      "
+    depends_on:
+      - server

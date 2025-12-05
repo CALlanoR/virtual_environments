@@ -1,0 +1,13 @@
+google-cloud-bigquery 
+pandas 
+db-dtypes
+google-cloud-bigquery-storage
+google-cloud-aiplatform
+google-cloud-storage
+google-genai
+gitpython
+google-adk
+sqlalchemy
+sqlalchemy-bigquery
+tabulate
+streamlit
