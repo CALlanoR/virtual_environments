@@ -1,0 +1,12 @@
+services:
+  node-shell:
+    image: node:25
+    container_name: node_dev_container
+    user: "node" # Seguridad: corre como usuario no-root
+    working_dir: /home/node/app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app # Mapea tu carpeta actual al contenedor
+    # Esto mantiene el contenedor vivo sin ejecutar procesos de Node
+    command: tail -f /dev/null

@@ -1,0 +1,24 @@
+volumes:
+  pgvector_db_storage:
+
+services:
+  postgres:
+    container_name: pgvector18_server
+    image: pgvector/pgvector:pg17-trixie
+    restart: always
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_NON_ROOT_USER
+      - POSTGRES_NON_ROOT_PASSWORD
+    volumes:
+      - pgvector_db_storage:/var/lib/postgresql
+      - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
+    ports:
+      - 5434:5432
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -h localhost -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
