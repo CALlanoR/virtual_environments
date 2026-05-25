@@ -1,0 +1,16 @@
+services:
+  rust-dev:
+    build: .
+    container_name: rust_dev_env
+    volumes:
+      # Monta la carpeta actual (.) en la carpeta /app del contenedor
+      - .:/app
+      # Cache de Cargo: Evita que las librerías se descarguen cada vez que recreas el contenedor
+      - cargo_cache:/usr/local/cargo/registry
+    working_dir: /app
+    # Para que no se apague solo
+    stdin_open: true
+    tty: true
+
+volumes:
+  cargo_cache:

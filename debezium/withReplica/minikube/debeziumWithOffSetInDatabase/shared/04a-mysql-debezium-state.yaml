@@ -1,0 +1,206 @@
+# MySQL único dedicado al state de Debezium para los dos stacks del lab.
+# Vive en cdc-lab. Aisla los dos stacks por DB lógica + usuario:
+#   - dbz_state_57 (DB) + dbz_state_57 (usuario)  → para debezium-server-57
+#   - dbz_state_8  (DB) + dbz_state_8  (usuario)  → para debezium-server-8
+# Sin grants cruzados entre DBs.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: debezium-state-credentials
+  namespace: cdc-lab
+type: Opaque
+stringData:
+  # Generados con `openssl rand -base64 32`.
+  root-password: WEq9NNkTHEXOAHnW8nd9wsnUT0oqzAHm8M556554Fas=
+  dbz-state-57-password: tnLaVvXr/SBzoL35yWz02j+aJ8Syd8FpT2CMemw3JEs=
+  dbz-state-8-password: EzrW7ZTLhnSyxWG3jhioBP6RR1Rs7NqOXDoNvB47MsY=
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: debezium-state-data
+  namespace: cdc-lab
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-debezium-state-initdb
+  namespace: cdc-lab
+data:
+  00-schema.sql: |
+    -- Dos DBs lógicas (una por stack). MYSQL_DATABASE de la env crearía solo una;
+    -- aquí creamos las dos explícitamente para no depender de esa env.
+    CREATE DATABASE IF NOT EXISTS dbz_state_57;
+    CREATE DATABASE IF NOT EXISTS dbz_state_8;
+
+    -- Usuarios distintos por stack, plugin mysql_native_password para compatibilidad
+    -- amplia con el driver JDBC (evita el handshake de caching_sha2_password).
+    CREATE USER IF NOT EXISTS 'dbz_state_57'@'%' IDENTIFIED WITH mysql_native_password BY 'placeholder_57';
+    CREATE USER IF NOT EXISTS 'dbz_state_8'@'%'  IDENTIFIED WITH mysql_native_password BY 'placeholder_8';
+
+    -- Grants acotados: cada usuario solo sobre SU DB. Sin DROP/ALTER/SUPER.
+    -- CREATE es necesario porque JdbcSchemaHistory llama CREATE TABLE IF NOT EXISTS en cada arranque.
+    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE ON dbz_state_57.* TO 'dbz_state_57'@'%';
+    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE ON dbz_state_8.*  TO 'dbz_state_8'@'%';
+    FLUSH PRIVILEGES;
+
+    -- Pre-creación de tablas en cada DB.
+    -- Esquema verificado contra debezium-storage-jdbc 2.4.2.Final y 3.5.0.Final.
+    -- history_data: MEDIUMTEXT (no VARCHAR(65000), que falla en MySQL 8 utf8mb4 por row-size).
+    USE dbz_state_57;
+    CREATE TABLE IF NOT EXISTS offset_storage (
+      id                 VARCHAR(36)  NOT NULL,
+      offset_key         VARCHAR(1255),
+      offset_val         VARCHAR(1255),
+      record_insert_ts   TIMESTAMP    NOT NULL,
+      record_insert_seq  INTEGER      NOT NULL,
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB;
+    CREATE TABLE IF NOT EXISTS schema_history (
+      id                 VARCHAR(36)  NOT NULL,
+      history_data       MEDIUMTEXT,
+      history_data_seq   INTEGER,
+      record_insert_ts   TIMESTAMP    NOT NULL,
+      record_insert_seq  INTEGER      NOT NULL,
+      PRIMARY KEY (id, history_data_seq)
+    ) ENGINE=InnoDB;
+
+    USE dbz_state_8;
+    CREATE TABLE IF NOT EXISTS offset_storage (
+      id                 VARCHAR(36)  NOT NULL,
+      offset_key         VARCHAR(1255),
+      offset_val         VARCHAR(1255),
+      record_insert_ts   TIMESTAMP    NOT NULL,
+      record_insert_seq  INTEGER      NOT NULL,
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB;
+    CREATE TABLE IF NOT EXISTS schema_history (
+      id                 VARCHAR(36)  NOT NULL,
+      history_data       MEDIUMTEXT,
+      history_data_seq   INTEGER,
+      record_insert_ts   TIMESTAMP    NOT NULL,
+      record_insert_seq  INTEGER      NOT NULL,
+      PRIMARY KEY (id, history_data_seq)
+    ) ENGINE=InnoDB;
+  01-set-passwords.sh: |
+    #!/bin/sh
+    set -e
+    mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "
+      ALTER USER 'dbz_state_57'@'%' IDENTIFIED WITH mysql_native_password BY '${DBZ_STATE_57_PASSWORD}';
+      ALTER USER 'dbz_state_8'@'%'  IDENTIFIED WITH mysql_native_password BY '${DBZ_STATE_8_PASSWORD}';
+      FLUSH PRIVILEGES;"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-debezium-state
+  namespace: cdc-lab
+  labels:
+    app: mysql-debezium-state
+spec:
+  selector:
+    app: mysql-debezium-state
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+---
+# Acceso externo desde el host (DBeaver, mysql CLI, etc.) vía IP de minikube.
+# El Service ClusterIP de arriba sigue siendo el que usan los debezium-server.
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-debezium-state-nodeport
+  namespace: cdc-lab
+  labels:
+    app: mysql-debezium-state
+spec:
+  type: NodePort
+  selector:
+    app: mysql-debezium-state
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+      nodePort: 30410
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-debezium-state
+  namespace: cdc-lab
+  labels:
+    app: mysql-debezium-state
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mysql-debezium-state
+  template:
+    metadata:
+      labels:
+        app: mysql-debezium-state
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: debezium-state-credentials
+                  key: root-password
+            - name: DBZ_STATE_57_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: debezium-state-credentials
+                  key: dbz-state-57-password
+            - name: DBZ_STATE_8_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: debezium-state-credentials
+                  key: dbz-state-8-password
+          ports:
+            - name: mysql
+              containerPort: 3306
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "mysqladmin ping -h localhost -uroot -p${MYSQL_ROOT_PASSWORD}"]
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "mysqladmin ping -h localhost -uroot -p${MYSQL_ROOT_PASSWORD}"]
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 512Mi
+              cpu: 500m
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: debezium-state-data
+        - name: initdb
+          configMap:
+            name: mysql-debezium-state-initdb

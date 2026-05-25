@@ -1,0 +1,160 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-primary-config-8
+  namespace: cdc-lab-file
+  labels:
+    stack: mysql8
+data:
+  my.cnf: |
+    [mysqld]
+    server-id                 = 1
+    log_bin                   = mysql-bin
+    binlog_format             = ROW
+    binlog_row_image          = FULL
+    gtid_mode                 = ON
+    enforce_gtid_consistency  = ON
+    binlog_expire_logs_seconds = 86400
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-primary-initdb-8
+  namespace: cdc-lab-file
+  labels:
+    stack: mysql8
+data:
+  01-users.sql: |
+    CREATE USER 'repl'@'%' IDENTIFIED WITH mysql_native_password BY 'repl';
+    GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
+
+    CREATE USER 'debezium'@'%' IDENTIFIED WITH mysql_native_password BY 'dbz';
+    GRANT REPLICATION SLAVE, REPLICATION CLIENT, SELECT, RELOAD ON *.* TO 'debezium'@'%';
+
+    FLUSH PRIVILEGES;
+  02-demo-schema.sql: |
+    CREATE DATABASE IF NOT EXISTS inventory;
+    USE inventory;
+
+    CREATE TABLE customers (
+      id          INT          NOT NULL AUTO_INCREMENT,
+      first_name  VARCHAR(100) NOT NULL,
+      last_name   VARCHAR(100) NOT NULL,
+      email       VARCHAR(150) NOT NULL,
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB;
+
+    INSERT INTO customers (first_name, last_name, email) VALUES
+      ('Ada',     'Lovelace',  'ada@example.com'),
+      ('Alan',    'Turing',    'alan@example.com'),
+      ('Grace',   'Hopper',    'grace@example.com');
+
+    CREATE TABLE audit_log (
+      id        INT          NOT NULL AUTO_INCREMENT,
+      message   VARCHAR(255) NOT NULL,
+      created_at DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB;
+
+    INSERT INTO audit_log (message) VALUES
+      ('seed: stack mysql8 initialized');
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-replica-config-8
+  namespace: cdc-lab-file
+  labels:
+    stack: mysql8
+data:
+  my.cnf: |
+    [mysqld]
+    server-id                 = 2
+    log_bin                   = mysql-bin
+    binlog_format             = ROW
+    binlog_row_image          = FULL
+    log_replica_updates       = ON
+    gtid_mode                 = ON
+    enforce_gtid_consistency  = ON
+    read_only                 = ON
+    relay_log                 = mysql-relay-bin
+    binlog_expire_logs_seconds = 86400
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-replica-initdb-8
+  namespace: cdc-lab-file
+  labels:
+    stack: mysql8
+data:
+  01-start-replica.sql: |
+    CHANGE REPLICATION SOURCE TO
+      SOURCE_HOST          = 'mysql-primary-8',
+      SOURCE_PORT          = 3306,
+      SOURCE_USER          = 'repl',
+      SOURCE_PASSWORD      = 'repl',
+      SOURCE_AUTO_POSITION = 1,
+      GET_SOURCE_PUBLIC_KEY = 1;
+
+    START REPLICA;
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-replica-healthcheck-8
+  namespace: cdc-lab-file
+  labels:
+    stack: mysql8
+data:
+  healthcheck.sh: |
+    #!/bin/sh
+    set -e
+    mysqladmin ping --silent -h localhost -uroot -proot >/dev/null
+    status=$(mysql -uroot -proot -e 'SHOW REPLICA STATUS\G' 2>/dev/null)
+    echo "$status" | grep -q 'Replica_IO_Running: Yes'
+    echo "$status" | grep -q 'Replica_SQL_Running: Yes'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: debezium-config-8
+  namespace: cdc-lab-file
+  labels:
+    stack: mysql8
+data:
+  application.properties: |
+    debezium.sink.type=http
+    debezium.sink.http.url=http://cdc-sink-8:8080
+
+    debezium.format.value=json
+    debezium.format.key=json
+    debezium.format.value.schemas.enable=false
+
+    debezium.source.connector.class=io.debezium.connector.mysql.MySqlConnector
+
+    debezium.source.database.hostname=mysql-replica-8
+    debezium.source.database.port=3306
+    debezium.source.database.user=debezium
+    debezium.source.database.password=dbz
+
+    debezium.source.database.server.id=43
+    debezium.source.topic.prefix=replica-cdc-8
+
+    debezium.source.database.include.list=inventory
+    debezium.source.table.include.list=inventory.customers
+
+    # Offset y schema history persistidos en archivos locales del pod.
+    # El directorio /debezium/data está respaldado por un PVC (ver 06-debezium-server-8.yaml).
+    debezium.source.offset.storage=org.apache.kafka.connect.storage.FileOffsetBackingStore
+    debezium.source.offset.storage.file.filename=/debezium/data/offsets-8.dat
+    debezium.source.offset.flush.interval.ms=10000
+
+    debezium.source.schema.history.internal=io.debezium.storage.file.history.FileSchemaHistory
+    debezium.source.schema.history.internal.file.filename=/debezium/data/schema-history-8.dat
+
+    debezium.source.snapshot.mode=when_needed
+
+    quarkus.log.console.json=false
+    quarkus.log.level=INFO
+    quarkus.log.category."io.debezium".level=INFO

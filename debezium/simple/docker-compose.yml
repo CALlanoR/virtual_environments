@@ -1,0 +1,74 @@
+services:
+  mysql-source:
+    image: mysql:5.7
+    container_name: mysql_source
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: inventory
+    ports:
+      - "3306:3306"
+    command:
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --server-id=1
+      - --expire-logs-days=7
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      # ── KRaft: sin ZooKeeper
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+
+      # ── Listeners
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+      # ── Configuración general 
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+
+  # ── Debezium Connect con plugin S3 Sink incluido
+  debezium-connect:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: debezium_connect
+    depends_on:
+      - kafka
+      - mysql-source
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: my_connect_configs
+      OFFSET_STORAGE_TOPIC: my_connect_offsets
+      STATUS_STORAGE_TOPIC: my_connect_statuses
+
+      # ── Credenciales AWS para que el S3 Sink pueda escribir ───────
+      # Para producción reemplazar por IAM role (ECS Task Role).
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-us-east-1}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
+
+volumes:
+  mysql_data:
+  kafka_data:

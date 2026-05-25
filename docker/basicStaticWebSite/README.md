@@ -1,0 +1,1 @@
+sudo docker build -t my_website_image . 

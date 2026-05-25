@@ -1,0 +1,76 @@
+# Long-duration load-generator Job template.
+# Substitute __NAMESPACE__, __TARGET__ and __STACK_LABEL__ before applying.
+# Example (post-consolidación a cdc-lab-file):
+#   sed -e 's/__NAMESPACE__/cdc-lab-file/' -e 's/__TARGET__/mysql8/' -e 's/__STACK_LABEL__/mysql8/' \
+#     -e 's/__TARGET_HOST__/mysql-primary-8/' loadgen-long.yaml | kubectl apply -f -
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-long-__STACK_LABEL__
+  namespace: __NAMESPACE__
+  labels:
+    app: load-generator
+    stack: __STACK_LABEL__
+spec:
+  ttlSecondsAfterFinished: 60
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: load-generator
+        stack: __STACK_LABEL__
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: pip-install
+          image: python:3.12-slim
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+              pip install --no-cache-dir --target /deps -r /script/requirements.txt
+          volumeMounts:
+            - name: script
+              mountPath: /script
+            - name: deps
+              mountPath: /deps
+      containers:
+        - name: load-generator
+          image: python:3.12-slim
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PYTHONPATH
+              value: /deps
+          command:
+            - python
+            - /script/random_changes.py
+            - --target
+            - __TARGET__
+            - --host
+            - __TARGET_HOST__
+            - --port
+            - "3306"
+            - --duration
+            - "1200"
+            - --interval
+            - "0.5"
+          volumeMounts:
+            - name: script
+              mountPath: /script
+            - name: deps
+              mountPath: /deps
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 50m
+            limits:
+              memory: 256Mi
+              cpu: 200m
+      volumes:
+        - name: script
+          configMap:
+            name: load-generator-script
+        - name: deps
+          emptyDir: {}

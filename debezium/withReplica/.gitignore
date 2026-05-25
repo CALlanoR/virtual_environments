@@ -1,0 +1,7 @@
+# Datos locales generados por contenedores. El stack es efímero
+# y no usa volúmenes nombrados; este .gitignore protege contra
+# montajes accidentales de datos persistentes.
+data/
+*.dat
+*.log
+.env

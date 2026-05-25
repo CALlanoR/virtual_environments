@@ -1,7 +1,7 @@
 # Define f such that f(n)(m) == n+m.  Example: f(3)(4) should be 7.
     
 def f(n: int) -> int:
-    x = lambda m: n + m
+    # x = lambda m: n + m
     def x(m): 
         return n + m
     return x

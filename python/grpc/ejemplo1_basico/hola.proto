@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+// El servicio que ofrece un saludo basico
+service ServicioSaludo {
+  // Metodo remoto: Envia un saludo, recibe una respuesta con mensaje
+  rpc Saludar (PeticionSaludo) returns (RespuestaSaludo) {}
+}
+
+// El mensaje de peticion. Contiene el nombre del usuario
+message PeticionSaludo {
+  string nombre = 1;
+}
+
+// La respuesta devuelve un mensaje en formato texto
+message RespuestaSaludo {
+  string mensaje = 1;
+}

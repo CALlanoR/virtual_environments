@@ -1,0 +1,78 @@
+# PVC para persistir offset y schema history en archivos.
+# ReadWriteOnce: solo un pod puede montarlo a la vez (consistente con replicas=1 + Recreate).
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: debezium-data-57
+  namespace: cdc-lab-file
+  labels:
+    app: debezium-server
+    stack: mysql57
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debezium-server-57
+  namespace: cdc-lab-file
+  labels:
+    app: debezium-server
+    stack: mysql57
+spec:
+  replicas: 1
+  # Recreate: imprescindible con PVC ReadWriteOnce — el pod viejo libera el volumen
+  # antes de que el nuevo lo monte. Con RollingUpdate quedarían dos pods compitiendo.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: debezium-server
+      stack: mysql57
+  template:
+    metadata:
+      labels:
+        app: debezium-server
+        stack: mysql57
+    spec:
+      containers:
+        - name: debezium-server
+          image: withreplica/debezium-server-mysql57-jdbc:2.4.2.Final
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: config
+              mountPath: /debezium/conf
+              readOnly: true
+            - name: data
+              mountPath: /debezium/data
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 200m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 4
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 3
+      volumes:
+        - name: config
+          configMap:
+            name: debezium-config-57
+        - name: data
+          persistentVolumeClaim:
+            claimName: debezium-data-57

@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debezium-server-57
+  namespace: cdc-lab
+  labels:
+    app: debezium-server
+    stack: mysql57
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: debezium-server
+      stack: mysql57
+  template:
+    metadata:
+      labels:
+        app: debezium-server
+        stack: mysql57
+    spec:
+      containers:
+        - name: debezium-server
+          image: withreplica/debezium-server-mysql57-jdbc:2.4.2.Final
+          imagePullPolicy: IfNotPresent
+          env:
+            # Quarkus property overrides para las dos passwords JDBC del state-store.
+            # Las propiedades correspondientes (debezium.source.*.jdbc.password) no
+            # aparecen en application.properties — esta env var las override.
+            - name: DEBEZIUM_SOURCE_OFFSET_STORAGE_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: debezium-state-credentials
+                  key: dbz-state-57-password
+            - name: DEBEZIUM_SOURCE_SCHEMA_HISTORY_INTERNAL_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: debezium-state-credentials
+                  key: dbz-state-57-password
+          volumeMounts:
+            - name: config
+              mountPath: /debezium/conf
+              readOnly: true
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 200m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 4
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 3
+      volumes:
+        - name: config
+          configMap:
+            name: debezium-config-57

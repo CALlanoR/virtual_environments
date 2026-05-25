@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+// Sistema central de la universidad con 2 funcionalidades distintas
+service SistemaUniversitario {
+  // Operacion 1: Obtener detalles de un estudiante existente
+  rpc ObtenerEstudiante (IdEstudiante) returns (InfoEstudiante) {}
+  
+  // Operacion 2: Registrar a un nuevo estudiante
+  rpc RegistrarEstudiante (NuevoEstudiante) returns (RespuestaRegistro) {}
+}
+
+// ----------------------------------------------------
+// Mensajes para la Operacion 1: Obtener Estudiante
+// Usamos tipos base, como int32 (enteros de 32 bits) y string
+// ----------------------------------------------------
+message IdEstudiante {
+  int32 id_estudiante = 1;
+}
+
+message InfoEstudiante {
+  int32 id_estudiante = 1;
+  string nombre = 2;
+  string carrera = 3;
+  int32 semestre = 4;
+}
+
+// ----------------------------------------------------
+// Mensajes para la Operacion 2: Registrar Estudiante
+// ----------------------------------------------------
+message NuevoEstudiante {
+  string nombre = 1;
+  string carrera = 2;
+  int32 semestre = 3;
+}
+
+message RespuestaRegistro {
+  bool exito = 1;           // Un booleano de verificacion simple
+  string mensaje = 2;       // Mensaje de detalle de error/exito
+  int32 id_asignado = 3;    // ID proporcionado en memoria
+}

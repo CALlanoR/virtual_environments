@@ -1,0 +1,97 @@
+services:
+
+  mysql-primary:
+    image: mysql:5.7
+    container_name: mysql-primary
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/primary/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - ./mysql/primary/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - cdc
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  mysql-replica:
+    image: mysql:5.7
+    container_name: mysql-replica
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql/replica/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - ./mysql/replica/init:/docker-entrypoint-initdb.d:ro
+      - ./mysql/replica/healthcheck.sh:/usr/local/bin/replica-healthcheck.sh:ro
+    networks:
+      - cdc
+    depends_on:
+      mysql-primary:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/replica-healthcheck.sh"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
+
+  debezium-server:
+    # 2.4.2.Final es el último Debezium Server que oficialmente soporta
+    # MySQL 5.7. A partir de 2.5.0.Beta1, MySQL 5.7 fue desupported.
+    # Ver: https://debezium.io/releases/2.4/  y  https://debezium.io/releases/2.5/
+    #
+    # Esta versión NO incluye el sink "log" (añadido en versiones posteriores),
+    # por lo que usamos el sink "http" apuntando al servicio cdc-sink, que
+    # imprime cada evento en sus logs.
+    image: debezium/server:2.4.2.Final
+    container_name: debezium-server
+    volumes:
+      - ./debezium/conf:/debezium/conf:ro
+      - debezium-data:/debezium/data
+    networks:
+      - cdc
+    depends_on:
+      mysql-replica:
+        condition: service_healthy
+      cdc-sink:
+        condition: service_started
+
+  # Sink HTTP: imprime cada POST entrante en su stdout. Debezium Server hace
+  # POST con el evento CDC serializado como JSON. Ver eventos con:
+  #   docker compose logs -f cdc-sink
+  cdc-sink:
+    image: mendhak/http-https-echo:40
+    container_name: cdc-sink
+    environment:
+      HTTP_PORT: "8080"
+      HTTPS_PORT: "8443"
+    networks:
+      - cdc
+
+  # Cliente MySQL ad-hoc. Uso:
+  #   docker compose run --rm mysql-client mysql -hmysql-primary -uroot -proot inventory
+  #   docker compose run --rm mysql-client mysql -hmysql-replica -uroot -proot -e 'SHOW SLAVE STATUS\G'
+  mysql-client:
+    image: mysql:5.7
+    profiles: ["tools"]
+    networks:
+      - cdc
+    entrypoint: ["sh"]
+
+volumes:
+  debezium-data:
+
+networks:
+  cdc:
+    driver: bridge

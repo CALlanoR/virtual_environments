@@ -1,0 +1,5 @@
+PyMySQL==1.1.1
+# Necesario para que PyMySQL pueda autenticarse contra MySQL 8.0 cuando el
+# usuario usa caching_sha2_password (default de root en 8.0). Sin esto:
+#   RuntimeError: 'cryptography' package is required for ... caching_sha2_password
+cryptography==46.0.3

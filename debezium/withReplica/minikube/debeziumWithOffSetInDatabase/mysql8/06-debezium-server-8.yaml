@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debezium-server-8
+  namespace: cdc-lab
+  labels:
+    app: debezium-server
+    stack: mysql8
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: debezium-server
+      stack: mysql8
+  template:
+    metadata:
+      labels:
+        app: debezium-server
+        stack: mysql8
+    spec:
+      containers:
+        - name: debezium-server
+          image: withreplica/debezium-server-mysql:3.5.0.Final
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DEBEZIUM_SOURCE_OFFSET_STORAGE_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: debezium-state-credentials
+                  key: dbz-state-8-password
+            - name: DEBEZIUM_SOURCE_SCHEMA_HISTORY_INTERNAL_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: debezium-state-credentials
+                  key: dbz-state-8-password
+          volumeMounts:
+            - name: config
+              mountPath: /debezium/config
+              readOnly: true
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 200m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 4
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 3
+      volumes:
+        - name: config
+          configMap:
+            name: debezium-config-8
